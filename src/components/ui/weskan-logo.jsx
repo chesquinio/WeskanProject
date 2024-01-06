@@ -1,4 +1,4 @@
-export default function WeskanLogo({ height = "10", width = "10" }) {
+export default function WeskanLogo({ height, width }) {
   return (
     <div className={`h-${height} w-${width}`}>
       <img

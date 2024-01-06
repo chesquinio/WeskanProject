@@ -11,15 +11,15 @@ function classNames(...classes) {
   return classes.filter(Boolean).join(" ");
 }
 
+const navigation = [
+  { name: "Inicio", href: "/" },
+  { name: "Empresa", href: "/empresa" },
+  { name: "Productos", href: "/productos" },
+  { name: "Catalogo", href: "/catalogo" },
+];
+
 export default function Header() {
   const pathname = usePathname();
-
-  const navigation = [
-    { name: "Inicio", href: "/" },
-    { name: "Empresa", href: "/empresa" },
-    { name: "Productos", href: "#" },
-    { name: "Catalogo", href: "#" },
-  ];
 
   return (
     <Disclosure as="nav" className="bg-white">
@@ -29,7 +29,7 @@ export default function Header() {
             <div className="relative flex h-20 items-center justify-between">
               <div className="absolute inset-y-0 left-0 flex items-center sm:hidden">
                 {/* Mobile menu button*/}
-                <Disclosure.Button className="relative inline-flex items-center justify-center rounded-md p-2 text-gray-400 hover:bg-gray-700 hover:text-white focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white">
+                <Disclosure.Button className="relative inline-flex items-center justify-center rounded-md p-2 text-gray-400 hover:bg-gray-400 hover:text-white focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white">
                   <span className="absolute -inset-0.5" />
                   <span className="sr-only">Open main menu</span>
                   {open ? (
@@ -40,7 +40,7 @@ export default function Header() {
                 </Disclosure.Button>
               </div>
               <div className="flex flex-1 items-center justify-center sm:items-stretch sm:justify-start">
-                <WeskanLogo height="12" width="12" />
+                <WeskanLogo height="14" width="14" />
                 <div className="hidden sm:ml-6 sm:block">
                   <div className="flex space-x-4">
                     {navigation.map((item) => (
@@ -49,9 +49,9 @@ export default function Header() {
                         href={item.href}
                         className={`${
                           pathname === item.href
-                            ? "border-b-2 border-pink-400 rounded-none text-gray-800"
-                            : "text-gray-600 hover:bg-gray-200 hover:text-gray-800"
-                        } rounded-md px-3 py-2 text-md font-medium`}
+                            ? "border-b-2 rounded-none text-gray-800"
+                            : "text-gray-600 hover:border-b hover:text-gray-800"
+                        } px-3 py-2 text-base font-medium border-pink-400`}
                         aria-current={
                           pathname === item.href ? "page" : undefined
                         }
@@ -75,7 +75,7 @@ export default function Header() {
                 {/* Profile dropdown */}
                 <Menu as="div" className="relative ml-3">
                   <div>
-                    <Menu.Button className="relative flex rounded-full bg-gray-800 text-sm focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800">
+                    <Menu.Button className="relative flex rounded-full bg-gray-400 text-sm focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-400">
                       <span className="absolute -inset-1.5" />
                       <span className="sr-only">Open user menu</span>
                       <img
@@ -129,19 +129,20 @@ export default function Header() {
           </div>
 
           <Disclosure.Panel className="sm:hidden">
-            <div className="space-y-1 px-2 pb-3 pt-2">
+            <div className="space-y-2 px-2 pb-3 pt-2">
               {navigation.map((item) => (
                 <Disclosure.Button
                   key={item.name}
                   as="a"
                   href={item.href}
-                  className={classNames(
-                    item.current
-                      ? "bg-gray-900 text-white"
-                      : "text-gray-300 hover:bg-gray-700 hover:text-white",
-                    "block rounded-md px-3 py-2 text-base font-medium"
-                  )}
-                  aria-current={item.current ? "page" : undefined}
+                  className={`
+                    ${
+                      pathname === item.href
+                        ? "border-b-2 border-pink-400 rounded-none text-gray-800"
+                        : "text-gray-600 hover:border-b border-pink-400"
+                    } block px-3 py-2 text-lg font-medium
+                  `}
+                  aria-current={pathname === item.href ? "page" : undefined}
                 >
                   {item.name}
                 </Disclosure.Button>
