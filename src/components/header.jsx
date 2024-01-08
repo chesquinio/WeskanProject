@@ -4,23 +4,14 @@ import { Fragment } from "react";
 import Link from "next/link";
 import WeskanLogo from "./weskan-logo";
 import { Disclosure, Menu, Transition } from "@headlessui/react";
-import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/outline";
-import { usePathname } from "next/navigation";
+import { Bars3Icon, PowerIcon, XMarkIcon } from "@heroicons/react/24/outline";
+import { DesktopLinks, MovileLinks } from "./nav-links";
 
 function classNames(...classes) {
   return classes.filter(Boolean).join(" ");
 }
 
-const navigation = [
-  { name: "Inicio", href: "/" },
-  { name: "Empresa", href: "/empresa" },
-  { name: "Productos", href: "/productos" },
-  { name: "Catalogo", href: "/catalogo" },
-];
-
 export default function Header() {
-  const pathname = usePathname();
-
   return (
     <Disclosure as="nav" className="bg-white">
       {({ open }) => (
@@ -40,27 +31,10 @@ export default function Header() {
                 </Disclosure.Button>
               </div>
               <div className="flex flex-1 items-center justify-center sm:items-stretch sm:justify-start">
-                <WeskanLogo height="14" width="14" />
-                <div className="hidden sm:ml-6 sm:block">
-                  <div className="flex space-x-4">
-                    {navigation.map((item) => (
-                      <Link
-                        key={item.name}
-                        href={item.href}
-                        className={`${
-                          pathname === item.href
-                            ? "border-b-2 rounded-none text-gray-800"
-                            : "text-gray-600 hover:border-b hover:text-gray-800"
-                        } px-3 py-2 text-base font-medium border-pink-400`}
-                        aria-current={
-                          pathname === item.href ? "page" : undefined
-                        }
-                      >
-                        {item.name}
-                      </Link>
-                    ))}
-                  </div>
+                <div className="w-14 h-14">
+                  <WeskanLogo />
                 </div>
+                <DesktopLinks />
               </div>
               <div className="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
                 {/* <button
@@ -108,19 +82,19 @@ export default function Header() {
                           </Link>
                         )}
                       </Menu.Item>
-                      <Menu.Item>
+                      {/* <Menu.Item>
                         {({ active }) => (
                           <button
-                            type="button"
                             className={classNames(
                               active ? "bg-gray-100" : "",
-                              "block w-full text-left px-4 py-2 text-md text-gray-700"
+                              " flex w-full gap-2 px-4 py-2 text-md text-gray-700"
                             )}
                           >
-                            Cerrar Sesión
+                            <PowerIcon className="w-6" />
+                            <div>Cerrar Sesión</div>
                           </button>
                         )}
-                      </Menu.Item>
+                      </Menu.Item> */}
                     </Menu.Items>
                   </Transition>
                 </Menu>
@@ -129,25 +103,7 @@ export default function Header() {
           </div>
 
           <Disclosure.Panel className="sm:hidden">
-            <div className="space-y-2 px-2 pb-3 pt-2">
-              {navigation.map((item) => (
-                <Disclosure.Button
-                  key={item.name}
-                  as="a"
-                  href={item.href}
-                  className={`
-                    ${
-                      pathname === item.href
-                        ? "border-b-2 border-pink-400 rounded-none text-gray-800"
-                        : "text-gray-600 hover:border-b border-pink-400"
-                    } block px-3 py-2 text-lg font-medium
-                  `}
-                  aria-current={pathname === item.href ? "page" : undefined}
-                >
-                  {item.name}
-                </Disclosure.Button>
-              ))}
-            </div>
+            <MovileLinks />
           </Disclosure.Panel>
         </>
       )}

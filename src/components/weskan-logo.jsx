@@ -1,6 +1,6 @@
-export default function WeskanLogo({ height, width }) {
+export default function WeskanLogo() {
   return (
-    <div className={`h-${height} w-${width}`}>
+    <div className={`h-full w-full`}>
       <img
         src="/weskan-logo.png"
         alt="Weskan Logo"

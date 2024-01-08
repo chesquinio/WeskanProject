@@ -16,8 +16,8 @@ export default function CompanyPage() {
           <p
             className={`text-lg text-gray-800 md:text-xl xl:text-2xl md:leading-normal`}
           >
-            Weskan de Establecimientos Metalúrgicos Gays S.A. fue fundada Juan
-            Bautista Gays.
+            Weskan de Establecimientos Metalúrgicos Gays S.A. fue fundada por
+            <strong>Juan Bautista Gays.</strong>
           </p>
         </div>
         <div className="flex items-center justify-center opacity-60 p-6 md:w-3/5 md:px-28 md:py-12">
