@@ -1,7 +1,5 @@
 import authConfig from "@/src/auth.config";
 import NextAuth from "next-auth";
-import { NextResponse } from "next/server";
-import squareWasm from "./square.wasm?module";
 import {
   DEFAULT_LOGIN_REDIRECT,
   apiAuthPrefix,
@@ -38,14 +36,9 @@ export default auth((req) => {
 });
 
 export const config = {
+  runtime: "edge", // for Edge API Routes only
+  unstable_allowDynamic: [
+    "/node_modules/function-bind/**", // use a glob to allow anything in the function-bind 3rd party module
+  ],
   matcher: ["/((?!.+\\.[\\w]+$|_next).*)", "/", "/(api|trpc)(.*)"],
 };
-
-export async function middleware() {
-  const m = await WebAssembly.instantiate(squareWasm);
-  const answer = m.exports.square(9);
-
-  const response = NextResponse.next();
-  response.headers.set("x-square", answer.toString());
-  return response;
-}
