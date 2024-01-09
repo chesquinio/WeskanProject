@@ -1,14 +1,13 @@
 "use client";
 
 import Link from "next/link";
-import { useFormState, useFormStatus } from "react-dom";
+import { useFormState } from "react-dom";
 import { authenticate } from "@/src/lib/actions";
 import { ExclamationCircleIcon } from "@heroicons/react/24/outline";
 
 export default function LoginForm() {
   const prevState = { errors: {}, message: null };
   const [state, dispath] = useFormState(authenticate, prevState);
-  const { pending } = useFormStatus();
 
   return (
     <>
@@ -96,7 +95,6 @@ export default function LoginForm() {
           <div>
             <button
               type="submit"
-              aria-disabled={pending}
               className="flex w-full justify-center rounded-md bg-pink-400 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-pink-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-pink-600"
             >
               Iniciar

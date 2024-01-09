@@ -1,11 +1,25 @@
-import { User } from "../models/User";
-import { mongooseConnect } from "./mongoose";
+import { db } from "./db";
 
 export async function getUserByEmail(email) {
   try {
-    await mongooseConnect();
+    const user = db.user.findUnique({
+      where: {
+        email,
+      },
+    });
+    return user;
+  } catch (error) {
+    return null;
+  }
+}
 
-    const user = await User.findOne({ email });
+export async function getUserById(id) {
+  try {
+    const user = db.user.findUnique({
+      where: {
+        id,
+      },
+    });
     return user;
   } catch (error) {
     return null;

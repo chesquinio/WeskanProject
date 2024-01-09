@@ -1,14 +1,13 @@
 "use server";
 
 import bcrypt from "bcryptjs";
-import { mongooseConnect } from "./mongoose";
 import { redirect } from "next/navigation";
-import { User } from "@/src/models/User";
 import { registerUserSchema, loginUserSchema } from "@/src/schemas";
 import { getUserByEmail } from "./data";
 import { signIn } from "@/src/auth";
 import { DEFAULT_LOGIN_REDIRECT } from "@/routes";
 import { AuthError } from "next-auth";
+import { db } from "./db";
 
 export async function register(prevState, formdata) {
   const validatedFields = registerUserSchema.safeParse({
@@ -27,8 +26,6 @@ export async function register(prevState, formdata) {
   const { name, email, password } = validatedFields.data;
 
   try {
-    await mongooseConnect();
-
     const existingUser = await getUserByEmail(email);
     if (existingUser) {
       return {
@@ -38,14 +35,13 @@ export async function register(prevState, formdata) {
 
     const hashedPassword = await bcrypt.hash(password, 10);
 
-    const user = new User({
-      name,
-      email,
-      password: hashedPassword,
-      validated: false,
-      isAdmin: false,
+    await db.user.create({
+      data: {
+        name,
+        email,
+        password: hashedPassword,
+      },
     });
-    await user.save();
   } catch (error) {
     throw new Error(`Ha ocurrido un error al registrarse: ${error}`);
   }
