@@ -1,0 +1,11 @@
+{
+    "builds": [
+      {
+        "src": "next.config.js",
+        "use": "@now/next"
+      }
+    ],
+    "files": [
+      "!./node_modules/mongoose/dist/browser.umd.js"
+    ]
+  }
