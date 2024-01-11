@@ -1,4 +1,4 @@
-import LoginForm from "@/src/components/login/login-form";
+import LoginForm from "@/src/components/auth/login/login-form";
 import WeskanLogo from "@/src/components/weskan-logo";
 
 export default function LoginPage() {

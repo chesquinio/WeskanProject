@@ -2,7 +2,12 @@
 export const publicRoutes = ["/", "/empresa", "/productos"];
 
 // Routes used for authentication
-export const authRoutes = ["/iniciar-sesion", "/registrarse"];
+export const authRoutes = [
+  "/iniciar-sesion",
+  "/registrarse",
+  "/recuperar",
+  "/confirmar",
+];
 
 // The prefix for API authentication routes
 export const apiAuthPrefix = "/api/auth";

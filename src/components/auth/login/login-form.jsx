@@ -49,14 +49,14 @@ export default function LoginForm() {
               >
                 Contraseña
               </label>
-              {/* <div className="text-sm">
-                  <a
-                    href="#"
-                    className="font-semibold text-indigo-600 hover:text-indigo-500"
-                  >
-                    Olvidaste tu contraseña?
-                  </a>
-                </div> */}
+              <div className="text-sm">
+                <Link
+                  href="/recuperar"
+                  className="font-semibold text-pink-500 hover:text-pink-400"
+                >
+                  Olvidaste tu contraseña?
+                </Link>
+              </div>
             </div>
             <div className="mt-2">
               <input
@@ -80,15 +80,24 @@ export default function LoginForm() {
           </div>
 
           <div
-            className="flex h-8 items-end space-x-1"
+            id="form-status"
             aria-live="polite"
             aria-atomic="true"
+            className="flex items-center h-8"
           >
             {state.message && (
-              <>
-                <ExclamationCircleIcon className="h-5 w-5 text-red-500" />
-                <p className="text-sm text-red-500">{state.message}</p>
-              </>
+              <div
+                key={state.message}
+                id="error-message"
+                aria-live="polite"
+                aria-atomic="true"
+                className="flex justify-start items-center w-full space-x-1 bg-red-300 rounded py-2 px-4"
+              >
+                <ExclamationCircleIcon className="h-5 w-5 text-red-800" />
+                <p className="text-sm font-semibold text-red-800">
+                  {state.message}
+                </p>
+              </div>
             )}
           </div>
 
@@ -106,7 +115,7 @@ export default function LoginForm() {
           No tienes una cuenta?{" "}
           <Link
             href="/registrarse"
-            className="font-semibold leading-6 text-pink-400 hover:text-pink-500"
+            className="font-semibold leading-6 text-pink-500 hover:text-pink-400"
           >
             Registrate aquí
           </Link>

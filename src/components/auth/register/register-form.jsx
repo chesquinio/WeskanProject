@@ -3,9 +3,13 @@
 import { register } from "@/src/lib/actions";
 import { useFormState } from "react-dom";
 import Link from "next/link";
+import {
+  ExclamationCircleIcon,
+  CheckCircleIcon,
+} from "@heroicons/react/24/outline";
 
 export default function RegisterForm() {
-  const initialState = { errors: {}, message: null };
+  const initialState = { errors: {}, message: null, success: null };
   const [state, dispath] = useFormState(register, initialState);
 
   return (
@@ -106,11 +110,39 @@ export default function RegisterForm() {
             </div>
           </div>
 
-          <div id="form-error" aria-live="polite" aria-atomic="true">
+          <div
+            id="form-status"
+            aria-live="polite"
+            aria-atomic="true"
+            className="flex items-center h-8"
+          >
             {state.message && (
-              <p className="mt-2 text-sm text-red-500" key={state.message}>
-                {state.message}
-              </p>
+              <div
+                key={state.message}
+                id="error-message"
+                aria-live="polite"
+                aria-atomic="true"
+                className="flex justify-start items-center w-full space-x-1 bg-red-300 rounded py-2 px-4"
+              >
+                <ExclamationCircleIcon className="h-5 w-5 text-red-800" />
+                <p className="text-sm font-semibold text-red-800">
+                  {state.message}
+                </p>
+              </div>
+            )}
+            {state.success && (
+              <div
+                key={state.success}
+                id="success-message"
+                aria-live="polite"
+                aria-atomic="true"
+                className="flex justify-start items-center w-full space-x-1 bg-green-300 rounded py-2 px-4"
+              >
+                <CheckCircleIcon className="h-5 w-5 text-green-800" />
+                <p className="text-sm font-semibold text-green-800">
+                  {state.success}
+                </p>
+              </div>
             )}
           </div>
 

@@ -28,3 +28,17 @@ export const loginUserSchema = UserSchema.omit({
   validated: true,
   isAdmin: true,
 });
+
+export const recoverUserSchema = UserSchema.omit({
+  name: true,
+  password: true,
+  validated: true,
+  isAdmin: true,
+});
+
+export const newPasswordUserSchema = UserSchema.omit({
+  name: true,
+  email: true,
+  validated: true,
+  isAdmin: true,
+});

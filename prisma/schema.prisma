@@ -11,15 +11,21 @@ datasource db {
   directUrl = env("DIRECT_URL")
 }
 
+enum UserRole {
+  USER
+  ADMIN
+}
+
 model User {
-  id        String    @id @default(cuid())
-  name      String?
-  email     String?   @unique
-  password  String
-  image     String?
-  validated Boolean   @default(false)
-  isAdmin   Boolean   @default(false)
-  Account   Account[]
+  id            String    @id @default(cuid())
+  name          String?
+  email         String?   @unique
+  emailVerified DateTime?
+  password      String
+  image         String?
+  validated     Boolean   @default(false)
+  role          UserRole  @default(USER)
+  Account       Account[]
 }
 
 model Account {
@@ -36,4 +42,22 @@ model Account {
   user               User      @relation(fields: [userId], references: [id])
 
   @@unique([providerId, providerAccountId])
+}
+
+model VerificationToken {
+  id      String   @id @default(cuid())
+  email   String
+  token   String   @unique
+  expires DateTime
+
+  @@unique([email, token])
+}
+
+model PasswordRecoverToken {
+  id      String   @id @default(cuid())
+  email   String
+  token   String   @unique
+  expires DateTime
+
+  @@unique([email, token])
 }
