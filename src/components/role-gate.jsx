@@ -1,5 +1,5 @@
-import { currentRole } from "@/src/lib/auth";
-import ContentError from "@/src/components/content-error";
+import { currentRole } from "@/lib/auth";
+import ContentError from "@/components/content-error";
 
 export default async function RoleGate({ children, allowedRole }) {
   const role = await currentRole();

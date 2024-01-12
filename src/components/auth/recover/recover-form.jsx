@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { useFormState } from "react-dom";
-import { recover } from "@/src/lib/actions";
+import { recover } from "@/lib/actions";
 import {
   CheckCircleIcon,
   ExclamationCircleIcon,

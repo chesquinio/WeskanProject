@@ -19,7 +19,7 @@ const links = [
     href: "/administrador/solicitudes",
     icon: DocumentDuplicateIcon,
   },
-  { name: "Clientes", href: "/administrador/clientes", icon: UserGroupIcon },
+  { name: "Usuarios", href: "/administrador/usuarios", icon: UserGroupIcon },
   {
     name: "Catálogos",
     href: "/administrador/catalogos",

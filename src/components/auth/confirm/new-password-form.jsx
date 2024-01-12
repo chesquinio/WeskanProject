@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { useFormState } from "react-dom";
-import { newPassword } from "@/src/lib/actions";
+import { newPassword } from "@/lib/actions";
 import {
   CheckCircleIcon,
   ExclamationCircleIcon,

@@ -12,8 +12,8 @@ import {
   XMarkIcon,
 } from "@heroicons/react/24/outline";
 import { DesktopLinks, MovileLinks } from "./nav-links";
-import { logout } from "@/src/lib/actions";
-import { useCurrentUser } from "../hooks/use-current-user";
+import { logout } from "@/lib/actions";
+import { useCurrentUser } from "@/hooks/use-current-user";
 
 function classNames(...classes) {
   return classes.filter(Boolean).join(" ");

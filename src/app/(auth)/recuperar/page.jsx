@@ -1,4 +1,4 @@
-import RecoverForm from "@/src/components/auth/recover/recover-form";
+import RecoverForm from "@/components/auth/recover/recover-form";
 
 export default function RecoverPage() {
   return (

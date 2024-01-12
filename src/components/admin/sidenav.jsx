@@ -4,7 +4,7 @@ import Link from "next/link";
 import { PowerIcon } from "@heroicons/react/24/outline";
 import WeskanLogo from "../weskan-logo";
 import NavLinks from "./nav-links";
-import { logout } from "@/src/lib/actions";
+import { logout } from "@/lib/actions";
 
 export default function SideNav() {
   return (

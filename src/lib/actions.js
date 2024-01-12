@@ -6,14 +6,15 @@ import {
   loginUserSchema,
   recoverUserSchema,
   newPasswordUserSchema,
-} from "@/src/schemas";
+} from "@/schemas";
 import { getPasswordRecoverTokenByToken, getUserByEmail } from "./data";
-import { signIn, signOut } from "@/src/auth";
-import { DEFAULT_LOGIN_REDIRECT } from "@/routes";
+import { signIn, signOut } from "@/auth";
+import { DEFAULT_LOGIN_REDIRECT } from "../../routes";
 import { AuthError } from "next-auth";
-import { db } from "@/src/lib/db";
+import { db } from "@/lib/db";
 import { sendPasswordRecoverEmail } from "./email";
 import { generatePasswordRecoverToken } from "./tokens";
+import { revalidatePath } from "next/cache";
 
 export async function register(prevState, formdata) {
   const validatedFields = registerUserSchema.safeParse({
@@ -78,12 +79,12 @@ export async function authenticate(prevState, formdata) {
     return { message: "Este email no existe." };
   }
 
-  // if (!existingUser.validated) {
-  //   return {
-  //     message:
-  //       "Tu cuenta no ha sido validada por el momento, esto puede tardar hasta 24 horas hábiles.",
-  //   };
-  // }
+  if (!existingUser.validated) {
+    return {
+      message:
+        "Tu cuenta no ha sido validada por el momento, esto puede tardar hasta 24 horas hábiles.",
+    };
+  }
 
   try {
     await signIn("credentials", {
@@ -200,4 +201,69 @@ export async function newPassword(prevState, formdata) {
       `Ha ocurrido un error al modificar la contraseña: ${error}`
     );
   }
+}
+
+export async function allowedRequest(id) {
+  try {
+    await db.user.update({
+      where: {
+        id: id,
+      },
+      data: {
+        validated: true,
+      },
+    });
+  } catch (error) {
+    throw new Error(`Ha ocurrido un error al permitir el usuario: ${error}`);
+  }
+
+  revalidatePath("/administrador/solicirudes");
+}
+
+export async function deniedRequest(id) {
+  try {
+    await db.user.delete({
+      where: {
+        id: id,
+      },
+    });
+  } catch (error) {
+    throw new Error(`Ha ocurrido un error al denegar el usuario: ${error}`);
+  }
+
+  revalidatePath("/administrador/solicirudes");
+}
+
+export async function changeToAdmin(id) {
+  try {
+    await db.user.update({
+      where: {
+        id: id,
+      },
+      data: {
+        role: "ADMIN",
+      },
+    });
+  } catch (error) {
+    throw new Error(`Ha ocurrido un error al cambiar el rol: ${error}`);
+  }
+
+  revalidatePath("/administrador/usuarios");
+}
+
+export async function changeToUser(id) {
+  try {
+    await db.user.update({
+      where: {
+        id: id,
+      },
+      data: {
+        role: "USER",
+      },
+    });
+  } catch (error) {
+    throw new Error(`Ha ocurrido un error al cambiar el rol: ${error}`);
+  }
+
+  revalidatePath("/administrador/usuarios");
 }

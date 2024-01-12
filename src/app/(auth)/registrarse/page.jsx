@@ -1,5 +1,5 @@
-import RegisterForm from "@/src/components/auth/register/register-form";
-import WeskanLogo from "@/src/components/weskan-logo";
+import RegisterForm from "@/components/auth/register/register-form";
+import WeskanLogo from "@/components/weskan-logo";
 
 export default function RegisterPage() {
   return (

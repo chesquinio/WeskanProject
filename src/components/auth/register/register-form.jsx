@@ -1,6 +1,6 @@
 "use client";
 
-import { register } from "@/src/lib/actions";
+import { register } from "@/lib/actions";
 import { useFormState } from "react-dom";
 import Link from "next/link";
 import {

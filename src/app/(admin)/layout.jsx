@@ -1,5 +1,5 @@
-import SideNav from "@/src/components/admin/sidenav";
-import RoleGate from "@/src/components/role-gate";
+import SideNav from "@/components/admin/sidenav";
+import RoleGate from "@/components/role-gate";
 import { UserRole } from "@prisma/client";
 
 export default async function AdminLayout({ children }) {

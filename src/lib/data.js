@@ -1,8 +1,76 @@
 import { db } from "./db";
+import { unstable_noStore as noStore } from "next/cache";
 
-export async function getAllUsers() {
+const ITEMS_PER_PAGE = 6;
+
+export async function getFilteredValidatedUsers(query, currentPage) {
+  noStore();
+  const offset = (currentPage - 1) * ITEMS_PER_PAGE;
+
   try {
-    const users = await db.user.findMany();
+    const users = await db.user.findMany({
+      select: {
+        id: true,
+        name: true,
+        email: true,
+        image: true,
+        role: true,
+      },
+      where: {
+        AND: [
+          {
+            OR: [
+              { name: { contains: query, mode: "insensitive" } },
+              { email: { contains: query, mode: "insensitive" } },
+            ],
+          },
+          { validated: { equals: true } },
+        ],
+      },
+      orderBy: {
+        name: "desc",
+      },
+      take: ITEMS_PER_PAGE,
+      skip: offset,
+    });
+
+    return users;
+  } catch (error) {
+    return null;
+  }
+}
+
+export async function getFilteredRequestUsers(query, currentPage) {
+  noStore();
+  const offset = (currentPage - 1) * ITEMS_PER_PAGE;
+
+  try {
+    const users = await db.user.findMany({
+      select: {
+        id: true,
+        name: true,
+        email: true,
+        image: true,
+        role: true,
+      },
+      where: {
+        AND: [
+          {
+            OR: [
+              { name: { contains: query, mode: "insensitive" } },
+              { email: { contains: query, mode: "insensitive" } },
+            ],
+          },
+          { validated: { equals: false } },
+        ],
+      },
+      orderBy: {
+        name: "desc",
+      },
+      take: ITEMS_PER_PAGE,
+      skip: offset,
+    });
+
     return users;
   } catch (error) {
     return null;
@@ -84,6 +152,69 @@ export async function getPasswordRecoverTokenByEmail(email) {
     });
 
     return passwordRecoverToken;
+  } catch (error) {
+    return null;
+  }
+}
+
+export async function getValidatedUsersPages(query) {
+  try {
+    const count = await db.user.count({
+      where: {
+        AND: [
+          {
+            OR: [
+              { name: { contains: query, mode: "insensitive" } },
+              { email: { contains: query, mode: "insensitive" } },
+            ],
+          },
+          { validated: { equals: true } },
+        ],
+      },
+    });
+
+    const totalPages = Math.ceil(count / ITEMS_PER_PAGE);
+    return totalPages;
+  } catch (error) {
+    return null;
+  }
+}
+
+export async function getRequestUsersPages(query) {
+  try {
+    const count = await db.user.count({
+      where: {
+        AND: [
+          {
+            OR: [
+              { name: { contains: query, mode: "insensitive" } },
+              { email: { contains: query, mode: "insensitive" } },
+            ],
+          },
+          { validated: { equals: false } },
+        ],
+      },
+    });
+
+    const totalPages = Math.ceil(count / ITEMS_PER_PAGE);
+    return totalPages;
+  } catch (error) {
+    return null;
+  }
+}
+
+export async function getRoleById(id) {
+  try {
+    const role = db.user.findUnique({
+      where: {
+        id: id,
+      },
+      select: {
+        role: true,
+      },
+    });
+
+    return role;
   } catch (error) {
     return null;
   }

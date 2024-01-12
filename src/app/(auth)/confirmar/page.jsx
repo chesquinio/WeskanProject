@@ -1,4 +1,4 @@
-import NewPasswordForm from "@/src/components/auth/confirm/new-password-form";
+import NewPasswordForm from "@/components/auth/confirm/new-password-form";
 
 export default function NewPasswordPage() {
   return (

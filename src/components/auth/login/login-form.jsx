@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { useFormState } from "react-dom";
-import { authenticate } from "@/src/lib/actions";
+import { authenticate } from "@/lib/actions";
 import { ExclamationCircleIcon } from "@heroicons/react/24/outline";
 
 export default function LoginForm() {
