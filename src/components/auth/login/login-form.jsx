@@ -4,6 +4,7 @@ import Link from "next/link";
 import { useFormState } from "react-dom";
 import { authenticate } from "@/lib/actions";
 import { ExclamationCircleIcon } from "@heroicons/react/24/outline";
+import { SubmitButton } from "../buttons";
 
 export default function LoginForm() {
   const prevState = { errors: {}, message: null };
@@ -100,15 +101,7 @@ export default function LoginForm() {
               </div>
             )}
           </div>
-
-          <div>
-            <button
-              type="submit"
-              className="flex w-full justify-center rounded-md bg-pink-400 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-pink-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-pink-600"
-            >
-              Iniciar
-            </button>
-          </div>
+          <SubmitButton text="Iniciar" />
         </form>
 
         <p className="mt-10 text-center text-sm text-gray-500">

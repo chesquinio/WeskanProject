@@ -12,9 +12,10 @@ import { signIn, signOut } from "@/auth";
 import { DEFAULT_LOGIN_REDIRECT } from "../../routes";
 import { AuthError } from "next-auth";
 import { db } from "@/lib/db";
-import { sendPasswordRecoverEmail } from "./email";
+import { sendPasswordRecoverEmail } from "./emails";
 import { generatePasswordRecoverToken } from "./tokens";
 import { revalidatePath } from "next/cache";
+import { upload } from "./files";
 
 export async function register(prevState, formdata) {
   const validatedFields = registerUserSchema.safeParse({
@@ -266,4 +267,30 @@ export async function changeToUser(id) {
   }
 
   revalidatePath("/administrador/usuarios");
+}
+
+export async function uploadFile(prevState, formdata) {
+  try {
+    const file = formdata.get("file");
+    if (!file.size > 0) {
+      return { message: "No se ha encontrado ningun archivo." };
+    }
+
+    const { filename, date } = await upload(file);
+    if (!filename || !date) {
+      return { message: "Ha ocurrido un error al guardar el archivo." };
+    }
+
+    await db.file.create({
+      data: {
+        filename: filename,
+        createdAt: date,
+      },
+    });
+
+    revalidatePath("/administrador/catalogos");
+    return { success: "Se ha guardado el archivo." };
+  } catch (error) {
+    throw new Error(`Ha ocurrido un error: ${error}`);
+  }
 }

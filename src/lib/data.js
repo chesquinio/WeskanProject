@@ -1,5 +1,7 @@
 import { db } from "./db";
-import { unstable_noStore as noStore } from "next/cache";
+import { unstable_noStore as noStore, revalidatePath } from "next/cache";
+import { read } from "./files";
+import { redirect } from "next/navigation";
 
 const ITEMS_PER_PAGE = 6;
 
@@ -205,7 +207,7 @@ export async function getRequestUsersPages(query) {
 
 export async function getRoleById(id) {
   try {
-    const role = db.user.findUnique({
+    const role = await db.user.findUnique({
       where: {
         id: id,
       },
@@ -215,6 +217,20 @@ export async function getRoleById(id) {
     });
 
     return role;
+  } catch (error) {
+    return null;
+  }
+}
+
+export async function getLastFile() {
+  try {
+    const lastFile = await db.file.findFirst({
+      orderBy: { createdAt: "desc" },
+    });
+    const filename = lastFile.filename;
+    const path = await read(filename);
+
+    return path;
   } catch (error) {
     return null;
   }

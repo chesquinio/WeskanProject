@@ -7,6 +7,7 @@ import {
   ExclamationCircleIcon,
   CheckCircleIcon,
 } from "@heroicons/react/24/outline";
+import { SubmitButton } from "../buttons";
 
 export default function RegisterForm() {
   const initialState = { errors: {}, message: null, success: null };
@@ -80,14 +81,6 @@ export default function RegisterForm() {
               >
                 Contraseña
               </label>
-              {/* <div className="text-sm">
-              <a
-                href="#"
-                className="font-semibold text-indigo-600 hover:text-indigo-500"
-              >
-                Olvidaste tu contraseña?
-              </a>
-            </div> */}
             </div>
             <div className="mt-2">
               <input
@@ -145,15 +138,7 @@ export default function RegisterForm() {
               </div>
             )}
           </div>
-
-          <div>
-            <button
-              type="submit"
-              className="flex w-full justify-center rounded-md bg-pink-400 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-pink-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-pink-600"
-            >
-              Registrarte
-            </button>
-          </div>
+          <SubmitButton text="Registrarse" />
         </form>
 
         <p className="mt-10 text-center text-sm text-gray-500">

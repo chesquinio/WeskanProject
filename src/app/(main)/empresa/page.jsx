@@ -20,16 +20,11 @@ export default function CompanyPage() {
             <strong>Juan Bautista Gays.</strong>
           </p>
         </div>
-        <div className="flex items-center justify-center opacity-60 p-6 md:w-3/5 md:px-28 md:py-12">
+        <div className="flex items-center justify-center p-6 md:w-3/5 md:px-28 md:py-12">
           <img
             src="/mapa-weskan.png"
-            className="hidden md:block rounded-lg"
-            alt="Screenshots of the dashboard project showing desktop version"
-          />
-          <img
-            src="/mapa-weskan.png"
-            className="block md:hidden rounded-lg"
-            alt="Screenshots of the dashboard project showing mobile version"
+            className="block rounded-lg"
+            alt="Screenshots of the dashboard project showing desktop and mobile version"
           />
         </div>
       </section>

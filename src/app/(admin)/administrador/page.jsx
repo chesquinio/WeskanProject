@@ -1,3 +1,3 @@
-export default function AdminPage() {
+export default async function AdminPage() {
   return <main>admin</main>;
 }
