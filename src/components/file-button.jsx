@@ -7,7 +7,7 @@ export default async function FileButton() {
   return (
     <div className="w-full h-60 group flex flex-col">
       <Link
-        href={`../${path}`}
+        href={path !== null ? `/${path}` : "/"}
         className="block relative w-full h-full rounded overflow-hidden group"
       >
         <img
