@@ -3,12 +3,11 @@ import Link from "next/link";
 
 export default async function FileButton() {
   const path = await getLastFile();
-  const url = path.split("/").pop();
 
   return (
     <div className="w-full h-60 group flex flex-col">
       <Link
-        href={url !== null ? `/${url}` : "/"}
+        href={path !== null ? `/${path.split("/").pop()}` : "/"}
         className="block relative w-full h-full rounded overflow-hidden group"
       >
         <img
