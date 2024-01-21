@@ -3,7 +3,7 @@ import FileButton from "@/components/file-button";
 export default async function CataloguePage() {
   return (
     <main className="m-5">
-      <section className="mt-4 flex grow flex-col gap-4 md:flex-row">
+      <section className="flex grow flex-col gap-4 md:flex-row min-h-[calc(100vh-120px)]">
         <div className="flex flex-col justify-center gap-6 rounded-lg bg-gray-200 px-6 py-10 md:w-2/5 md:px-20">
           <h1 className="text-2xl font-bold text-gray-800 md:text-4xl xl:text-5xl md:leading-normal">
             Productos para todos los motores.

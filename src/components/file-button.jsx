@@ -19,7 +19,7 @@ export default async function FileButton() {
             style={{ textShadow: "0px 4px 19px rgba(190,102,188,0.6)" }}
             className="text-3xl md:text-5xl"
           >
-            Catalogo
+            Catálogo
           </h3>
         </div>
       </Link>

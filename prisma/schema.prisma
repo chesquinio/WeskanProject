@@ -67,3 +67,10 @@ model File {
   filename  String   @unique
   createdAt DateTime
 }
+
+// model MeliToken {
+//   id          String   @id @default(cuid())
+//   accessToken String   @unique
+//   userId      Int
+//   expires     DateTime
+// }

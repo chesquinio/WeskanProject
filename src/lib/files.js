@@ -49,7 +49,7 @@ export async function read(key) {
 
     const res = await s3.send(command);
 
-    const fileStream = fs.createWriteStream(`./public/catalogo.${ext}`);
+    const fileStream = fs.createWriteStream(`./catalogo.${ext}`);
     res.Body.pipe(fileStream);
 
     return new Promise((resolve, reject) => {

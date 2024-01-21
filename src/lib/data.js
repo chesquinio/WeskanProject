@@ -1,7 +1,6 @@
 import { db } from "./db";
-import { unstable_noStore as noStore, revalidatePath } from "next/cache";
+import { unstable_noStore as noStore } from "next/cache";
 import { read } from "./files";
-import { redirect } from "next/navigation";
 
 const ITEMS_PER_PAGE = 6;
 
@@ -235,3 +234,15 @@ export async function getLastFile() {
     return null;
   }
 }
+
+// export async function getMeliToken() {
+//   try {
+//     const meliToken = await db.meliToken.findFisrt({
+//       orderBy: { expires: "desc" },
+//     });
+//     console.log(meliToken);
+//     return meliToken;
+//   } catch (error) {
+//     return null;
+//   }
+// }
