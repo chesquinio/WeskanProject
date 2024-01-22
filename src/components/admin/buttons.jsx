@@ -12,8 +12,8 @@ import {
   XCircleIcon,
 } from "@heroicons/react/24/outline";
 
-export function AllowedButton({ id, movile }) {
-  const allowedRequestById = allowedRequest.bind(null, id);
+export function AllowedButton({ id, email, movile }) {
+  const allowedRequestById = allowedRequest.bind(null, id, email);
 
   return (
     <form action={allowedRequestById}>
@@ -25,8 +25,8 @@ export function AllowedButton({ id, movile }) {
   );
 }
 
-export function DeniedButton({ id, movile }) {
-  const deniedRequestById = deniedRequest.bind(null, id);
+export function DeniedButton({ id, email, movile }) {
+  const deniedRequestById = deniedRequest.bind(null, id, email);
 
   return (
     <form action={deniedRequestById}>

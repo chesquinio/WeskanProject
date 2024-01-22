@@ -6,13 +6,19 @@ import {
   loginUserSchema,
   recoverUserSchema,
   newPasswordUserSchema,
+  emailSchema,
 } from "@/schemas";
 import { getPasswordRecoverTokenByToken, getUserByEmail } from "./data";
 import { signIn, signOut } from "@/auth";
 import { DEFAULT_LOGIN_REDIRECT } from "../../routes";
 import { AuthError } from "next-auth";
 import { db } from "@/lib/db";
-import { sendPasswordRecoverEmail } from "./emails";
+import {
+  sendAllowedRequestEmail,
+  sendDeniedRequestEmail,
+  sendEmail,
+  sendPasswordRecoverEmail,
+} from "./emails";
 import { generatePasswordRecoverToken } from "./tokens";
 import { revalidatePath } from "next/cache";
 import { upload } from "./files";
@@ -204,8 +210,9 @@ export async function newPassword(prevState, formdata) {
   }
 }
 
-export async function allowedRequest(id) {
+export async function allowedRequest(id, email) {
   try {
+    await sendAllowedRequestEmail(email);
     await db.user.update({
       where: {
         id: id,
@@ -218,11 +225,12 @@ export async function allowedRequest(id) {
     throw new Error(`Ha ocurrido un error al permitir el usuario: ${error}`);
   }
 
-  revalidatePath("/administrador/solicirudes");
+  revalidatePath("/administrador/solicitudes");
 }
 
-export async function deniedRequest(id) {
+export async function deniedRequest(id, email) {
   try {
+    await sendDeniedRequestEmail(email);
     await db.user.delete({
       where: {
         id: id,
@@ -232,7 +240,7 @@ export async function deniedRequest(id) {
     throw new Error(`Ha ocurrido un error al denegar el usuario: ${error}`);
   }
 
-  revalidatePath("/administrador/solicirudes");
+  revalidatePath("/administrador/solicitudes");
 }
 
 export async function changeToAdmin(id) {
@@ -276,20 +284,44 @@ export async function uploadFile(prevState, formdata) {
       return { message: "No se ha encontrado ningun archivo." };
     }
 
-    const { filename, date } = await upload(file);
-    if (!filename || !date) {
+    const { link, date } = await upload(file);
+    if (!link || !date) {
       return { message: "Ha ocurrido un error al guardar el archivo." };
     }
 
     await db.file.create({
       data: {
-        filename: filename,
+        link: link,
         createdAt: date,
       },
     });
 
     revalidatePath("/administrador/catalogos");
     return { success: "Se ha guardado el archivo." };
+  } catch (error) {
+    throw new Error(`Ha ocurrido un error: ${error}`);
+  }
+}
+
+export async function sendEmailToUser(prevState, formdata) {
+  const validatedFields = emailSchema.safeParse({
+    email: formdata.get("email"),
+    subject: formdata.get("subject"),
+    message: formdata.get("message"),
+  });
+
+  if (!validatedFields.success) {
+    return {
+      errors: validatedFields.error.flatten().fieldErrors,
+      message: "Ha ocurrido un error.",
+    };
+  }
+
+  const { email, subject, message } = validatedFields.data;
+
+  try {
+    await sendEmail(email, subject, message);
+    revalidatePath("/administrador/usuarios");
   } catch (error) {
     throw new Error(`Ha ocurrido un error: ${error}`);
   }

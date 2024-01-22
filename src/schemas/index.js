@@ -42,3 +42,17 @@ export const newPasswordUserSchema = UserSchema.omit({
   validated: true,
   isAdmin: true,
 });
+
+export const emailSchema = z.object({
+  email: z
+    .string({
+      invalid_type_error: "Es necesario un email.",
+    })
+    .email({ message: "Es necesario un email valido" }),
+  subject: z.string({
+    invalid_type_error: "Ingrese un asunto.",
+  }),
+  message: z.string({
+    invalid_type_error: "Ingrese un mensaje",
+  }),
+});

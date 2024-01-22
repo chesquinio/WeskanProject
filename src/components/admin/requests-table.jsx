@@ -35,8 +35,8 @@ export default async function RequestsTable({ query, currentPage }) {
                         <p className="font-normal">Informacion adicional</p>
                       </div>
                       <div className="flex justify-end gap-2">
-                        <AllowedButton id={user.id} movile />
-                        <DeniedButton id={user.id} movile />
+                        <AllowedButton id={user.id} email={user.email} movile />
+                        <DeniedButton id={user.id} email={user.email} movile />
                       </div>
                     </div>
                   </div>
@@ -83,8 +83,8 @@ export default async function RequestsTable({ query, currentPage }) {
                       </td>
                       <td className="whitespace-nowrap py-3 pl-6 pr-3">
                         <div className="flex justify-end gap-3">
-                          <AllowedButton id={user.id} />
-                          <DeniedButton id={user.id} />
+                          <AllowedButton id={user.id} email={user.email} />
+                          <DeniedButton id={user.id} email={user.email} />
                         </div>
                       </td>
                     </tr>

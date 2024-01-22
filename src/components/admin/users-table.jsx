@@ -1,9 +1,11 @@
 import { getFilteredValidatedUsers } from "@/lib/data";
-import { UserCircleIcon } from "@heroicons/react/24/outline";
 import { AdminButton, UserButton } from "./buttons";
+import SendEmailModal from "./send-email-modal";
+import { currentUser } from "@/lib/auth";
 
 export default async function UsersTable({ query, currentPage }) {
   const users = await getFilteredValidatedUsers(query, currentPage);
+  const { id } = await currentUser();
 
   return (
     <div className="mt-6 flow-root">
@@ -37,6 +39,7 @@ export default async function UsersTable({ query, currentPage }) {
                     <div className="flex justify-end gap-2">
                       <AdminButton id={user.id} movile />
                       <UserButton id={user.id} movile />
+                      <SendEmailModal name={user.name} email={user.email} />
                     </div>
                   </div>
                 </div>
@@ -82,9 +85,14 @@ export default async function UsersTable({ query, currentPage }) {
                       Informacion adicional
                     </td>
                     <td className="whitespace-nowrap py-3 pl-6 pr-3">
-                      <div className="flex justify-end gap-3">
+                      <div
+                        className={`flex justify-end gap-3 ${
+                          user.id === id ? "hidden" : "block"
+                        }`}
+                      >
                         <AdminButton id={user.id} />
                         <UserButton id={user.id} />
+                        <SendEmailModal name={user.name} email={user.email} />
                       </div>
                     </td>
                   </tr>

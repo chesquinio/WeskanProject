@@ -2,12 +2,12 @@ import { getLastFile } from "@/lib/data";
 import Link from "next/link";
 
 export default async function FileButton() {
-  const path = await getLastFile();
+  const link = await getLastFile();
 
   return (
     <div className="w-full h-60 group flex flex-col">
       <Link
-        href={path !== null ? `/${path.split("/").pop()}` : "/"}
+        href={link !== null ? link : "/"}
         className="block relative w-full h-full rounded overflow-hidden group"
       >
         <img

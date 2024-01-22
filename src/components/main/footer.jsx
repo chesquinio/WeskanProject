@@ -1,10 +1,10 @@
 export default function Footer() {
   return (
     <>
-      <div className="bg-gray-800 text-gray-300 py-5">
+      <div className="bg-gray-900 text-gray-300 py-5">
         <div className="w-4/5 m-auto">
           <div className="flex flex-col lg:flex-row lg:justify-center">
-            <div className="flex flex-col lg:grid lg:grid-cols-2 items-start gap-8 ml-3 mt-5 text-white">
+            <div className="flex flex-col lg:grid lg:grid-cols-2 items-start lg:w-5/12 gap-8 ml-3 mt-5 text-white">
               <span className="text-lg font-ligh cursor-default">
                 <i className="bx bx-map"></i>
                 <p className="text-gray-300 ml-2 inline text-sm">
@@ -34,7 +34,7 @@ export default function Footer() {
             </div>
             <div className="lg:hidden h-px bg-gray-400 my-8"></div>
             <div className="hidden lg:block w-px bg-gray-400 mx-8"></div>
-            <div className="flex justify-center items-center">
+            <div className="flex justify-center items-center lg:w-5/12">
               <p className="text-sm mx-auto w-4/5 text-center">
                 © Copyright 2023 - Weskan S.A. - Todos los derechos reservados
               </p>

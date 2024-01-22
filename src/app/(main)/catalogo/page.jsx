@@ -12,8 +12,8 @@ export default async function CataloguePage() {
             className={`text-cl text-gray-800 md:text-2xl xl:text-3xl md:leading-normal`}
           >
             Aquí podras encontrar un listado con todos nuestros
-            <b className="text-pink-400">productos</b> en un{" "}
-            <b className="text-pink-400">solo lugar</b>, simplificando el
+            <b className="text-pink-400"> productos</b> en un
+            <b className="text-pink-400"> solo lugar</b>, simplificando el
             proceso de pedidos y solicitudes.
           </p>
           <p
@@ -35,7 +35,7 @@ export default async function CataloguePage() {
           />
         </div>
       </section>
-      <section className="mx-auto max-w-[1200px] mt-20">
+      <section className="mx-auto max-w-[1200px] py-24 sm:py-32">
         <h2 className="text-4xl font-bold text-center text-gray-800 mb-8">
           Conoce nuestra lista de precios.
         </h2>

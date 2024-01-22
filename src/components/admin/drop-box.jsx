@@ -15,23 +15,24 @@ export default function DropBox() {
       <form action={dispath} className="flex flex-col sm:flex-row gap-5">
         <label
           htmlFor="file"
-          className="w-full h-52 border-2 font-medium text-gray-700 border-dashed border-pink-400 rounded-lg flex justify-center items-center"
+          className="w-full h-52 border-2 font-medium text-gray-700 border-dashed border-pink-400 rounded-lg flex justify-center items-center cursor-pointer"
         >
-          {!filename
-            ? "Seleciona un archivo excel."
-            : `Archivo ${filename} seleccionado.`}
+          <span>
+            {!filename
+              ? "Seleciona un archivo excel."
+              : `Archivo ${filename} seleccionado.`}
+          </span>
+          <input
+            id="file"
+            type="file"
+            name="file"
+            accept=".xlsx, .xls"
+            onChange={(e) => setFilename(e.target.files[0]?.name)}
+            className="sr-only"
+          />
         </label>
-        <input
-          id="file"
-          type="file"
-          name="file"
-          accept=".xlsx, .xls"
-          onChange={(e) => setFilename(e.target.files[0]?.name)}
-          className="hidden"
-        />
-        <button className="flex items-center justify-center w-full sm:w-12 h-12 sm:h-52 rounded-lg bg-gray-100 hover:bg-pink-100 hover:text-pink-500">
-          <ArrowRightIcon className="w-6" />
-        </button>
+
+        <SubmitButton />
       </form>
       <div className="mt-4">
         {state.message && (
@@ -46,5 +47,21 @@ export default function DropBox() {
         )}
       </div>
     </section>
+  );
+}
+
+function SubmitButton() {
+  const { pending } = useFormState();
+  return (
+    <button
+      disabled={pending}
+      className={`flex items-center justify-center w-full sm:w-12 h-12 sm:h-52 rounded-lg bg-gray-100 ${
+        pending
+          ? "text-gray-500 bg-gray-50"
+          : "hover:bg-pink-100 hover:text-pink-500"
+      }`}
+    >
+      <ArrowRightIcon className="w-6" />
+    </button>
   );
 }

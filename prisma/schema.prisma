@@ -64,7 +64,7 @@ model PasswordRecoverToken {
 
 model File {
   id        String   @id @default(cuid())
-  filename  String   @unique
+  link      String   @unique
   createdAt DateTime
 }
 

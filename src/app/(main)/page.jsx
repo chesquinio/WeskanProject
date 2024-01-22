@@ -1,3 +1,4 @@
+import { ArrowRightIcon } from "@heroicons/react/24/outline";
 import Link from "next/link";
 
 export default function HomePage() {
@@ -15,17 +16,14 @@ export default function HomePage() {
               Bienvenidos a <strong className="text-pink-400">Weskan.</strong>{" "}
               Vendedores de autopartes de todo el país.
             </p>
-            <p
-              className={`text-lg text-gray-800 md:text-xl xl:text-2xl md:leading-normal`}
+            <Link
+              href="https://weskan.mercadoshops.com.ar/"
+              target="_blank"
+              className="text-lg md:text-xl xl:text-2xl leading-6 text-gray-800 hover:text-pink-400 flex items-center gap-3 hover:gap-5 transition-all"
             >
-              Conoce nuestros productos{" "}
-              <Link
-                href="/productos"
-                className="text-pink-400 border-b border-pink-400"
-              >
-                aquí.
-              </Link>
-            </p>
+              <p>Ver nuestros productos</p>
+              <ArrowRightIcon className="w-5 h-5" />
+            </Link>
           </div>
           <div className="flex items-center justify-center p-6 md:w-3/5 md:px-28 md:py-12">
             <img
@@ -46,26 +44,22 @@ export default function HomePage() {
               Nuestros objetivos.
             </h3>
             <p className="text-lg text-balance text-gray-600">
-              Lorem ipsum dolor, sit amet consectetur adipisicing elit.
-              Voluptate animi fugit itaque perspiciatis incidunt laboriosam
-              quis, esse ducimus rerum atque ipsam ex? Et error mollitia
-              accusantium, aliquid ullam ipsam excepturi!
+              Somos más que una empresa del sector, somos un equipo de trabajo
+              eficiente que busca ofrecer el mejor producto.
             </p>
             <p className="text-balance text-gray-600">
-              Lorem ipsum, dolor sit amet consectetur adipisicing elit. Vel,
-              perferendis impedit! Id dolor nostrum assumenda nisi eligendi
-              itaque! Cum quia consequuntur excepturi veniam, voluptate corporis
-              cumque pariatur porro, harum dolore tempora quod voluptatum
-              mollitia cupiditate blanditiis tempore quis aspernatur
-              reprehenderit.
+              Nos concentramos en la fabricación y venta de productos
+              especializados como válvulas, guías de válvulas, asientos de
+              válvulas, pistones o tapas de cilindros. Actualmente, estamos
+              centrados en consolidar nuestra posición en el mercado nacional,
+              para destacarnos como proveedores líderes en soluciones
+              metalúrgicas de alta calidad.
             </p>
             <p className="text-balance text-gray-600">
-              Lorem ipsum, dolor sit amet consectetur adipisicing elit. Vel,
-              perferendis impedit! Id dolor nostrum assumenda nisi eligendi
-              itaque! Cum quia consequuntur excepturi veniam, voluptate corporis
-              cumque pariatur porro, harum dolore tempora quod voluptatum
-              mollitia cupiditate blanditiis tempore quis aspernatur
-              reprehenderit.
+              Nosotros tenemos el compromiso de ser líderes locales y
+              expandirnos globalmente, manteniendo siempre nuestro compromiso
+              con la calidad, la innovación y la satisfacción del cliente en la
+              fabricación y comercialización de nuestros productos distintivos.
             </p>
           </div>
           <div className="flex flex-col lg:w-1/3 lg:ml-10 mt-12 gap-5">

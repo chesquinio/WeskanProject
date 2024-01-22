@@ -1,66 +1,41 @@
-import {
-  PutObjectCommand,
-  S3Client,
-  GetObjectCommand,
-} from "@aws-sdk/client-s3";
-import fs from "fs";
+import { PutObjectCommand, S3Client } from "@aws-sdk/client-s3";
 
 const bucketName = process.env.AWS_BUCKET_NAME;
+const region = process.env.AWS_DEFAULT_REGION;
 
 const s3 = new S3Client({
   credentials: {
     accessKeyId: process.env.AWS_ACCESS_KEY_ID,
     secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY,
   },
-  region: process.env.AWS_DEFAULT_REGION,
+  region: region,
 });
 
 export async function upload(file) {
   try {
     const ext = file.name.split(".").pop();
     const date = new Date();
-    const filename = Date.now() + "." + ext;
+    const filename =
+      "catalogo_de_precios_" +
+      new Date().toLocaleDateString().split("/").join("-") +
+      "_" +
+      new Date().toLocaleTimeString() +
+      "." +
+      ext;
 
     const buffer = Buffer.from(await file.arrayBuffer());
 
-    const res = await s3.send(
+    await s3.send(
       new PutObjectCommand({
         Bucket: bucketName,
-        Key: filename,
+        Key: `price-list/${filename}`,
         Body: buffer,
         ContentType: file.type,
       })
     );
 
-    return { filename, date };
-  } catch (error) {
-    return null;
-  }
-}
-
-export async function read(key) {
-  try {
-    const command = new GetObjectCommand({
-      Bucket: bucketName,
-      Key: key,
-    });
-
-    const ext = key.split(".").pop();
-
-    const res = await s3.send(command);
-
-    const fileStream = fs.createWriteStream(`./catalogo.${ext}`);
-    res.Body.pipe(fileStream);
-
-    return new Promise((resolve, reject) => {
-      fileStream.on("close", () => {
-        resolve(`./catalogo.${ext}`);
-      });
-
-      fileStream.on("error", (error) => {
-        reject(error);
-      });
-    });
+    const link = `https://${bucketName}.s3.${region}.amazonaws.com/price-list/${filename}`;
+    return { link, date };
   } catch (error) {
     return null;
   }

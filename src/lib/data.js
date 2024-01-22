@@ -1,6 +1,5 @@
 import { db } from "./db";
 import { unstable_noStore as noStore } from "next/cache";
-import { read } from "./files";
 
 const ITEMS_PER_PAGE = 6;
 
@@ -226,10 +225,38 @@ export async function getLastFile() {
     const lastFile = await db.file.findFirst({
       orderBy: { createdAt: "desc" },
     });
-    const filename = lastFile.filename;
-    const path = await read(filename);
+    const lastFileLink = lastFile.link;
 
-    return path;
+    return lastFileLink;
+  } catch (error) {
+    return null;
+  }
+}
+
+export async function getCardData() {
+  try {
+    const totalUsers = await db.user.count({
+      where: {
+        role: "USER",
+        validated: true,
+      },
+    });
+
+    const totalAdmins = await db.user.count({
+      where: {
+        role: "ADMIN",
+      },
+    });
+
+    const totalRequest = await db.user.count({
+      where: {
+        validated: false,
+      },
+    });
+
+    const totalFiles = await db.file.count({});
+
+    return { totalUsers, totalFiles, totalAdmins, totalRequest };
   } catch (error) {
     return null;
   }

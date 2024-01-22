@@ -2,7 +2,7 @@
 
 import { Fragment } from "react";
 import Link from "next/link";
-import WeskanLogo from "./weskan-logo";
+import WeskanLogo from "../weskan-logo";
 import { useState } from "react";
 import { Dialog, Disclosure, Menu, Transition } from "@headlessui/react";
 import {
@@ -19,8 +19,8 @@ import { usePathname } from "next/navigation";
 const navigation = [
   { name: "Inicio", href: "/" },
   { name: "Empresa", href: "/empresa" },
-  { name: "Productos", href: "/productos" },
-  { name: "Catalogo", href: "/catalogo" },
+  { name: "Productos", href: "https://weskan.mercadoshops.com.ar" },
+  { name: "Catálogo", href: "/catalogo" },
 ];
 
 function classNames(...classes) {
@@ -62,7 +62,7 @@ export default function Header() {
                 ))}
               </div>
 
-              <div className="flex items-center sm:static sm:inset-auto p-6">
+              <div className="flex items-center sm:static sm:inset-auto p-2">
                 {/* Profile dropdown */}
                 {user ? (
                   <Menu as="div" className="relative ml-3">
@@ -138,7 +138,7 @@ export default function Header() {
                   <div className="hidden lg:flex lg:flex-1 lg:justify-end">
                     <Link
                       href="/iniciar-sesion"
-                      className="text-sm font-semibold py-2 px-4 rounded-lg leading-6 text-gray-800 hover:text-pink-400 hover:bg-pink-50"
+                      className="text-sm font-semibold py-2 px-4 rounded-lg leading-6 text-gray-800 transition-transform hover:text-pink-400 hover:bg-pink-50"
                     >
                       Iniciar Sesión <span aria-hidden="true">&rarr;</span>
                     </Link>
