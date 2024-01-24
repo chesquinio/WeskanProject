@@ -1,8 +1,8 @@
-import { getFilteredRequestUsers } from "@/lib/data";
+import { getFilteredUsers } from "@/lib/data";
 import { AllowedButton, DeniedButton } from "./buttons";
 
-export default async function RequestsTable({ query, currentPage }) {
-  const users = await getFilteredRequestUsers(query, currentPage);
+export default async function AccessesTable({ query, currentPage }) {
+  const users = await getFilteredUsers(query, currentPage);
 
   return (
     <div className="mt-6 flow-root">

@@ -18,6 +18,18 @@ export const {
         session.user.id = token.sub;
       }
 
+      if (token.image && session.user) {
+        session.user.image = token.image;
+      }
+
+      if (token.category && session.user) {
+        session.user.category = token.category;
+      }
+
+      if (token.description && session.user) {
+        session.user.description = token.description;
+      }
+
       if (token.role && session.user) {
         session.user.role = token.role;
       }
@@ -35,6 +47,9 @@ export const {
 
       if (!existingUser) return token;
 
+      token.image = existingUser.image;
+      token.category = existingUser.category;
+      token.description = existingUser.description;
       token.role = existingUser.role;
       token.validated = existingUser.validated;
 

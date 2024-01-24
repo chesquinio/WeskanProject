@@ -1,9 +1,11 @@
 import { z } from "zod";
 
 const UserSchema = z.object({
-  name: z.string({
-    invalid_type_error: "Ingresa un nombre.",
-  }),
+  name: z
+    .string({
+      invalid_type_error: "Ingresa un nombre.",
+    })
+    .min(2, { message: "Ingrese un nombre mas completo." }),
   email: z
     .string({
       invalid_type_error: "Ingrese un email.",
@@ -14,17 +16,27 @@ const UserSchema = z.object({
       invalid_type_error: "Ingrese una contraseña.",
     })
     .min(6, { message: "Ingrese una contraseña com 6 o más caracteres." }),
+  category: z.string({
+    invalid_type_error: "Ingrese una categoría.",
+  }),
+  description: z.string({
+    invalid_type_error: "Ingrese una descripción.",
+  }),
   validated: z.boolean(),
   isAdmin: z.boolean(),
 });
 
 export const registerUserSchema = UserSchema.omit({
+  category: true,
+  description: true,
   validated: true,
   isAdmin: true,
 });
 
 export const loginUserSchema = UserSchema.omit({
   name: true,
+  category: true,
+  description: true,
   validated: true,
   isAdmin: true,
 });
@@ -32,6 +44,8 @@ export const loginUserSchema = UserSchema.omit({
 export const recoverUserSchema = UserSchema.omit({
   name: true,
   password: true,
+  category: true,
+  description: true,
   validated: true,
   isAdmin: true,
 });
@@ -39,6 +53,15 @@ export const recoverUserSchema = UserSchema.omit({
 export const newPasswordUserSchema = UserSchema.omit({
   name: true,
   email: true,
+  category: true,
+  description: true,
+  validated: true,
+  isAdmin: true,
+});
+
+export const editUserSchema = UserSchema.omit({
+  password: true,
+  category: true,
   validated: true,
   isAdmin: true,
 });

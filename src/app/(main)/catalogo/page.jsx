@@ -1,4 +1,4 @@
-import FileButton from "@/components/file-button";
+import FileButtons from "@/components/file-button";
 
 export default async function CataloguePage() {
   return (
@@ -36,10 +36,10 @@ export default async function CataloguePage() {
         </div>
       </section>
       <section className="mx-auto max-w-[1200px] py-24 sm:py-32">
-        <h2 className="text-4xl font-bold text-center text-gray-800 mb-8">
-          Conoce nuestra lista de precios.
+        <h2 className="text-4xl font-bold text-center text-gray-800 mb-12">
+          Conoce nuestra listas de precios.
         </h2>
-        <FileButton />
+        <FileButtons />
       </section>
     </main>
   );

@@ -71,7 +71,7 @@ export default function Header() {
                         <span className="absolute -inset-1.5" />
                         <span className="sr-only">Abrir Menu Usuario</span>
                         <img
-                          className="h-10 w-10 rounded-full"
+                          className="h-10 w-10 object-cover rounded-full"
                           src={user?.image ? user?.image : `/avatar.png`}
                           alt="Imagen Perfil"
                         />

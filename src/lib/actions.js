@@ -7,6 +7,7 @@ import {
   recoverUserSchema,
   newPasswordUserSchema,
   emailSchema,
+  editUserSchema,
 } from "@/schemas";
 import { getPasswordRecoverTokenByToken, getUserByEmail } from "./data";
 import { signIn, signOut } from "@/auth";
@@ -21,7 +22,8 @@ import {
 } from "./emails";
 import { generatePasswordRecoverToken } from "./tokens";
 import { revalidatePath } from "next/cache";
-import { upload } from "./files";
+import { upload, uploadImage } from "./files";
+import { redirect } from "next/navigation";
 
 export async function register(prevState, formdata) {
   const validatedFields = registerUserSchema.safeParse({
@@ -56,13 +58,11 @@ export async function register(prevState, formdata) {
         password: hashedPassword,
       },
     });
-
-    return {
-      success: "Solicitud de creación de cuenta exitosa.",
-    };
   } catch (error) {
     throw new Error(`Ha ocurrido un error al registrarse: ${error}`);
   }
+
+  redirect("/");
 }
 
 export async function authenticate(prevState, formdata) {
@@ -84,13 +84,6 @@ export async function authenticate(prevState, formdata) {
 
   if (!existingUser || !existingUser.email || !existingUser.password) {
     return { message: "Este email no existe." };
-  }
-
-  if (!existingUser.validated) {
-    return {
-      message:
-        "Tu cuenta no ha sido validada por el momento, esto puede tardar hasta 24 horas hábiles.",
-    };
   }
 
   try {
@@ -231,9 +224,12 @@ export async function allowedRequest(id, email) {
 export async function deniedRequest(id, email) {
   try {
     await sendDeniedRequestEmail(email);
-    await db.user.delete({
+    await db.user.update({
       where: {
         id: id,
+      },
+      data: {
+        validated: false,
       },
     });
   } catch (error) {
@@ -251,6 +247,7 @@ export async function changeToAdmin(id) {
       },
       data: {
         role: "ADMIN",
+        validated: true,
       },
     });
   } catch (error) {
@@ -268,6 +265,7 @@ export async function changeToUser(id) {
       },
       data: {
         role: "USER",
+        validated: false,
       },
     });
   } catch (error) {
@@ -279,7 +277,10 @@ export async function changeToUser(id) {
 
 export async function uploadFile(prevState, formdata) {
   try {
+    const list_type = formdata.get("list_type");
+
     const file = formdata.get("file");
+
     if (!file.size > 0) {
       return { message: "No se ha encontrado ningun archivo." };
     }
@@ -291,6 +292,7 @@ export async function uploadFile(prevState, formdata) {
 
     await db.file.create({
       data: {
+        name: list_type,
         link: link,
         createdAt: date,
       },
@@ -325,4 +327,41 @@ export async function sendEmailToUser(prevState, formdata) {
   } catch (error) {
     throw new Error(`Ha ocurrido un error: ${error}`);
   }
+}
+
+export async function editUser(prevState, formdata) {
+  const validatedFields = editUserSchema.safeParse({
+    name: formdata.get("name"),
+    email: formdata.get("email"),
+    description: formdata.get("description"),
+  });
+
+  if (!validatedFields.success) {
+    return {
+      errors: validatedFields.error.flatten().fieldErrors,
+      message: "Ha ocurrido un error.",
+    };
+  }
+
+  const { name, email, description } = validatedFields.data;
+  const image = formdata.get("image");
+
+  try {
+    const link = await uploadImage(image);
+    await db.user.update({
+      where: {
+        email: email,
+      },
+      data: {
+        name: name,
+        description: description,
+        image: link,
+      },
+    });
+  } catch (error) {
+    throw new Error(`Ha ocurrido un error: ${error}`);
+  }
+
+  revalidatePath("/");
+  redirect("/");
 }

@@ -1,10 +1,10 @@
-import { getFilteredValidatedUsers } from "@/lib/data";
+import { getFilteredUsers } from "@/lib/data";
 import { AdminButton, UserButton } from "./buttons";
 import SendEmailModal from "./send-email-modal";
 import { currentUser } from "@/lib/auth";
 
 export default async function UsersTable({ query, currentPage }) {
-  const users = await getFilteredValidatedUsers(query, currentPage);
+  const users = await getFilteredUsers(query, currentPage);
   const { id } = await currentUser();
 
   return (

@@ -3,7 +3,7 @@ import { unstable_noStore as noStore } from "next/cache";
 
 const ITEMS_PER_PAGE = 6;
 
-export async function getFilteredValidatedUsers(query, currentPage) {
+export async function getFilteredUsers(query, currentPage) {
   noStore();
   const offset = (currentPage - 1) * ITEMS_PER_PAGE;
 
@@ -24,44 +24,6 @@ export async function getFilteredValidatedUsers(query, currentPage) {
               { email: { contains: query, mode: "insensitive" } },
             ],
           },
-          { validated: { equals: true } },
-        ],
-      },
-      orderBy: {
-        name: "desc",
-      },
-      take: ITEMS_PER_PAGE,
-      skip: offset,
-    });
-
-    return users;
-  } catch (error) {
-    return null;
-  }
-}
-
-export async function getFilteredRequestUsers(query, currentPage) {
-  noStore();
-  const offset = (currentPage - 1) * ITEMS_PER_PAGE;
-
-  try {
-    const users = await db.user.findMany({
-      select: {
-        id: true,
-        name: true,
-        email: true,
-        image: true,
-        role: true,
-      },
-      where: {
-        AND: [
-          {
-            OR: [
-              { name: { contains: query, mode: "insensitive" } },
-              { email: { contains: query, mode: "insensitive" } },
-            ],
-          },
-          { validated: { equals: false } },
         ],
       },
       orderBy: {
@@ -157,7 +119,7 @@ export async function getPasswordRecoverTokenByEmail(email) {
   }
 }
 
-export async function getValidatedUsersPages(query) {
+export async function getUsersPages(query) {
   try {
     const count = await db.user.count({
       where: {
@@ -168,7 +130,6 @@ export async function getValidatedUsersPages(query) {
               { email: { contains: query, mode: "insensitive" } },
             ],
           },
-          { validated: { equals: true } },
         ],
       },
     });
@@ -220,14 +181,83 @@ export async function getRoleById(id) {
   }
 }
 
-export async function getLastFile() {
+export async function getValidatedById(id) {
   try {
-    const lastFile = await db.file.findFirst({
+    const isValidated = await db.user.findUnique({
+      where: {
+        id: id,
+      },
+      select: {
+        validated: true,
+      },
+    });
+
+    return isValidated;
+  } catch (error) {
+    return null;
+  }
+}
+
+export async function getLastsFiles() {
+  try {
+    const lastGuidesFile = await db.file.findFirst({
+      where: {
+        name: "guias",
+      },
       orderBy: { createdAt: "desc" },
     });
-    const lastFileLink = lastFile.link;
 
-    return lastFileLink;
+    const lastGuidesBikeFile = await db.file.findFirst({
+      where: {
+        name: "guias-moto",
+      },
+      orderBy: { createdAt: "desc" },
+    });
+
+    const lastValvesFile = await db.file.findFirst({
+      where: {
+        name: "valvulas",
+      },
+      orderBy: { createdAt: "desc" },
+    });
+
+    const lastValvesBikeFile = await db.file.findFirst({
+      where: {
+        name: "valvulas-moto",
+      },
+      orderBy: { createdAt: "desc" },
+    });
+
+    const lastValvesRacingFile = await db.file.findFirst({
+      where: {
+        name: "valvulas-racing",
+      },
+      orderBy: { createdAt: "desc" },
+    });
+
+    const lastSleevesFile = await db.file.findFirst({
+      where: {
+        name: "camisas",
+      },
+      orderBy: { createdAt: "desc" },
+    });
+
+    const lastExclusiveFile = await db.file.findFirst({
+      where: {
+        name: "exclusiva",
+      },
+      orderBy: { createdAt: "desc" },
+    });
+
+    return {
+      lastGuidesFile,
+      lastGuidesBikeFile,
+      lastValvesFile,
+      lastValvesBikeFile,
+      lastValvesRacingFile,
+      lastSleevesFile,
+      lastExclusiveFile,
+    };
   } catch (error) {
     return null;
   }
@@ -238,7 +268,6 @@ export async function getCardData() {
     const totalUsers = await db.user.count({
       where: {
         role: "USER",
-        validated: true,
       },
     });
 
@@ -248,15 +277,15 @@ export async function getCardData() {
       },
     });
 
-    const totalRequest = await db.user.count({
+    const totalAccess = await db.user.count({
       where: {
-        validated: false,
+        validated: true,
       },
     });
 
     const totalFiles = await db.file.count({});
 
-    return { totalUsers, totalFiles, totalAdmins, totalRequest };
+    return { totalUsers, totalFiles, totalAdmins, totalAccess };
   } catch (error) {
     return null;
   }

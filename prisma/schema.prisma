@@ -23,6 +23,8 @@ model User {
   emailVerified DateTime?
   password      String
   image         String?
+  category      String?
+  description   String?
   validated     Boolean   @default(false)
   role          UserRole  @default(USER)
   Account       Account[]
@@ -64,6 +66,7 @@ model PasswordRecoverToken {
 
 model File {
   id        String   @id @default(cuid())
+  name      String
   link      String   @unique
   createdAt DateTime
 }

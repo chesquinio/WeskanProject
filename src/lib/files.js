@@ -40,3 +40,31 @@ export async function upload(file) {
     return null;
   }
 }
+
+export async function uploadImage(image) {
+  try {
+    const ext = image.name.split(".").pop();
+    const filename =
+      new Date().toLocaleDateString().split("/").join("-") +
+      "_" +
+      new Date().toLocaleTimeString() +
+      "." +
+      ext;
+
+    const buffer = Buffer.from(await image.arrayBuffer());
+
+    await s3.send(
+      new PutObjectCommand({
+        Bucket: bucketName,
+        Key: `image/${filename}`,
+        Body: buffer,
+        ContentType: image.type,
+      })
+    );
+
+    const link = `https://${bucketName}.s3.${region}.amazonaws.com/image/${filename}`;
+    return link;
+  } catch (error) {
+    return null;
+  }
+}

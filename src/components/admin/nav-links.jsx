@@ -15,12 +15,12 @@ import Link from "next/link";
 // Depending on the size of the application, this would be stored in a database.
 const links = [
   { name: "Inicio", href: "/administrador", icon: HomeIcon },
+  { name: "Usuarios", href: "/administrador/usuarios", icon: UserGroupIcon },
   {
-    name: "Solicitudes",
-    href: "/administrador/solicitudes",
+    name: "Accesos",
+    href: "/administrador/accesos",
     icon: DocumentDuplicateIcon,
   },
-  { name: "Usuarios", href: "/administrador/usuarios", icon: UserGroupIcon },
   {
     name: "Catálogos",
     href: "/administrador/catalogos",

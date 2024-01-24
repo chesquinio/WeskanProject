@@ -4,7 +4,7 @@ import {
   changeToUser,
   deniedRequest,
 } from "@/lib/actions";
-import { getRoleById } from "@/lib/data";
+import { getRoleById, getValidatedById } from "@/lib/data";
 import {
   CheckCircleIcon,
   CommandLineIcon,
@@ -12,26 +12,42 @@ import {
   XCircleIcon,
 } from "@heroicons/react/24/outline";
 
-export function AllowedButton({ id, email, movile }) {
+export async function AllowedButton({ id, email, movile }) {
   const allowedRequestById = allowedRequest.bind(null, id, email);
+  const { validated } = await getValidatedById(id);
 
   return (
     <form action={allowedRequestById}>
-      <button className="flex items-center space-x-1 text-white text-sm rounded-full bg-pink-400 py-1.5 px-4 hover:bg-pink-500">
-        {!movile ? <span>Permitir</span> : ""}
+      <button
+        disabled={validated}
+        className={`flex items-center space-x-1 text-sm rounded-full py-1.5 px-4 ${
+          validated
+            ? "bg-pink-500 text-white"
+            : "bg-gray-100 hover:bg-gray-200 text-gray-500"
+        }`}
+      >
+        {!movile ? <span>Permitido</span> : ""}
         <CheckCircleIcon className="w-5" />
       </button>
     </form>
   );
 }
 
-export function DeniedButton({ id, email, movile }) {
+export async function DeniedButton({ id, email, movile }) {
   const deniedRequestById = deniedRequest.bind(null, id, email);
+  const { validated } = await getValidatedById(id);
 
   return (
     <form action={deniedRequestById}>
-      <button className="flex items-center space-x-1 text-gray-500 text-sm rounded-full bg-gray-100 py-1.5 px-4 hover:bg-gray-200">
-        {!movile ? <span>Denegar</span> : ""}
+      <button
+        disabled={!validated}
+        className={`flex items-center space-x-1 text-sm rounded-full py-1.5 px-4 ${
+          !validated
+            ? "bg-pink-500 text-white"
+            : "bg-gray-100 hover:bg-gray-200 text-gray-500"
+        }`}
+      >
+        {!movile ? <span>Denegado</span> : ""}
         <XCircleIcon className="w-5" />
       </button>
     </form>

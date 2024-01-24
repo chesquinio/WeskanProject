@@ -1,6 +1,6 @@
 import {
   CommandLineIcon,
-  ClockIcon,
+  ClipboardDocumentCheckIcon,
   UserGroupIcon,
   InboxIcon,
 } from "@heroicons/react/24/outline";
@@ -9,18 +9,18 @@ import { getCardData } from "@/lib/data";
 const iconMap = {
   admins: CommandLineIcon,
   customers: UserGroupIcon,
-  request: ClockIcon,
+  access: ClipboardDocumentCheckIcon,
   files: InboxIcon,
 };
 
 export default async function CardWrapper() {
-  const { totalUsers, totalAdmins, totalRequest, totalFiles } =
+  const { totalUsers, totalAdmins, totalAccess, totalFiles } =
     await getCardData();
   return (
     <>
       <Card title="Usuarios" value={totalUsers} type="customers" />
-      <Card title="Solicitudes" value={totalRequest} type="request" />
-      <Card title="Catalogos Subidos" value={totalFiles} type="files" />
+      <Card title="Usuarios con Accesos" value={totalAccess} type="access" />
+      <Card title="Catálogos Subidos" value={totalFiles} type="files" />
       <Card title="Administradores" value={totalAdmins} type="admins" />
     </>
   );
