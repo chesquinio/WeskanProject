@@ -1,15 +1,33 @@
 "use client";
 
-import { Fragment, useRef, useState } from "react";
+import { Fragment, useEffect, useRef, useState } from "react";
 import { Dialog, Transition } from "@headlessui/react";
 import { EnvelopeIcon } from "@heroicons/react/24/outline";
 import { useFormState } from "react-dom";
 import { sendEmailToUser } from "@/lib/actions";
+import { toast } from "../ui/use-toast";
 
 export default function SendEmailModal({ name, email }) {
   const [open, setOpen] = useState(false);
-  const initialState = { errors: {}, message: null };
+  const initialState = { errors: {}, message: null, success: null };
   const [state, dispath] = useFormState(sendEmailToUser, initialState);
+
+  useEffect(() => {
+    setOpen(false);
+    if (state.message) {
+      toast({
+        variant: "destructive",
+        title: "Algo salio mal!",
+        description: state.message,
+        status: "message",
+      });
+    } else if (state.success) {
+      toast({
+        description: state.success,
+        status: "success",
+      });
+    }
+  }, [state.message, state.success, toast]);
 
   const cancelButtonRef = useRef(null);
   return (
@@ -114,14 +132,6 @@ export default function SendEmailModal({ name, email }) {
                               className="p-2 resize-none w-full h-24 bg-gray-100 rounded outline-pink-500"
                               required
                             />
-                          </div>
-
-                          <div>
-                            {state?.message && (
-                              <p className="inline text-red-800 bg-red-300 py-2 px-4 rounded">
-                                {state.message}
-                              </p>
-                            )}
                           </div>
                         </div>
                       </div>

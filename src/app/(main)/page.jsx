@@ -1,3 +1,4 @@
+import Associates from "@/components/main/associates";
 import { ArrowRightIcon } from "@heroicons/react/24/outline";
 import Link from "next/link";
 
@@ -7,7 +8,7 @@ export default function HomePage() {
       <main className="m-5">
         <section className="flex grow flex-col gap-4 md:flex-row min-h-[calc(100vh-120px)]">
           <div className="flex flex-col justify-center gap-6 rounded-lg bg-gray-200 px-6 py-10 md:w-2/5 md:px-20">
-            <h1 className="text-2xl font-bold text-gray-800 md:text-4xl xl:text-5xl md:leading-normal">
+            <h1 className="text-2xl font-bold text-gray-900 md:text-4xl xl:text-5xl md:leading-normal">
               No somos únicos, sí los primeros.
             </h1>
             <p
@@ -88,6 +89,9 @@ export default function HomePage() {
             />
           </div>
         </section>
+        {/* <section>
+          <Associates />
+        </section> */}
       </main>
     </>
   );

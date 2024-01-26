@@ -36,7 +36,11 @@ export default async function UsersTable({ query, currentPage }) {
                       <p className="text-lg font-normal">Dato</p>
                       <p className="font-normal">Indormacion adicional</p>
                     </div>
-                    <div className="flex justify-end gap-2">
+                    <div
+                      className={`flex justify-end gap-2 ${
+                        user.id === id ? "hidden" : "block"
+                      }`}
+                    >
                       <AdminButton id={user.id} movile />
                       <UserButton id={user.id} movile />
                       <SendEmailModal name={user.name} email={user.email} />

@@ -127,3 +127,57 @@ export function UserTableSkeleton() {
     </div>
   );
 }
+
+export function FileButtonsSkeleton() {
+  return (
+    <section className="grid grid-cols-1 md:grid-cols-2 gap-10 w-full">
+      <div className="h-40 w-full lg:w-80 mx-auto">
+        <div className="block relative w-full h-full rounded-lg bg-gray-200">
+          <div className="absolute bg-gray-300 w-32 h-10 rounded-lg bottom-3 left-3"></div>
+        </div>
+      </div>
+
+      <div className="h-40 w-full lg:w-80 mx-auto">
+        <div className="block relative w-full h-full rounded-lg bg-gray-200">
+          <div className="absolute bg-gray-300 w-32 h-10 rounded-lg bottom-3 left-3"></div>
+        </div>
+      </div>
+
+      <div className="h-40 w-full lg:w-80 mx-auto">
+        <div className="block relative w-full h-full rounded-lg bg-gray-200">
+          <div className="absolute bg-gray-300 w-32 h-10 rounded-lg bottom-3 left-3"></div>
+        </div>
+      </div>
+
+      <div className="h-40 w-full lg:w-80 mx-auto">
+        <div className="block relative w-full h-full rounded-lg bg-gray-200">
+          <div className="absolute bg-gray-300 w-32 h-10 rounded-lg bottom-3 left-3"></div>
+        </div>
+      </div>
+
+      <div className="h-40 w-full lg:w-80 mx-auto">
+        <div className="block relative w-full h-full rounded-lg bg-gray-200">
+          <div className="absolute bg-gray-300 w-32 h-10 rounded-lg bottom-3 left-3"></div>
+        </div>
+      </div>
+
+      <div className="h-40 w-full lg:w-80 mx-auto">
+        <div className="block relative w-full h-full rounded-lg bg-gray-200">
+          <div className="absolute bg-gray-300 w-32 h-10 rounded-lg bottom-3 left-3"></div>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+export function MainSkeleton() {
+  return (
+    <div className="flex grow flex-col gap-4 md:flex-row min-h-[calc(100vh-120px)] w-dvh m-5">
+      <div className="flex flex-col justify-center gap-6 rounded-lg bg-gray-200 px-6 py-10 md:w-2/5 md:px-20">
+        <div className="w-3/4 h-16 rounded bg-gray-300"></div>
+        <div className="w-2/3 h-40 rounded bg-gray-300"></div>
+        <div className="w-2/3 h-14 rounded bg-gray-300"></div>
+      </div>
+    </div>
+  );
+}

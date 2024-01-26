@@ -323,7 +323,8 @@ export async function sendEmailToUser(prevState, formdata) {
 
   try {
     await sendEmail(email, subject, message);
-    revalidatePath("/administrador/usuarios");
+
+    return { success: "Se ha enviado el email correctamente." };
   } catch (error) {
     throw new Error(`Ha ocurrido un error: ${error}`);
   }

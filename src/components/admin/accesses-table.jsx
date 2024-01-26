@@ -1,8 +1,10 @@
 import { getFilteredUsers } from "@/lib/data";
 import { AllowedButton, DeniedButton } from "./buttons";
+import { currentUser } from "@/lib/auth";
 
 export default async function AccessesTable({ query, currentPage }) {
   const users = await getFilteredUsers(query, currentPage);
+  const { id } = await currentUser();
 
   return (
     <div className="mt-6 flow-root">
@@ -34,7 +36,11 @@ export default async function AccessesTable({ query, currentPage }) {
                         <p className="text-lg font-normal">Dato</p>
                         <p className="font-normal">Informacion adicional</p>
                       </div>
-                      <div className="flex justify-end gap-2">
+                      <div
+                        className={`flex justify-end gap-2 ${
+                          user.id === id ? "hidden" : "block"
+                        }`}
+                      >
                         <AllowedButton id={user.id} email={user.email} movile />
                         <DeniedButton id={user.id} email={user.email} movile />
                       </div>
@@ -82,7 +88,11 @@ export default async function AccessesTable({ query, currentPage }) {
                         Informacion adicional
                       </td>
                       <td className="whitespace-nowrap py-3 pl-6 pr-3">
-                        <div className="flex justify-end gap-3">
+                        <div
+                          className={`flex justify-end gap-3 ${
+                            user.id === id ? "hidden" : "block"
+                          }`}
+                        >
                           <AllowedButton id={user.id} email={user.email} />
                           <DeniedButton id={user.id} email={user.email} />
                         </div>
