@@ -2,6 +2,27 @@ import Associates from "@/components/main/associates";
 import { ArrowRightIcon } from "@heroicons/react/24/outline";
 import Link from "next/link";
 
+const valuesInfo = [
+  {
+    id: 1,
+    title: "Progresando e innovando.",
+    description:
+      "Uno de los valores que nos caracteriza, es la confianza de lo que fabricamos, por tal motivo es el cual mejoramos y buscamos la manera de ofrecer un mejor producto, en pos del desarrollo.",
+  },
+  {
+    id: 2,
+    title: "Aprendiendo un poco más.",
+    description:
+      "En Weskan nos encontramos entrenando y capacitacitando a nuestro personal, para que puedan día a día desarrollar habilidades que les permitan realizar las tareas de una forma mas eficiente.",
+  },
+  {
+    id: 3,
+    title: "Un ambiente colaborativo.",
+    description:
+      "Un mejor producto se puede ofrecer gracias a que todos entendemos la finalidad y necesidad del mismo, y esto se logra ayudandonos mutuamente a entender cada etapa del proceso de fabricación.",
+  },
+];
+
 export default function HomePage() {
   return (
     <>
@@ -44,11 +65,11 @@ export default function HomePage() {
             <h3 className="font-bold text-4xl text-gray-900">
               Nuestros objetivos.
             </h3>
-            <p className="text-lg text-balance text-gray-600">
+            <p className="text-lg text-balance text-gray-600 tracking-wide">
               Somos más que una empresa del sector, somos un equipo de trabajo
               eficiente que busca ofrecer el mejor producto.
             </p>
-            <p className="text-balance text-gray-600">
+            <p className="text-balance text-gray-600 tracking-wider">
               Nos concentramos en la fabricación y venta de productos
               especializados como válvulas, guías de válvulas, asientos de
               válvulas, pistones o tapas de cilindros. Actualmente, estamos
@@ -56,7 +77,7 @@ export default function HomePage() {
               para destacarnos como proveedores líderes en soluciones
               metalúrgicas de alta calidad.
             </p>
-            <p className="text-balance text-gray-600">
+            <p className="text-balance text-gray-600 tracking-wider">
               Nosotros tenemos el compromiso de ser líderes locales y
               expandirnos globalmente, manteniendo siempre nuestro compromiso
               con la calidad, la innovación y la satisfacción del cliente en la
@@ -87,6 +108,27 @@ export default function HomePage() {
               alt="Guias y Asientos de Valvulas"
               className="rounded-2xl"
             />
+          </div>
+        </section>
+        <section className="flex flex-col mx-5 sm:mx-10 md:max-w-3xl md:mx-auto lg:max-w-5xl xl:max-w-7xl py-24 sm:py-32">
+          <div className="flex flex-col w-full md:w-1/2 gap-5 mb-12">
+            <h3 className="font-bold text-4xl text-gray-900">
+              Nuestro valor agregado.
+            </h3>
+            <p className="text-lg text-balance text-gray-600 tracking-wide">
+              No solo fabricamos autopartes, sino que abastecemos a miles de
+              clientes que buscan una solución.
+            </p>
+          </div>
+          <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-x-8 gap-y-12">
+            {valuesInfo.map((item) => (
+              <div key={item.id} className="flex flex-col gap-2">
+                <h5 className="font-semibold text-gray-800">{item.title}</h5>
+                <p className="text-gray-600 tracking-wider">
+                  {item.description}
+                </p>
+              </div>
+            ))}
           </div>
         </section>
         {/* <section>

@@ -169,15 +169,3 @@ export function FileButtonsSkeleton() {
     </section>
   );
 }
-
-export function MainSkeleton() {
-  return (
-    <div className="flex grow flex-col gap-4 md:flex-row min-h-[calc(100vh-120px)] w-dvh m-5">
-      <div className="flex flex-col justify-center gap-6 rounded-lg bg-gray-200 px-6 py-10 md:w-2/5 md:px-20">
-        <div className="w-3/4 h-16 rounded bg-gray-300"></div>
-        <div className="w-2/3 h-40 rounded bg-gray-300"></div>
-        <div className="w-2/3 h-14 rounded bg-gray-300"></div>
-      </div>
-    </div>
-  );
-}

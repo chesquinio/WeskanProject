@@ -7,6 +7,7 @@ export const authRoutes = [
   "/registrarse",
   "/recuperar",
   "/confirmar",
+  "/error",
 ];
 
 // The prefix for API authentication routes

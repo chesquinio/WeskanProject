@@ -5,8 +5,16 @@ import { useFormState } from "react-dom";
 import { authenticate } from "@/lib/actions";
 import { ExclamationCircleIcon } from "@heroicons/react/24/outline";
 import { SubmitButton } from "../buttons";
+import { useSearchParams } from "next/navigation";
+import Social from "./social";
 
 export default function LoginForm() {
+  const searchParams = useSearchParams();
+  const urlError =
+    searchParams.get("error") === "OAuthAccountNotLinked"
+      ? "Este email ya se encuentra en uso!"
+      : "";
+
   const prevState = { errors: {}, message: null };
   const [state, dispath] = useFormState(authenticate, prevState);
 
@@ -79,16 +87,18 @@ export default function LoginForm() {
                 ))}
             </div>
           </div>
-
+          <div className="mt-2">
+            <Social />
+          </div>
           <div
             id="form-status"
             aria-live="polite"
             aria-atomic="true"
             className="flex items-center h-8"
           >
-            {state.message && (
+            {(state.message || urlError) && (
               <div
-                key={state.message}
+                key={state.message || urlError}
                 id="error-message"
                 aria-live="polite"
                 aria-atomic="true"
@@ -96,7 +106,7 @@ export default function LoginForm() {
               >
                 <ExclamationCircleIcon className="h-5 w-5 text-red-800" />
                 <p className="text-sm font-semibold text-red-800">
-                  {state.message}
+                  {state.message || urlError}
                 </p>
               </div>
             )}

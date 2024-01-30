@@ -39,6 +39,18 @@ export async function getFilteredUsers(query, currentPage) {
   }
 }
 
+export const getAccountByUserId = async (userId) => {
+  try {
+    const account = await db.account.findFirst({
+      where: { userId },
+    });
+
+    return account;
+  } catch {
+    return null;
+  }
+};
+
 export async function getUserByEmail(email) {
   try {
     const user = db.user.findUnique({
