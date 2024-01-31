@@ -60,7 +60,7 @@ export default async function FileButtons() {
             className="block relative w-full h-full rounded-lg overflow-hidden group"
           >
             <img
-              src={file ? `/${file.name}.webp` : "/weskan-logo.png"}
+              src={file ? `/${file.name}.webp` : "/weskan-logo.webp"}
               className="w-full h-full rounded object-cover object-center transition-transform transform scale-100 lg:group-hover:scale-105"
             />
             <div className="absolute inset-0 pb-8 pl-5 pr-16 flex flex-col items-start justify-end z-5 opacity-100 lg:opacity-0 lg:group-hover:opacity-100 transition-opacity bg-gray-500 bg-opacity-50 text-white">
