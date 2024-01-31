@@ -14,7 +14,7 @@ export default function SideNav() {
         href="/administrador"
       >
         <div className="w-12 md:w-16 h-12 md:h-16">
-          <WeskanLogo />
+          <WeskanLogo circle />
         </div>
       </Link>
       <div className="flex grow flex-row justify-between space-x-2 md:flex-col md:space-x-0 md:space-y-2">

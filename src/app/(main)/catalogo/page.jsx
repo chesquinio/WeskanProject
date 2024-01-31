@@ -7,6 +7,10 @@ import {
 } from "@heroicons/react/20/solid";
 import { Suspense } from "react";
 
+export const metadata = {
+  title: `Catalogo`,
+};
+
 export default async function CataloguePage() {
   return (
     <main className="m-5">

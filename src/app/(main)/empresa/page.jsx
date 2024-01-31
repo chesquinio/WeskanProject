@@ -1,3 +1,7 @@
+export const metadata = {
+  title: `Empresa`,
+};
+
 export default function CompanyPage() {
   return (
     <main className="m-5">

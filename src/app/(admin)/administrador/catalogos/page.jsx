@@ -1,6 +1,10 @@
 import DropBox from "@/components/admin/drop-box";
 import FileButtons from "@/components/file-button";
 
+export const metadata = {
+  title: `Catálogos`,
+};
+
 export default async function CataloguePage() {
   return (
     <main className="m-5 space-y-5">

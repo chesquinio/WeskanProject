@@ -23,7 +23,7 @@ const transporter = nodemailer.createTransport({
 export const sendEmail = async (email, subject, message) => {
   try {
     const response = await transporter.sendMail({
-      from: domain_address,
+      from: `Weskan S.A. <${domain_address}>`,
       to: email,
       subject: subject,
       html: `
@@ -76,7 +76,7 @@ export const sendPasswordRecoverEmail = async (email, token) => {
 
   try {
     const response = await transporter.sendMail({
-      from: domain_address,
+      from: `Weskan S.A. <${domain_address}>`,
       to: email,
       subject: "Recuperación de contraseña",
       html: `
@@ -127,7 +127,7 @@ export const sendPasswordRecoverEmail = async (email, token) => {
 export const sendDeniedRequestEmail = async (email) => {
   try {
     const response = await transporter.sendMail({
-      from: domain_address,
+      from: `Weskan S.A. <${domain_address}>`,
       to: email,
       subject: "Cambio en el acceso de listas",
       html: `
@@ -178,7 +178,7 @@ export const sendDeniedRequestEmail = async (email) => {
 export const sendAllowedRequestEmail = async (email) => {
   try {
     const response = await transporter.sendMail({
-      from: domain_address,
+      from: `Weskan S.A. <${domain_address}>`,
       to: email,
       subject: "Cambio en el acceso de listas",
       html: `

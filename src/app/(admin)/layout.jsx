@@ -2,6 +2,13 @@ import SideNav from "@/components/admin/sidenav";
 import RoleGate from "@/components/role-gate";
 import { UserRole } from "@prisma/client";
 
+export const metadata = {
+  title: {
+    template: "%s | Administrador",
+    default: "Administrador",
+  },
+};
+
 export default async function AdminLayout({ children }) {
   return (
     <RoleGate allowedRole={UserRole.ADMIN}>

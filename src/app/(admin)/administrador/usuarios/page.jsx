@@ -5,6 +5,10 @@ import { UserTableSkeleton } from "@/components/skeletons";
 import { getUsersPages } from "@/lib/data";
 import { Suspense } from "react";
 
+export const metadata = {
+  title: `Usuarios`,
+};
+
 export default async function CustomersPage({ searchParams }) {
   const query = searchParams?.query || "";
   const currentPage = Number(searchParams?.page) || 1;
