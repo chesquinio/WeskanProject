@@ -35,12 +35,12 @@ export default async function CataloguePage() {
         </div>
         <div className="flex items-center justify-center opacity-60 p-6 md:w-3/5 md:px-28 md:py-12">
           <img
-            src="/catalogue-image.png"
+            src="/catalogue-image.webp"
             className="hidden md:block rounded-lg"
             alt="Screenshots of the dashboard project showing desktop version"
           />
           <img
-            src="/catalogue-image-mobile.png"
+            src="/catalogue-image-mobile.webp"
             className="block md:hidden rounded-lg"
             alt="Screenshots of the dashboard project showing mobile version"
           />

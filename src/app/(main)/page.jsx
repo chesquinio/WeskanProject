@@ -49,14 +49,9 @@ export default function HomePage() {
           </div>
           <div className="flex items-center justify-center p-6 md:w-3/5 md:px-28 md:py-12">
             <img
-              src="/main-image.png"
+              src="/main-image.webp"
               className="hidden md:block"
-              alt="Screenshots of the dashboard project showing desktop version"
-            />
-            <img
-              src="/main-image.png"
-              className="block md:hidden"
-              alt="Screenshots of the dashboard project showing mobile version"
+              alt="Screenshots of the dashboard project showing desktop and mobile version"
             />
           </div>
         </section>
@@ -104,7 +99,7 @@ export default function HomePage() {
         <section className="md:mx-5 py-24 sm:py-32">
           <div className="w-full max-h-[600px]">
             <img
-              src="/all-products.jpg"
+              src="/all-products.webp"
               alt="Guias y Asientos de Valvulas"
               className="rounded-2xl"
             />

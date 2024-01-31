@@ -26,7 +26,7 @@ export default function CompanyPage() {
         </div>
         <div className="flex items-center justify-center p-6 md:w-3/5 md:px-28 md:py-12">
           <img
-            src="/mapa-weskan.png"
+            src="/mapa-weskan.webp"
             className="block rounded-lg"
             alt="Screenshots of the dashboard project showing desktop and mobile version"
           />
@@ -109,7 +109,7 @@ export default function CompanyPage() {
         <div className="mx-auto max-w-2xl lg:max-w-4xl">
           <img
             className="mx-auto h-12 rounded-full"
-            src="/weskan-logo.png"
+            src="/weskan-logo.webp"
             alt="Logo Weskan"
           />
           <figure className="mt-10">
