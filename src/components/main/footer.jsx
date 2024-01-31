@@ -1,3 +1,5 @@
+import Link from "next/link";
+
 export default function Footer() {
   return (
     <>
@@ -34,10 +36,18 @@ export default function Footer() {
             </div>
             <div className="lg:hidden h-px bg-gray-400 my-8"></div>
             <div className="hidden lg:block w-px bg-gray-400 mx-8"></div>
-            <div className="flex justify-center items-center lg:w-5/12">
+            <div className="flex flex-col gap-2 justify-center items-center lg:w-5/12">
               <p className="text-sm mx-auto w-4/5 text-center">
                 © Copyright 2023 - Weskan S.A. - Todos los derechos reservados
               </p>
+              <div className="flex flex-row gap-3 text-sm font-light text-center">
+                <Link href="/terminos-y-condiciones">
+                  Términos y Condiciones
+                </Link>
+                <a href="https://www.privacypolicies.com/live/276ad946-7f98-41ae-aeea-ccedc1fc013d">
+                  Politica de Privacidad
+                </a>
+              </div>
             </div>
           </div>
           <div className="mx-auto h-px w-full xl:w-10/12 bg-gray-400 my-8"></div>
