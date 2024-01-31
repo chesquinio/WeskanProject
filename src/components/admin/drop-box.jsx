@@ -48,7 +48,7 @@ const list = [
     id: 7,
     name: "Exclusiva",
     value: "exclusiva",
-    image: "/weskan-logo.png",
+    image: "/weskan-logo.webp",
   },
 ];
 
@@ -94,7 +94,8 @@ export default function DropBox() {
           type="text"
           id="list_type"
           name="list_type"
-          defaultValue={selectedItem.value}
+          value={selectedItem.value}
+          readOnly
           className="sr-only"
         />
         <div className="py-5">
