@@ -1,5 +1,10 @@
 // This routes don´t require authentication
-export const publicRoutes = ["/", "/empresa", "/productos"];
+export const publicRoutes = [
+  "/",
+  "/nueva-verificacion",
+  "/empresa",
+  "/productos",
+];
 
 // Routes used for authentication
 export const authRoutes = [

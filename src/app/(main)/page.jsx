@@ -41,7 +41,7 @@ export default function HomePage() {
             <Link
               href="https://weskan.mercadoshops.com.ar/"
               target="_blank"
-              className="text-lg md:text-xl xl:text-2xl leading-6 text-gray-800 hover:text-pink-400 flex items-center gap-3 hover:gap-5 transition-all"
+              className="text-lg md:text-xl xl:text-2xl font-medium leading-6 text-pink-500 hover:text-pink-400 flex items-center gap-3 hover:gap-5 transition-all"
             >
               <p>Ver nuestros productos</p>
               <ArrowRightIcon className="w-5 h-5" />
@@ -50,7 +50,7 @@ export default function HomePage() {
           <div className="flex items-center justify-center p-6 md:w-3/5 md:px-28 md:py-12">
             <img
               src="/main-image.webp"
-              className="hidden md:block"
+              className="block"
               alt="Screenshots of the dashboard project showing desktop and mobile version"
             />
           </div>
@@ -61,8 +61,9 @@ export default function HomePage() {
               Nuestros objetivos.
             </h3>
             <p className="text-lg text-balance text-gray-600 tracking-wide">
-              Somos más que una empresa del sector, somos un equipo de trabajo
-              eficiente que busca ofrecer el mejor producto.
+              Somos más que una empresa del sector, somos un{" "}
+              <b>equipo de trabajo eficiente</b> que busca ofrecer el{" "}
+              <b>mejor producto</b>.
             </p>
             <p className="text-balance text-gray-600 tracking-wider">
               Nos concentramos en la fabricación y venta de productos
@@ -111,8 +112,8 @@ export default function HomePage() {
               Nuestro valor agregado.
             </h3>
             <p className="text-lg text-balance text-gray-600 tracking-wide">
-              No solo fabricamos autopartes, sino que abastecemos a miles de
-              clientes que buscan una solución.
+              No solo fabricamos autopartes, sino que abastecemos a{" "}
+              <b>miles de clientes</b> que buscan una <b>solución</b>.
             </p>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-x-8 gap-y-12">

@@ -10,10 +10,13 @@ export default function News() {
 
   useEffect(() => {
     const isSessionStorageAvailable =
-      typeof window !== "undefined" && window.sessionStorage;
+      typeof window !== "undefined" && window.localStorage;
 
-    if (isSessionStorageAvailable && sessionStorage.getItem("news") === null) {
-      sessionStorage.setItem("news", true);
+    if (
+      isSessionStorageAvailable &&
+      localStorage.getItem("newsWeskanSeen") === null
+    ) {
+      localStorage.setItem("newsWeskanSeen", true);
       setOpen(true);
     }
   }, []);

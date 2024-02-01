@@ -9,7 +9,11 @@ import {
   emailSchema,
   editUserSchema,
 } from "@/schemas";
-import { getPasswordRecoverTokenByToken, getUserByEmail } from "./data";
+import {
+  getPasswordRecoverTokenByToken,
+  getUserByEmail,
+  getVerificationToken,
+} from "./data";
 import { signIn, signOut } from "@/auth";
 import { DEFAULT_LOGIN_REDIRECT } from "../../routes";
 import { AuthError } from "next-auth";
@@ -19,8 +23,12 @@ import {
   sendDeniedRequestEmail,
   sendEmail,
   sendPasswordRecoverEmail,
+  sendVerificationEmail,
 } from "./emails";
-import { generatePasswordRecoverToken } from "./tokens";
+import {
+  generatePasswordRecoverToken,
+  generateVerificationToken,
+} from "./tokens";
 import { revalidatePath } from "next/cache";
 import { upload, uploadImage } from "./files";
 import { redirect } from "next/navigation";
@@ -58,11 +66,17 @@ export async function register(prevState, formdata) {
         password: hashedPassword,
       },
     });
+
+    const verificationToken = await generateVerificationToken(email);
+    await sendVerificationEmail(
+      verificationToken.email,
+      verificationToken.token
+    );
+
+    return { success: "Se ha enviado un correo de verificación" };
   } catch (error) {
     throw new Error(`Ha ocurrido un error al registrarse: ${error}`);
   }
-
-  redirect("/");
 }
 
 export async function authenticate(prevState, formdata) {
@@ -201,6 +215,40 @@ export async function newPassword(prevState, formdata) {
       `Ha ocurrido un error al modificar la contraseña: ${error}`
     );
   }
+}
+
+export async function newVerification(token) {
+  const existingToken = await getVerificationToken(token);
+
+  if (!existingToken) {
+    return { error: "El token no existe!" };
+  }
+
+  const hasExpired = new Date(existingToken.expires) < new Date();
+
+  if (hasExpired) {
+    return { error: "El token ha expirado!" };
+  }
+
+  const existingUser = await getUserByEmail(existingToken.email);
+
+  if (!existingUser) {
+    return { error: "El email no existe!" };
+  }
+
+  await db.user.update({
+    where: { id: existingUser.id },
+    data: {
+      emailVerified: new Date(),
+      email: existingToken.email,
+    },
+  });
+
+  await db.verificationToken.delete({
+    where: { id: existingToken.id },
+  });
+
+  return { success: "Email verificado!" };
 }
 
 export async function allowedRequest(id, email) {
