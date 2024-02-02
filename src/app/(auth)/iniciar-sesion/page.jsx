@@ -25,7 +25,7 @@ export default function LoginPage() {
         <div className="hidden lg:block w-1/2">
           <img
             src="/all-products-alt.webp"
-            alt=""
+            alt="Productos metalurgicos"
             className="w-full h-full object-cover"
           />
         </div>
