@@ -7,30 +7,39 @@ export default function Footer() {
         <div className="w-4/5 m-auto">
           <div className="flex flex-col lg:flex-row lg:justify-center">
             <div className="flex flex-col lg:grid lg:grid-cols-2 items-start lg:w-5/12 gap-8 ml-3 mt-5 text-white">
-              <span className="text-lg font-ligh cursor-default">
+              <span className="flex items-center text-lg font-ligh cursor-default">
                 <i className="bx bx-map"></i>
                 <p className="text-gray-300 ml-2 inline text-sm">
                   J.D.Perón 2189, Rafaela, Santa Fe
                 </p>
               </span>
               <a
-                className="text-xl font-light"
+                className="flex items-center text-xl font-light"
                 href="https://www.instagram.com/weskangv/"
                 target="_BLANCK"
               >
                 <i className="bx bxl-instagram"></i>
-                <p className="text-gray-300 hover:text-pink-400 ml-2 inline text-sm">
+                <p className="text-gray-300 hover:text-pink-400 ml-2 font-normal inline text-sm">
                   /weskangv
                 </p>
               </a>
               <a
-                className="text-xl font-light lg:col-span-2 text-center"
+                className="flex items-center text-xl font-light"
                 href="https://www.facebook.com/weskanracing"
                 target="_BLANCK"
               >
                 <i className="bx bxl-facebook-square"></i>
-                <p className="text-gray-300 hover:text-pink-400 ml-2 inline text-sm">
+                <p className="text-gray-300 hover:text-pink-400 ml-2 font-normal inline text-sm">
                   /weskanracing
+                </p>
+              </a>
+              <a
+                className="flex items-center text-xl font-light"
+                href="mailto:ventas@weskan.com.ar"
+              >
+                <i class="bx bx-envelope"></i>
+                <p className="text-gray-300 hover:text-pink-400 ml-2 font-normal inline text-sm">
+                  ventas@weskan.com.ar
                 </p>
               </a>
             </div>
