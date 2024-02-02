@@ -1,3 +1,5 @@
+import Link from "next/link";
+
 export default function ErrorPage() {
   return (
     <main className="grid h-dvh place-items-center bg-white px-6 py-24 sm:py-32 lg:px-8">
