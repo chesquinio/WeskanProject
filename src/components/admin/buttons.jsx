@@ -57,7 +57,6 @@ export async function DeniedButton({ id, email, movile }) {
 export async function AdminButton({ id, movile }) {
   const changeToAdminById = changeToAdmin.bind(null, id);
   const { role } = await getRoleById(id);
-
   return (
     <form action={changeToAdminById}>
       <button

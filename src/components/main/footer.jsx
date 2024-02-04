@@ -37,7 +37,7 @@ export default function Footer() {
                 className="flex items-center text-xl font-light"
                 href="mailto:ventas@weskan.com.ar"
               >
-                <i class="bx bx-envelope"></i>
+                <i className="bx bx-envelope"></i>
                 <p className="text-gray-300 hover:text-pink-400 ml-2 font-normal inline text-sm">
                   ventas@weskan.com.ar
                 </p>

@@ -87,6 +87,11 @@ export default function LoginForm() {
                 ))}
             </div>
           </div>
+          <div className="flex flex-row items-center w-full">
+            <div className="h-px w-full bg-gray-300" />
+            <p className="mx-4 text-sm text-nowrap">O continúa con</p>
+            <div className="h-px w-full bg-gray-300" />
+          </div>
           <div className="mt-2">
             <Social />
           </div>

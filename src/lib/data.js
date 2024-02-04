@@ -14,6 +14,7 @@ export async function getFilteredUsers(query, currentPage) {
         name: true,
         email: true,
         image: true,
+        category: true,
         role: true,
       },
       where: {

@@ -301,7 +301,6 @@ export async function changeToAdmin(id) {
   } catch (error) {
     throw new Error(`Ha ocurrido un error al cambiar el rol: ${error}`);
   }
-
   revalidatePath("/administrador/usuarios");
 }
 
@@ -319,7 +318,6 @@ export async function changeToUser(id) {
   } catch (error) {
     throw new Error(`Ha ocurrido un error al cambiar el rol: ${error}`);
   }
-
   revalidatePath("/administrador/usuarios");
 }
 
@@ -413,4 +411,37 @@ export async function editUser(prevState, formdata) {
 
   revalidatePath("/");
   redirect("/");
+}
+
+export async function updateCategory(prevState, formdata) {
+  const email = formdata.get("email");
+  const category = formdata.get("category");
+
+  const user = await db.user.findFirst({
+    where: {
+      email: email,
+    },
+  });
+  if (!user) {
+    return { message: "No se ha encontrado el usuario" };
+  }
+
+  if (!category) {
+    return { message: "No se ha podido actualizar la categoria." };
+  }
+
+  try {
+    await db.user.update({
+      where: {
+        email: email,
+      },
+      data: {
+        category: category,
+      },
+    });
+
+    return { success: "Se ha actualizado el usuario" };
+  } catch (error) {
+    throw new Error(`Ha ocurrido un error: ${error}`);
+  }
 }

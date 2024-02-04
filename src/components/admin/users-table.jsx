@@ -33,8 +33,10 @@ export default async function UsersTable({ query, currentPage }) {
                   </div>
                   <div className="flex w-full items-center justify-between pt-4">
                     <div>
-                      <p className="text-lg font-normal">Dato</p>
-                      <p className="font-normal">Indormacion adicional</p>
+                      <p className="text-lg font-normal">Categoría</p>
+                      <p className="font-normal">
+                        {user.category || "No definido"}
+                      </p>
                     </div>
                     <div
                       className={`flex justify-end gap-2 ${
@@ -59,7 +61,7 @@ export default async function UsersTable({ query, currentPage }) {
                     Email
                   </th>
                   <th scope="col" className="px-3 py-5 font-medium">
-                    Dato
+                    Categoría
                   </th>
                   <th scope="col" className="relative py-3 pl-6 pr-3">
                     <span className="sr-only">Rol</span>
@@ -86,7 +88,7 @@ export default async function UsersTable({ query, currentPage }) {
                       {user.email}
                     </td>
                     <td className="whitespace-nowrap px-3 py-3">
-                      Informacion adicional
+                      {user.category || "No definido"}
                     </td>
                     <td className="whitespace-nowrap py-3 pl-6 pr-3">
                       <div
