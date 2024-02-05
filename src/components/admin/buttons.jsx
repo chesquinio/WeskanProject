@@ -1,10 +1,11 @@
+"use client";
+
 import {
   allowedRequest,
   changeToAdmin,
   changeToUser,
   deniedRequest,
 } from "@/lib/actions";
-import { getRoleById, getValidatedById } from "@/lib/data";
 import {
   CheckCircleIcon,
   CommandLineIcon,
@@ -12,9 +13,8 @@ import {
   XCircleIcon,
 } from "@heroicons/react/24/outline";
 
-export async function AllowedButton({ id, email, movile }) {
+export function AllowedButton({ id, email, validated, movile }) {
   const allowedRequestById = allowedRequest.bind(null, id, email);
-  const { validated } = await getValidatedById(id);
 
   return (
     <form action={allowedRequestById}>
@@ -33,9 +33,8 @@ export async function AllowedButton({ id, email, movile }) {
   );
 }
 
-export async function DeniedButton({ id, email, movile }) {
+export function DeniedButton({ id, email, validated, movile }) {
   const deniedRequestById = deniedRequest.bind(null, id, email);
-  const { validated } = await getValidatedById(id);
 
   return (
     <form action={deniedRequestById}>
@@ -54,9 +53,9 @@ export async function DeniedButton({ id, email, movile }) {
   );
 }
 
-export async function AdminButton({ id, movile }) {
+export function AdminButton({ id, role, movile }) {
   const changeToAdminById = changeToAdmin.bind(null, id);
-  const { role } = await getRoleById(id);
+
   return (
     <form action={changeToAdminById}>
       <button
@@ -74,9 +73,8 @@ export async function AdminButton({ id, movile }) {
   );
 }
 
-export async function UserButton({ id, movile }) {
+export function UserButton({ id, role, movile }) {
   const changeToUserById = changeToUser.bind(null, id);
-  const { role } = await getRoleById(id);
 
   return (
     <form action={changeToUserById}>

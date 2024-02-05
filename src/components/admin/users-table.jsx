@@ -43,8 +43,8 @@ export default async function UsersTable({ query, currentPage }) {
                         user.id === id ? "hidden" : "block"
                       }`}
                     >
-                      <AdminButton id={user.id} movile />
-                      <UserButton id={user.id} movile />
+                      <AdminButton id={user.id} role={user.role} movile />
+                      <UserButton id={user.id} role={user.role} movile />
                       <SendEmailModal name={user.name} email={user.email} />
                     </div>
                   </div>
@@ -96,8 +96,8 @@ export default async function UsersTable({ query, currentPage }) {
                           user.id === id ? "hidden" : "block"
                         }`}
                       >
-                        <AdminButton id={user.id} />
-                        <UserButton id={user.id} />
+                        <AdminButton id={user.id} role={user.role} />
+                        <UserButton id={user.id} role={user.role} />
                         <SendEmailModal name={user.name} email={user.email} />
                       </div>
                     </td>

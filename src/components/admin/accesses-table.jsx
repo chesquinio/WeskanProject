@@ -43,8 +43,18 @@ export default async function AccessesTable({ query, currentPage }) {
                           user.id === id ? "hidden" : "block"
                         }`}
                       >
-                        <AllowedButton id={user.id} email={user.email} movile />
-                        <DeniedButton id={user.id} email={user.email} movile />
+                        <AllowedButton
+                          id={user.id}
+                          email={user.email}
+                          validated={user.validated}
+                          movile
+                        />
+                        <DeniedButton
+                          id={user.id}
+                          email={user.email}
+                          validated={user.validated}
+                          movile
+                        />
                       </div>
                     </div>
                   </div>
@@ -95,8 +105,16 @@ export default async function AccessesTable({ query, currentPage }) {
                             user.id === id ? "hidden" : "block"
                           }`}
                         >
-                          <AllowedButton id={user.id} email={user.email} />
-                          <DeniedButton id={user.id} email={user.email} />
+                          <AllowedButton
+                            id={user.id}
+                            email={user.email}
+                            validated={user.validated}
+                          />
+                          <DeniedButton
+                            id={user.id}
+                            email={user.email}
+                            validated={user.validated}
+                          />
                         </div>
                       </td>
                     </tr>

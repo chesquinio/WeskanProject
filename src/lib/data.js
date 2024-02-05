@@ -15,6 +15,7 @@ export async function getFilteredUsers(query, currentPage) {
         email: true,
         image: true,
         category: true,
+        validated: true,
         role: true,
       },
       where: {
@@ -172,40 +173,6 @@ export async function getRequestUsersPages(query) {
 
     const totalPages = Math.ceil(count / ITEMS_PER_PAGE);
     return totalPages;
-  } catch (error) {
-    return null;
-  }
-}
-
-export async function getRoleById(id) {
-  try {
-    const role = await db.user.findUnique({
-      where: {
-        id: id,
-      },
-      select: {
-        role: true,
-      },
-    });
-
-    return role;
-  } catch (error) {
-    return null;
-  }
-}
-
-export async function getValidatedById(id) {
-  try {
-    const isValidated = await db.user.findUnique({
-      where: {
-        id: id,
-      },
-      select: {
-        validated: true,
-      },
-    });
-
-    return isValidated;
   } catch (error) {
     return null;
   }

@@ -106,7 +106,7 @@ export function UserTableSkeleton() {
                   Email
                 </th>
                 <th scope="col" className="px-3 py-5 font-medium">
-                  Dato
+                  Categoría
                 </th>
               </tr>
               <th scope="col" className="relative pl-3 pr-6 sm:pr-6">
