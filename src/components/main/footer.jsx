@@ -1,3 +1,11 @@
+import {
+  FacebookIcon,
+  GithubIcon,
+  InstagramIcon,
+  LinkedinIcon,
+  MailIcon,
+  MapPinIcon,
+} from "lucide-react";
 import Link from "next/link";
 
 export default function Footer() {
@@ -8,7 +16,7 @@ export default function Footer() {
           <div className="flex flex-col lg:flex-row lg:justify-center">
             <div className="flex flex-col lg:grid lg:grid-cols-2 items-start lg:w-5/12 gap-8 ml-3 mt-5 text-white">
               <span className="flex items-center text-lg font-ligh cursor-default">
-                <i className="bx bx-map"></i>
+                <MapPinIcon className="text-gray-300 w-4" />
                 <p className="text-gray-300 ml-2 inline text-sm">
                   J.D.Perón 2189, Rafaela, Santa Fe
                 </p>
@@ -18,7 +26,7 @@ export default function Footer() {
                 href="https://www.instagram.com/weskangv/"
                 target="_BLANCK"
               >
-                <i className="bx bxl-instagram"></i>
+                <InstagramIcon className="text-gray-300 w-4" />
                 <p className="text-gray-300 hover:text-pink-400 ml-2 font-normal inline text-sm">
                   /weskangv
                 </p>
@@ -28,7 +36,7 @@ export default function Footer() {
                 href="https://www.facebook.com/weskanracing"
                 target="_BLANCK"
               >
-                <i className="bx bxl-facebook-square"></i>
+                <FacebookIcon className="text-gray-300 w-4" />
                 <p className="text-gray-300 hover:text-pink-400 ml-2 font-normal inline text-sm">
                   /weskanracing
                 </p>
@@ -37,7 +45,7 @@ export default function Footer() {
                 className="flex items-center text-xl font-light"
                 href="mailto:ventas@weskan.com.ar"
               >
-                <i className="bx bx-envelope"></i>
+                <MailIcon className="text-gray-300 w-4" />
                 <p className="text-gray-300 hover:text-pink-400 ml-2 font-normal inline text-sm">
                   ventas@weskan.com.ar
                 </p>
@@ -67,23 +75,23 @@ export default function Footer() {
             <div className="flex justify-center items-center gap-3 mt-3">
               <a
                 href="mailto:willenerfrancis0@gmail.com"
-                className="bg-gray-300 text-gray-800 py-1 px-2 rounded-full text-moredark hover:text-red-400 transition-all"
+                className="bg-gray-400 text-gray-800 py-1 px-1.5 rounded-full text-moredark hover:text-blue-400 hover:bg-gray-300 transition-all"
               >
-                <i className="bx bxl-gmail"></i>
+                <MailIcon className="w-5" />
               </a>
               <a
                 href="https://github.com/chesquinio"
                 target="_BLANCK"
-                className="bg-gray-300 text-gray-800 py-1 px-2 rounded-full text-moredark hover:text-black transition-all"
+                className="bg-gray-400 text-gray-800 py-1 px-1.5 rounded-full text-moredark hover:text-blue-400 hover:bg-gray-300 transition-all"
               >
-                <i className="bx bxl-github"></i>
+                <GithubIcon className="w-5" />
               </a>
               <a
                 href="https://www.linkedin.com/in/francis-willener/"
                 target="_BLANCK"
-                className="bg-gray-300 text-gray-800 py-1 px-2 rounded-full text-moredark hover:text-blue-400 transition-all"
+                className="bg-gray-400 text-gray-800 py-1 px-1.5 rounded-full text-moredark hover:text-blue-400 hover:bg-gray-300 transition-all"
               >
-                <i className="bx bxl-linkedin"></i>
+                <LinkedinIcon className="w-5" />
               </a>
             </div>
           </div>
