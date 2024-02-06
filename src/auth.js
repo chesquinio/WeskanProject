@@ -68,6 +68,18 @@ export const {
         session.user.role = token.role;
       }
 
+      if (token.activeRequest && session.user) {
+        session.user.activeRequest = token.activeRequest;
+      }
+
+      if (token.typeRequest && session.user) {
+        session.user.typeRequest = token.typeRequest;
+      }
+
+      if (token.special && session.user) {
+        session.user.special = token.special;
+      }
+
       if (session.user) {
         session.user.name = token.name;
         session.user.email = token.email;
@@ -92,6 +104,9 @@ export const {
       token.description = existingUser.description;
       token.role = existingUser.role;
       token.validated = existingUser.validated;
+      token.activeRequest = existingUser.activeRequest;
+      token.typeRequest = existingUser.typeRequest;
+      token.special = existingUser.special;
 
       return token;
     },

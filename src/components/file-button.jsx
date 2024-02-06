@@ -1,4 +1,4 @@
-import { currentValidated } from "@/lib/auth";
+import { currentSpecial } from "@/lib/auth";
 import { getLastsFiles } from "@/lib/data";
 import Link from "next/link";
 
@@ -17,7 +17,7 @@ function formatName(name) {
 }
 
 export default async function FileButtons() {
-  const isValidated = await currentValidated();
+  const isSpecial = await currentSpecial();
 
   const filesFiltered = async () => {
     const {
@@ -39,7 +39,7 @@ export default async function FileButtons() {
       lastSleevesFile,
     ];
 
-    if (isValidated) {
+    if (isSpecial) {
       array.push(lastExclusiveFile);
     }
 

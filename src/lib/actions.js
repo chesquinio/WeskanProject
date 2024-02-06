@@ -445,3 +445,41 @@ export async function updateCategory(prevState, formdata) {
     throw new Error(`Ha ocurrido un error: ${error}`);
   }
 }
+
+export async function listRequest(prevState, formdata) {
+  const id = formdata.get("id");
+  const requestType = formdata.get("request_type");
+
+  if (!id) {
+    return { message: "No se ha encontrado el usuario!" };
+  }
+
+  if (!requestType) {
+    return { message: "Debes seleccionar una lista a solicitar!" };
+  }
+
+  const existingUser = await db.user.findUnique({
+    where: {
+      id: id,
+    },
+  });
+  if (existingUser.activeRequest) {
+    return { message: "Ya tienes una solicitud activa!" };
+  }
+
+  try {
+    await db.user.update({
+      where: {
+        id: id,
+      },
+      data: {
+        activeRequest: true,
+        typeRequest: requestType,
+      },
+    });
+
+    return { success: "Se ha enviado la solicitud correctamente" };
+  } catch (error) {
+    throw new Error(`Ha ocurrido un error: ${error}`);
+  }
+}

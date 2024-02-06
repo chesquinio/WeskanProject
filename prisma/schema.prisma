@@ -24,7 +24,10 @@ model User {
   image         String?
   category      String?
   description   String?
+  activeRequest Boolean   @default(false)
+  typeRequest   String?
   validated     Boolean   @default(false)
+  special       Boolean   @default(false)
   role          UserRole  @default(USER)
   Account       Account[]
 }

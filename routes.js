@@ -4,6 +4,7 @@ export const publicRoutes = [
   "/nueva-verificacion",
   "/empresa",
   "/productos",
+  "/catalogo",
 ];
 
 // Routes used for authentication
