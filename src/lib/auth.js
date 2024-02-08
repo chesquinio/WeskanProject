@@ -17,9 +17,3 @@ export async function currentValidated() {
 
   return session?.user.validated;
 }
-
-export async function currentSpecial() {
-  const session = await auth();
-
-  return session?.user.special;
-}

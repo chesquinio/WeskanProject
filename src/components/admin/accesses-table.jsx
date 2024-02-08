@@ -1,10 +1,15 @@
-import { getFilteredUsers } from "@/lib/data";
+import { getFilteredAccessUsers } from "@/lib/data";
 import { AllowedButton, DeniedButton } from "./buttons";
 import { currentUser } from "@/lib/auth";
 
 export default async function AccessesTable({ query, currentPage }) {
-  const users = await getFilteredUsers(query, currentPage);
+  const users = await getFilteredAccessUsers(query, currentPage);
   const { id } = await currentUser();
+
+  const filteredTypeRequest = (typeRequest) => {
+    const str = typeRequest.split("_").join(" ");
+    return str.charAt(0).toUpperCase() + str.slice(1);
+  };
 
   return (
     <div className="mt-6 flow-root">
@@ -33,9 +38,9 @@ export default async function AccessesTable({ query, currentPage }) {
                     </div>
                     <div className="flex w-full items-center justify-between pt-4">
                       <div>
-                        <p className="text-lg font-normal">Categoría</p>
+                        <p className="text-lg font-normal">Solicitúd</p>
                         <p className="font-normal">
-                          {user.category || "No definido"}
+                          {filteredTypeRequest(user.typeRequest)}
                         </p>
                       </div>
                       <div
@@ -70,7 +75,7 @@ export default async function AccessesTable({ query, currentPage }) {
                       Email
                     </th>
                     <th scope="col" className="px-3 py-5 font-medium">
-                      Categoría
+                      Solicitúd
                     </th>
                     <th scope="col" className="relative py-5 pl-6 pr-3">
                       <span className="sr-only">Acceso</span>
@@ -97,7 +102,7 @@ export default async function AccessesTable({ query, currentPage }) {
                         {user.email}
                       </td>
                       <td className="whitespace-nowrap px-3 py-3">
-                        {user.category || "No definido"}
+                        {filteredTypeRequest(user.typeRequest)}
                       </td>
                       <td className="whitespace-nowrap py-3 pl-6 pr-3">
                         <div

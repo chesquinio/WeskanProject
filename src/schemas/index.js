@@ -79,3 +79,20 @@ export const emailSchema = z.object({
     invalid_type_error: "Ingrese un mensaje",
   }),
 });
+
+export const userOptionsSchema = z.object({
+  email: z
+    .string({
+      invalid_type_error: "Es necesario un email.",
+    })
+    .email({ message: "Es necesario un email valido." }),
+  access: z.string({
+    invalid_type_error: "Ingrese un tipo de acceso.",
+  }),
+  role: z.string({
+    invalid_type_error: "Ingrese un rol.",
+  }),
+  special: z.string({
+    invalid_type_error: "Ingrese un dato.",
+  }),
+});

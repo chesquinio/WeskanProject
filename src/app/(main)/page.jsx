@@ -41,7 +41,7 @@ export default function HomePage() {
             <Link
               href="https://weskan.mercadoshops.com.ar/"
               target="_blank"
-              className="text-lg md:text-xl xl:text-2xl font-medium leading-6 text-pink-500 hover:text-pink-400 flex items-center gap-3 hover:gap-5 transition-all"
+              className="text-lg md:text-xl xl:text-2xl font-medium leading-6 text-pink-400 hover:text-pink-500 flex items-center gap-3 hover:gap-5 transition-all"
             >
               <p>Ver nuestros productos</p>
               <ArrowRightIcon className="w-5 h-5" />

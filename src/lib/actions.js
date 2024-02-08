@@ -8,6 +8,7 @@ import {
   newPasswordUserSchema,
   emailSchema,
   editUserSchema,
+  userOptionsSchema,
 } from "@/schemas";
 import {
   getPasswordRecoverTokenByToken,
@@ -19,7 +20,10 @@ import { DEFAULT_LOGIN_REDIRECT } from "../../routes";
 import { AuthError } from "next-auth";
 import { db } from "@/lib/db";
 import {
+  sendAllowedAdminEmail,
   sendAllowedRequestEmail,
+  sendAllowedSpecialListEmail,
+  sendChangeRequestEmail,
   sendDeniedRequestEmail,
   sendEmail,
   sendPasswordRecoverEmail,
@@ -259,6 +263,7 @@ export async function allowedRequest(id, email) {
         id: id,
       },
       data: {
+        activeRequest: false,
         validated: true,
       },
     });
@@ -277,7 +282,7 @@ export async function deniedRequest(id, email) {
         id: id,
       },
       data: {
-        validated: false,
+        activeRequest: false,
       },
     });
   } catch (error) {
@@ -324,7 +329,7 @@ export async function changeToUser(id) {
 export async function uploadFile(prevState, formdata) {
   try {
     const list_type = formdata.get("list_type");
-
+    const category = formdata.get("category");
     const file = formdata.get("file");
 
     if (!file.size > 0) {
@@ -340,6 +345,7 @@ export async function uploadFile(prevState, formdata) {
       data: {
         name: list_type,
         link: link,
+        category: category,
         createdAt: date,
       },
     });
@@ -479,6 +485,74 @@ export async function listRequest(prevState, formdata) {
     });
 
     return { success: "Se ha enviado la solicitud correctamente" };
+  } catch (error) {
+    throw new Error(`Ha ocurrido un error: ${error}`);
+  }
+}
+
+export async function updateUserOptions(prevState, formdata) {
+  const validatedFields = userOptionsSchema.safeParse({
+    email: formdata.get("email"),
+    access: formdata.get("access"),
+    role: formdata.get("role"),
+    special: formdata.get("special"),
+  });
+
+  if (!validatedFields.success) {
+    return {
+      errors: validatedFields.error.flatten().fieldErrors,
+      message: "Ha ocurrido un error.",
+    };
+  }
+
+  const { email, access, role, special } = validatedFields.data;
+
+  const existingUser = await getUserByEmail(email);
+  if (!existingUser) {
+    return { message: "No se encontró ningún usuario." };
+  }
+
+  try {
+    if (existingUser.typeRequest !== access) {
+      await sendChangeRequestEmail(email);
+    }
+    if (existingUser.special !== special) {
+      await sendAllowedSpecialListEmail(email);
+    }
+
+    if (role === "admin") {
+      await sendAllowedAdminEmail(email);
+      await db.user.update({
+        where: {
+          email: email,
+        },
+        data: {
+          activeRequest: false,
+          typeRequest: "todas",
+          role: "ADMIN",
+          special: true,
+        },
+      });
+
+      revalidatePath("/administrador/usuarios");
+      return { success: "Se ha asignado a un nuevo administrador." };
+    } else {
+      await db.user.update({
+        where: {
+          email: email,
+        },
+        data: {
+          activeRequest: false,
+          typeRequest: access === "remove" ? null : access,
+          role: "USER",
+          special:
+            access === "remove" ? false : special === "allowed" ? true : false,
+        },
+      });
+
+      revalidatePath("/administrador/usuarios");
+      return { success: "Se ha modificado el usuario correctamente." };
+    }
   } catch (error) {
     throw new Error(`Ha ocurrido un error: ${error}`);
   }

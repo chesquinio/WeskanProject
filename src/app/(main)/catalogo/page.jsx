@@ -2,6 +2,7 @@ import FileButtons from "@/components/file-button";
 import ListRequestForm from "@/components/main/list-request-form";
 import { FileButtonsSkeleton } from "@/components/skeletons";
 import { currentUser, currentValidated } from "@/lib/auth";
+import { ArrowRightIcon } from "@heroicons/react/24/outline";
 import Link from "next/link";
 import { Suspense } from "react";
 
@@ -50,8 +51,18 @@ export default async function CataloguePage() {
 
       {!user && (
         <section className="mx-auto max-w-[900px] py-24 sm:py-32">
-          <h3>Quieres conocer nuestras listas de precios?, Inicia sesión!</h3>
-          <Link href="/iniciar-sesion">Iniciar Sesión</Link>
+          <h3 className="text-2xl font-bold text-center text-gray-800 mb-12">
+            ¿Quieres conocer nuestras listas de precios?
+          </h3>
+          <div className="flex justify-center items-center">
+            <Link
+              href="/iniciar-sesion"
+              className="md:text-lg xl:text-xl font-medium leading-6 text-pink-400 hover:text-pink-500 flex items-center gap-3 hover:gap-5 transition-all"
+            >
+              Iniciar Sesión
+              <ArrowRightIcon className="w-5 h-5" />
+            </Link>
+          </div>
         </section>
       )}
 

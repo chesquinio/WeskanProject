@@ -2,6 +2,7 @@ import { getFilteredUsers } from "@/lib/data";
 import { AdminButton, UserButton } from "./buttons";
 import SendEmailModal from "./send-email-modal";
 import { currentUser } from "@/lib/auth";
+import EditUserModal from "./edit-user-modal";
 
 export default async function UsersTable({ query, currentPage }) {
   const users = await getFilteredUsers(query, currentPage);
@@ -43,8 +44,12 @@ export default async function UsersTable({ query, currentPage }) {
                         user.id === id ? "hidden" : "block"
                       }`}
                     >
-                      <AdminButton id={user.id} role={user.role} movile />
-                      <UserButton id={user.id} role={user.role} movile />
+                      {user.role === "ADMIN" && (
+                        <span className="rounded-full py-1.5 px-4 bg-pink-500 text-white">
+                          Admin
+                        </span>
+                      )}
+                      <EditUserModal user={user} />
                       <SendEmailModal name={user.name} email={user.email} />
                     </div>
                   </div>
@@ -96,8 +101,12 @@ export default async function UsersTable({ query, currentPage }) {
                           user.id === id ? "hidden" : "block"
                         }`}
                       >
-                        <AdminButton id={user.id} role={user.role} />
-                        <UserButton id={user.id} role={user.role} />
+                        {user.role === "ADMIN" && (
+                          <span className="rounded-full py-1.5 px-4 bg-pink-500 text-white">
+                            Admin
+                          </span>
+                        )}
+                        <EditUserModal user={user} />
                         <SendEmailModal name={user.name} email={user.email} />
                       </div>
                     </td>

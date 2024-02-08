@@ -1,4 +1,4 @@
-import { currentSpecial } from "@/lib/auth";
+import { currentUser } from "@/lib/auth";
 import { getLastsFiles } from "@/lib/data";
 import Link from "next/link";
 
@@ -17,36 +17,39 @@ function formatName(name) {
 }
 
 export default async function FileButtons() {
-  const isSpecial = await currentSpecial();
+  const { typeRequest, special } = await currentUser();
+  const latestFiles = await getLastsFiles();
 
-  const filesFiltered = async () => {
-    const {
-      lastGuidesFile,
-      lastGuidesBikeFile,
-      lastValvesFile,
-      lastValvesBikeFile,
-      lastValvesRacingFile,
-      lastSleevesFile,
-      lastExclusiveFile,
-    } = await getLastsFiles();
+  const filesFiltered = () => {
+    let array = [];
+    for (const file of latestFiles) {
+      if (file.name === "promociones") {
+        if (special) {
+          array.push(file);
+          continue;
+        }
+        continue;
+      }
 
-    const array = [
-      lastGuidesFile,
-      lastGuidesBikeFile,
-      lastValvesFile,
-      lastValvesBikeFile,
-      lastValvesRacingFile,
-      lastSleevesFile,
-    ];
-
-    if (isSpecial) {
-      array.push(lastExclusiveFile);
+      if (typeRequest === "todas") {
+        array.push(file);
+        continue;
+      } else if (typeRequest === "motos") {
+        if (file.category === "motos") {
+          array.push(file);
+          continue;
+        }
+      } else {
+        if (file.category === "autos_y_vehículos_pesados") {
+          array.push(file);
+          continue;
+        }
+      }
     }
-
     return array;
   };
 
-  const files = await filesFiltered();
+  const files = filesFiltered();
 
   return (
     <section className="grid grid-cols-1 md:grid-cols-2 gap-10 w-full">

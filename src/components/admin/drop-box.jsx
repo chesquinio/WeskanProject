@@ -10,45 +10,59 @@ import { useToast } from "@/components/ui/use-toast";
 const list = [
   {
     id: 1,
-    name: "Guías",
+    name: "Guías y Asientos",
     value: "guias",
+    category: "autos_y_vehículos_pesados",
     image: "/guias.webp",
   },
   {
     id: 2,
     name: "Guías de Motos",
     value: "guias-moto",
+    category: "motos",
     image: "/guias-moto.webp",
   },
   {
     id: 3,
     name: "Camisas",
     value: "camisas",
+    category: "motos",
     image: "/camisas.webp",
   },
   {
     id: 4,
     name: "Válvulas",
     value: "valvulas",
+    category: "autos_y_vehículos_pesados",
     image: "/valvulas.webp",
   },
   {
     id: 5,
     name: "Válvulas de Motos",
     value: "valvulas-moto",
+    category: "motos",
     image: "/valvulas-moto.webp",
   },
   {
     id: 6,
     name: "Válvulas Racing",
     value: "valvulas-racing",
+    category: "motos",
     image: "/valvulas-racing.webp",
   },
   {
     id: 7,
-    name: "Exclusiva",
-    value: "exclusiva",
-    image: "/weskan-logo.webp",
+    name: "Asientos",
+    value: "asientos",
+    category: "todas",
+    image: "/asientos.webp",
+  },
+  {
+    id: 8,
+    name: "Promociones Guías y Asientos",
+    value: "promociones",
+    category: "todas",
+    image: "/promociones.webp",
   },
 ];
 
@@ -95,6 +109,14 @@ export default function DropBox() {
           id="list_type"
           name="list_type"
           value={selectedItem.value}
+          readOnly
+          className="sr-only"
+        />
+        <input
+          type="text"
+          id="category"
+          name="category"
+          value={selectedItem.category}
           readOnly
           className="sr-only"
         />

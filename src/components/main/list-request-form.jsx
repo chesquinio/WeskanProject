@@ -6,13 +6,12 @@ import { useFormState, useFormStatus } from "react-dom";
 import { toast } from "../ui/use-toast";
 import { listRequest } from "@/lib/actions";
 import { useCurrentUser } from "@/hooks/use-current-user";
-import { BikeIcon, CarFrontIcon, CarIcon, LucideBike } from "lucide-react";
 
 const list = [
   {
     id: 1,
     name: "Autos y Vehiculos Pesados",
-    value: "autos y vehículos pesados",
+    value: "autos_y_vehículos_pesados",
     image: "/car.png",
   },
   {
@@ -23,8 +22,8 @@ const list = [
   },
   {
     id: 3,
-    name: "Ambas",
-    value: "ambas",
+    name: "Todas",
+    value: "todas",
     image: "/both.png",
   },
 ];
@@ -54,6 +53,11 @@ export default function ListRequestForm() {
   const handleSelectItem = (item) => {
     setSelectedItem(item);
   };
+
+  const typeRequestFormated = () => {
+    return typeRequest.split("_").join(" ");
+  };
+
   return (
     <section className="bg-gray-100 rounded-lg flex flex-col md:flex-row gap-5 w-full p-10">
       <form action={dispath} className="w-full md:w-1/2">
@@ -83,7 +87,8 @@ export default function ListRequestForm() {
       {activeRequest ? (
         <div className="flex justify-center items-center text-center rounded-lg p-5 bg-pink-300 w-full md:w-1/2">
           <p className="text-white font-medium text-lg">
-            Tienes una solicitud para acceder a {typeRequest} activa
+            Tienes una solicitud para acceder a <b>{typeRequestFormated()}</b>{" "}
+            activa
           </p>
         </div>
       ) : (

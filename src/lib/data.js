@@ -9,15 +9,6 @@ export async function getFilteredUsers(query, currentPage) {
 
   try {
     const users = await db.user.findMany({
-      select: {
-        id: true,
-        name: true,
-        email: true,
-        image: true,
-        category: true,
-        validated: true,
-        role: true,
-      },
       where: {
         AND: [
           {
@@ -26,6 +17,36 @@ export async function getFilteredUsers(query, currentPage) {
               { email: { contains: query, mode: "insensitive" } },
             ],
           },
+        ],
+      },
+      orderBy: {
+        name: "desc",
+      },
+      take: ITEMS_PER_PAGE,
+      skip: offset,
+    });
+
+    return users;
+  } catch (error) {
+    return null;
+  }
+}
+
+export async function getFilteredAccessUsers(query, currentPage) {
+  noStore();
+  const offset = (currentPage - 1) * ITEMS_PER_PAGE;
+
+  try {
+    const users = await db.user.findMany({
+      where: {
+        AND: [
+          {
+            OR: [
+              { name: { contains: query, mode: "insensitive" } },
+              { email: { contains: query, mode: "insensitive" } },
+            ],
+          },
+          { activeRequest: true },
         ],
       },
       orderBy: {
@@ -155,7 +176,7 @@ export async function getUsersPages(query) {
   }
 }
 
-export async function getRequestUsersPages(query) {
+export async function getAccessUsersPages(query) {
   try {
     const count = await db.user.count({
       where: {
@@ -166,7 +187,7 @@ export async function getRequestUsersPages(query) {
               { email: { contains: query, mode: "insensitive" } },
             ],
           },
-          { validated: { equals: false } },
+          { activeRequest: { equals: true } },
         ],
       },
     });
@@ -180,64 +201,33 @@ export async function getRequestUsersPages(query) {
 
 export async function getLastsFiles() {
   try {
-    const lastGuidesFile = await db.file.findFirst({
-      where: {
-        name: "guias",
+    const latestFiles = await prisma.file.groupBy({
+      by: ["name"],
+      _max: {
+        createdAt: true,
       },
-      orderBy: { createdAt: "desc" },
     });
 
-    const lastGuidesBikeFile = await db.file.findFirst({
-      where: {
-        name: "guias-moto",
-      },
-      orderBy: { createdAt: "desc" },
-    });
+    let results = [];
 
-    const lastValvesFile = await db.file.findFirst({
-      where: {
-        name: "valvulas",
-      },
-      orderBy: { createdAt: "desc" },
-    });
+    for (const group of latestFiles) {
+      const latestFile = await prisma.file.findFirst({
+        where: {
+          name: group.name,
+          createdAt: group._max.createdAt,
+        },
+        select: {
+          id: true,
+          name: true,
+          category: true,
+          link: true,
+          createdAt: true,
+        },
+      });
+      results.push(latestFile);
+    }
 
-    const lastValvesBikeFile = await db.file.findFirst({
-      where: {
-        name: "valvulas-moto",
-      },
-      orderBy: { createdAt: "desc" },
-    });
-
-    const lastValvesRacingFile = await db.file.findFirst({
-      where: {
-        name: "valvulas-racing",
-      },
-      orderBy: { createdAt: "desc" },
-    });
-
-    const lastSleevesFile = await db.file.findFirst({
-      where: {
-        name: "camisas",
-      },
-      orderBy: { createdAt: "desc" },
-    });
-
-    const lastExclusiveFile = await db.file.findFirst({
-      where: {
-        name: "exclusiva",
-      },
-      orderBy: { createdAt: "desc" },
-    });
-
-    return {
-      lastGuidesFile,
-      lastGuidesBikeFile,
-      lastValvesFile,
-      lastValvesBikeFile,
-      lastValvesRacingFile,
-      lastSleevesFile,
-      lastExclusiveFile,
-    };
+    return results;
   } catch (error) {
     return null;
   }

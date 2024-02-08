@@ -2,15 +2,17 @@
 
 import { Fragment, useEffect, useRef, useState } from "react";
 import { Dialog, Transition } from "@headlessui/react";
-import { EnvelopeIcon } from "@heroicons/react/24/outline";
+import { PencilSquareIcon } from "@heroicons/react/24/outline";
 import { useFormState } from "react-dom";
-import { sendEmailToUser } from "@/lib/actions";
 import { toast } from "../ui/use-toast";
+import { updateUserOptions } from "@/lib/actions";
 
-export default function SendEmailModal({ name, email }) {
+export default function EditUserModal({ user }) {
   const [open, setOpen] = useState(false);
+  const [access, setAccess] = useState(user.typeRequest || "remove");
+  const [role, setRole] = useState(user.role === "ADMIN" ? "admin" : "user");
   const initialState = { errors: {}, message: null, success: null };
-  const [state, dispath] = useFormState(sendEmailToUser, initialState);
+  const [state, dispath] = useFormState(updateUserOptions, initialState);
 
   useEffect(() => {
     setOpen(false);
@@ -36,7 +38,7 @@ export default function SendEmailModal({ name, email }) {
         onClick={() => setOpen(true)}
         className="w-8 h-8 bg-gray-100 rounded p-1 text-gray-500"
       >
-        <EnvelopeIcon />
+        <PencilSquareIcon />
       </button>
       <Transition.Root show={open} as={Fragment}>
         <Dialog
@@ -73,7 +75,7 @@ export default function SendEmailModal({ name, email }) {
                     <div className="bg-white px-4 pb-4 pt-5 sm:p-6 sm:pb-4">
                       <div className="sm:flex sm:items-start">
                         <div className="mx-auto flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-full bg-pink-100 sm:mx-0 sm:h-10 sm:w-10">
-                          <EnvelopeIcon
+                          <PencilSquareIcon
                             className="h-6 w-6 text-pink-500"
                             aria-hidden="true"
                           />
@@ -83,7 +85,7 @@ export default function SendEmailModal({ name, email }) {
                             as="h3"
                             className="text-base font-semibold leading-6 text-center text-gray-900 mb-4"
                           >
-                            Enviar un correo a {name}:
+                            Ediitar el usuario {user.name}:
                           </Dialog.Title>
                           <div className="mb-4">
                             <label
@@ -96,42 +98,106 @@ export default function SendEmailModal({ name, email }) {
                               type="email"
                               id="email"
                               name="email"
-                              value={email}
+                              value={user.email}
                               readOnly
-                              className="p-2 w-full bg-gray-100 rounded outline-none"
+                              className="p-2 w-full text-gray-400 bg-gray-100 rounded outline-none"
                             />
                           </div>
                           <div className="mb-4">
                             <label
-                              htmlFor="subject"
+                              htmlFor="admin"
                               className="block text-sm text-gray-600 mb-1 ml-1"
                             >
-                              Asunto:
+                              Permisos:
                             </label>
-                            <input
-                              type="text"
-                              id="subject"
-                              name="subject"
-                              placeholder="Confirmación de compra"
-                              className="p-2 w-full bg-gray-100 rounded outline-pink-500"
-                              required
-                            />
+                            <select
+                              id="role"
+                              name="role"
+                              value={role}
+                              onChange={(e) => setRole(e.target.value)}
+                              className="p-2 w-full bg-gray-100 rounded text-gray-900 outline-pink-500"
+                            >
+                              <option value="admin">Administrador</option>
+                              <option value="user">Usuario</option>
+                            </select>
+                            {state.errors?.admin &&
+                              state.errors.admin.map((error) => (
+                                <p
+                                  className="mt-2 text-sm text-red-500"
+                                  key={error}
+                                >
+                                  {error}
+                                </p>
+                              ))}
                           </div>
 
-                          <div className="mb-4">
+                          <div
+                            className={`${
+                              role !== "admin" ? "block" : "hidden"
+                            } mb-4`}
+                          >
                             <label
-                              htmlFor="message"
+                              htmlFor="access"
                               className="block text-sm text-gray-600 mb-1 ml-1"
                             >
-                              Mensaje:
+                              Accesos a listas:
                             </label>
-                            <textarea
-                              id="message"
-                              name="message"
-                              placeholder="Se ha concretado la compra a su nombre..."
-                              className="p-2 resize-none w-full h-24 bg-gray-100 rounded outline-pink-500"
-                              required
-                            />
+                            <select
+                              id="access"
+                              name="access"
+                              value={access}
+                              onChange={(e) => setAccess(e.target.value)}
+                              className="p-2 w-full bg-gray-100 rounded text-gray-900 outline-pink-500"
+                            >
+                              <option value="autos_y_vehículos_pesados">
+                                Autos y vehículos pesados
+                              </option>
+                              <option value="motos">Motos</option>
+                              <option value="todas">Todas</option>
+                              <option value="remove">Ninguna</option>
+                            </select>
+                            {state.access?.password &&
+                              state.errors.access.map((error) => (
+                                <p
+                                  className="mt-2 text-sm text-red-500"
+                                  key={error}
+                                >
+                                  {error}
+                                </p>
+                              ))}
+                          </div>
+
+                          <div
+                            className={`${
+                              access !== "remove" && role !== "admin"
+                                ? "block"
+                                : "hidden"
+                            } mb-4`}
+                          >
+                            <label
+                              htmlFor="special"
+                              className="block text-sm text-gray-600 mb-1 ml-1"
+                            >
+                              Acceso a lista de promociones:
+                            </label>
+                            <select
+                              id="special"
+                              name="special"
+                              defaultValue={user.special ? "allowed" : "denied"}
+                              className="p-2 w-full bg-gray-100 rounded text-gray-900 outline-pink-500"
+                            >
+                              <option value="allowed">Permitido</option>
+                              <option value="denied">Denegado</option>
+                            </select>
+                            {state.errors?.special &&
+                              state.errors.special.map((error) => (
+                                <p
+                                  className="mt-2 text-sm text-red-500"
+                                  key={error}
+                                >
+                                  {error}
+                                </p>
+                              ))}
                           </div>
                         </div>
                       </div>

@@ -426,9 +426,7 @@ export const sendDeniedRequestEmail = async (email) => {
       from: `Weskan S.A. <${domain_address}>`,
       to: email,
       subject: "Cambio en el acceso de listas",
-      html: template(
-        "Se le ha denegado el acceso a la lista especial de precios."
-      ),
+      html: template("Se le ha denegado el acceso a la lista de precios."),
     });
     return response?.messageId ? { ok: true } : { ok: false };
   } catch (error) {
@@ -443,7 +441,53 @@ export const sendAllowedRequestEmail = async (email) => {
       to: email,
       subject: "Cambio en el acceso de listas",
       html: template(
-        "Se le ha otorgado acceso a la lista de precios especiales en el apartado de catálogo."
+        "Se le ha otorgado acceso a la lista de precios en el apartado de catálogo."
+      ),
+    });
+    return response?.messageId ? { ok: true } : { ok: false };
+  } catch (error) {
+    return { ok: false };
+  }
+};
+
+export const sendAllowedSpecialListEmail = async (email) => {
+  try {
+    const response = await transporter.sendMail({
+      from: `Weskan S.A. <${domain_address}>`,
+      to: email,
+      subject: "Cambio en el acceso de listas",
+      html: template(
+        "Se le ha otorgado acceso a la lista de precios de promoción."
+      ),
+    });
+    return response?.messageId ? { ok: true } : { ok: false };
+  } catch (error) {
+    return { ok: false };
+  }
+};
+
+export const sendChangeRequestEmail = async (email) => {
+  try {
+    const response = await transporter.sendMail({
+      from: `Weskan S.A. <${domain_address}>`,
+      to: email,
+      subject: "Cambio en el acceso de listas",
+      html: template("Se le ha cambiado el acceso a la lista de precios."),
+    });
+    return response?.messageId ? { ok: true } : { ok: false };
+  } catch (error) {
+    return { ok: false };
+  }
+};
+
+export const sendAllowedAdminEmail = async (email) => {
+  try {
+    const response = await transporter.sendMail({
+      from: `Weskan S.A. <${domain_address}>`,
+      to: email,
+      subject: "Cambio en los permisos",
+      html: template(
+        "Se le ha otorgado permisos de administrador a tu cuenta."
       ),
     });
     return response?.messageId ? { ok: true } : { ok: false };
