@@ -5,13 +5,14 @@ import { FcGoogle } from "react-icons/fc";
 import { DEFAULT_LOGIN_REDIRECT } from "../../../../routes";
 
 export default function Social() {
-  const onClick = (event, provider) => {
+  const onClick = async (event, provider) => {
     event.preventDefault();
 
     signIn(provider, {
       callbackUrl: DEFAULT_LOGIN_REDIRECT,
     });
   };
+
   return (
     <div className="flex items-center w-full">
       <button
