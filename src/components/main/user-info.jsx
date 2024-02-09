@@ -145,11 +145,6 @@ export default function UserInfo({ user }) {
           </div>
         )}
       </form>
-      <div className="bg-white py-2 px-4 text-center text-sm text-gray-800 hover:text-pink-400 hover:bg-pink-100 font-medium rounded-lg transition">
-        <a href={`mailto:ventas@weskan.com.ar`}>
-          Solicitar acceso a lista de promociones
-        </a>
-      </div>
     </main>
   );
 }

@@ -59,6 +59,13 @@ const list = [
   },
   {
     id: 8,
+    name: "Tubos",
+    value: "Tubos",
+    category: "todas",
+    image: "/tubos.webp",
+  },
+  {
+    id: 9,
     name: "Promociones Guías y Asientos",
     value: "promociones",
     category: "todas",

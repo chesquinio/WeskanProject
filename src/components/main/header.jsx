@@ -6,6 +6,7 @@ import WeskanLogo from "../weskan-logo";
 import { useState } from "react";
 import { Dialog, Disclosure, Menu, Transition } from "@headlessui/react";
 import {
+  ArrowUpOnSquareStackIcon,
   Bars3Icon,
   Cog6ToothIcon,
   PowerIcon,
@@ -101,7 +102,7 @@ export default function Header() {
                             </Link>
                           )}
                         </Menu.Item>
-                        {user.role === "ADMIN" && (
+                        {user.role === "ADMIN" ? (
                           <Menu.Item>
                             {({ active }) => (
                               <Link
@@ -113,6 +114,21 @@ export default function Header() {
                               >
                                 <Cog6ToothIcon className="w-5" />
                                 <div>Administrador</div>
+                              </Link>
+                            )}
+                          </Menu.Item>
+                        ) : (
+                          <Menu.Item>
+                            {({ active }) => (
+                              <Link
+                                href="/curriculum"
+                                className={classNames(
+                                  active ? "bg-gray-100" : "",
+                                  "flex w-full items-center gap-2 px-4 py-2 text-md text-gray-800"
+                                )}
+                              >
+                                <ArrowUpOnSquareStackIcon className="w-5" />
+                                <div>Subir CV</div>
                               </Link>
                             )}
                           </Menu.Item>
