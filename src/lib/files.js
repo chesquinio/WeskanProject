@@ -68,3 +68,31 @@ export async function uploadImage(image) {
     return null;
   }
 }
+
+export async function uploadCurriculumFile(file) {
+  try {
+    const ext = file.name.split(".").pop();
+    const filename =
+      new Date().toLocaleDateString().split("/").join("-") +
+      "_" +
+      new Date().toLocaleTimeString() +
+      "." +
+      ext;
+
+    const buffer = Buffer.from(await file.arrayBuffer());
+
+    await s3.send(
+      new PutObjectCommand({
+        Bucket: bucketName,
+        Key: `curriculum/${filename}`,
+        Body: buffer,
+        ContentType: file.type,
+      })
+    );
+
+    const link = `https://${bucketName}.s3.${region}.amazonaws.com/curriculum/${filename}`;
+    return link;
+  } catch (error) {
+    return null;
+  }
+}

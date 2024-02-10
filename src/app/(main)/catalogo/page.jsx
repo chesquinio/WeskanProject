@@ -52,11 +52,11 @@ export default async function CataloguePage() {
       {!user && (
         <section className="mx-auto max-w-[900px] py-24 sm:py-32">
           <h3 className="text-2xl font-bold text-center text-gray-800 mb-12">
-            ¿Quieres conocer nuestras listas de precios?
+            ¿Quiéres conocer nuestras listas de precios?
           </h3>
           <div className="flex justify-center items-center">
             <Link
-              href="/iniciar-sesion"
+              href="https://weskan.online/iniciar-sesion"
               className="md:text-lg xl:text-xl font-medium leading-6 text-pink-400 hover:text-pink-500 flex items-center gap-3 hover:gap-5 transition-all"
             >
               Iniciar Sesión

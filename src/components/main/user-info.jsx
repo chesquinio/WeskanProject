@@ -131,6 +131,25 @@ export default function UserInfo({ user }) {
                   )}
                 </dd>
               </div>
+              {user.curriculum && (
+                <div className="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
+                  <dt className="text-sm font-medium leading-6 text-gray-900">
+                    Curriculum Vitae
+                  </dt>
+                  <dd className="mt-1 text-sm leading-6 text-gray-700 sm:col-span-2 sm:mt-0">
+                    <p>
+                      Has subido el siguiente{" "}
+                      <a
+                        className="text-pink-400"
+                        target="_black"
+                        href={user.curriculum}
+                      >
+                        curriculum
+                      </a>
+                    </p>
+                  </dd>
+                </div>
+              )}
             </dl>
           </div>
         </div>
@@ -145,11 +164,6 @@ export default function UserInfo({ user }) {
           </div>
         )}
       </form>
-      <div className="bg-white py-2 px-4 text-center text-sm text-gray-800 hover:text-pink-400 hover:bg-pink-100 font-medium rounded-lg transition">
-        <a href={`mailto:ventas@weskan.com.ar`}>
-          Solicitar acceso a lista de promociones
-        </a>
-      </div>
     </main>
   );
 }

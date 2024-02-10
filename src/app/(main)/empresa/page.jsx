@@ -75,7 +75,7 @@ export default function CompanyPage() {
             <div className="lg:pr-4">
               <div className="lg:max-w-lg">
                 <p className="text-base font-semibold leading-7 text-pink-400">
-                  Fabricaciíon a medida
+                  Fabricación a medida
                 </p>
                 <h1 className="mt-2 text-3xl font-bold tracking-tight text-gray-800 sm:text-4xl">
                   Establecimiento metalúrgico.
@@ -107,8 +107,8 @@ export default function CompanyPage() {
                 </p>
                 <p>
                   A inicios del siglo actual, <b>Weskan</b> comienza un{" "}
-                  <b>proceso de mejora continua</b>, iniciado un camino de
-                  <b>innovacion tecnologica</b> que consistió en:
+                  <b>proceso de mejora contínua</b>, iniciado un camino de{" "}
+                  <b>innovación tecnologica</b> que consistió en:
                 </p>
                 <ul role="list" className="mt-8 space-y-8 text-gray-600">
                   <li className="flex gap-x-3">

@@ -49,6 +49,11 @@ export default async function UsersTable({ query, currentPage }) {
                           Admin
                         </span>
                       )}
+                      {user.curriculum && (
+                        <span className="rounded-full py-1.5 px-4 bg-blue-500 text-white">
+                          CV
+                        </span>
+                      )}
                       <EditUserModal user={user} />
                       <SendEmailModal name={user.name} email={user.email} />
                     </div>
@@ -105,6 +110,15 @@ export default async function UsersTable({ query, currentPage }) {
                           <span className="rounded-full py-1.5 px-4 bg-pink-500 text-white">
                             Admin
                           </span>
+                        )}
+                        {user.curriculum && (
+                          <a
+                            href={user.curriculum}
+                            target="_blanck"
+                            className="rounded-full py-1.5 px-4 bg-secondary_light text-white"
+                          >
+                            CV
+                          </a>
                         )}
                         <EditUserModal user={user} />
                         <SendEmailModal name={user.name} email={user.email} />

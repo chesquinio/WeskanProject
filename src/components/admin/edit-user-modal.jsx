@@ -207,7 +207,7 @@ export default function EditUserModal({ user }) {
                         type="submit"
                         className="inline-flex w-full justify-center rounded-md bg-pink-400 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-pink-500 sm:ml-3 sm:w-auto"
                       >
-                        Enviar
+                        Guardar
                       </button>
                       <button
                         type="button"

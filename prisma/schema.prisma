@@ -28,6 +28,7 @@ model User {
   typeRequest   String?
   validated     Boolean   @default(false)
   special       Boolean   @default(false)
+  curriculum    String?
   role          UserRole  @default(USER)
   Account       Account[]
 }
