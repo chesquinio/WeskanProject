@@ -13,6 +13,7 @@ import {
 import {
   getPasswordRecoverTokenByToken,
   getUserByEmail,
+  getUserById,
   getVerificationToken,
 } from "./data";
 import { signIn, signOut } from "@/auth";
@@ -34,7 +35,7 @@ import {
   generateVerificationToken,
 } from "./tokens";
 import { revalidatePath } from "next/cache";
-import { upload, uploadImage } from "./files";
+import { upload, uploadImage, uploadCurriculumFile } from "./files";
 import { redirect } from "next/navigation";
 
 export async function register(prevState, formdata) {
@@ -531,6 +532,7 @@ export async function updateUserOptions(prevState, formdata) {
           typeRequest: "todas",
           role: "ADMIN",
           special: true,
+          curriculum: null,
         },
       });
 
@@ -553,6 +555,37 @@ export async function updateUserOptions(prevState, formdata) {
       revalidatePath("/administrador/usuarios");
       return { success: "Se ha modificado el usuario correctamente." };
     }
+  } catch (error) {
+    throw new Error(`Ha ocurrido un error: ${error}`);
+  }
+}
+
+export async function uploadCurriculum(prevState, formdata) {
+  const id = formdata.get("id");
+  const file = formdata.get("file");
+
+  if (!file.size > 0) {
+    return { message: "No se ha encontrado ningun archivo." };
+  }
+
+  const existingUser = await getUserById(id);
+  if (!existingUser) {
+    return { message: "No se ha encontrado el usuario." };
+  }
+
+  try {
+    const link = await uploadCurriculumFile(file);
+
+    await db.user.update({
+      where: {
+        id: existingUser.id,
+      },
+      data: {
+        curriculum: link,
+      },
+    });
+
+    return { success: "Se ha subido el curriculum correctamente." };
   } catch (error) {
     throw new Error(`Ha ocurrido un error: ${error}`);
   }

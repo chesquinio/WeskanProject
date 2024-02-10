@@ -80,6 +80,10 @@ export const {
         session.user.special = token.special;
       }
 
+      if (token.curriculum && session.user) {
+        session.user.curriculum = token.curriculum;
+      }
+
       if (session.user) {
         session.user.name = token.name;
         session.user.email = token.email;
@@ -107,6 +111,7 @@ export const {
       token.activeRequest = existingUser.activeRequest;
       token.typeRequest = existingUser.typeRequest;
       token.special = existingUser.special;
+      token.curriculum = existingUser.curriculum;
 
       return token;
     },
