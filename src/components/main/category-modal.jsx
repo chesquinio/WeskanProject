@@ -59,11 +59,12 @@ export default function CategoryModal() {
                           as="h3"
                           className="text-2xl font-bold leading-6 text-gray-900 mb-4"
                         >
-                          Con que finalidad quiéres acceder al catálogo?
+                          ¿Que tipo de negocio eres con el que quieres acceder
+                          al catálogo?
                         </Dialog.Title>
                         <Dialog.Title
                           as="h5"
-                          className="font-medium leading-6 text-gray-600"
+                          className="font-medium text-sm leading-6 text-gray-600"
                         >
                           Esto nos permitirá conocerte y brindarte una
                           experiencia más personalizada.
@@ -71,20 +72,19 @@ export default function CategoryModal() {
                         <div className="mt-5 grid grid-cols-1 md:grid-cols-2 gap-3">
                           <form
                             action={dispath}
-                            className="bg-gray-100 rounded-lg p-5 cursor-pointer"
+                            className="bg-gray-100 hover:bg-gray-200 rounded-lg p-5 cursor-pointer"
                           >
                             <button type="submit" className="outline-none">
                               <img
                                 src="/category1.png"
                                 alt=""
-                                className="hidden md:block rounded-lg mb-2"
+                                className="hidden md:block rounded-lg mb-2 h-40 w-full object-scale-down bg-white"
                               />
                               <h4 className="mb-2 text-lg font-medium text-center text-gray-900">
-                                Soy una pequeña empresa.
+                                Casa de repuestos
                               </h4>
                               <p className="text-gray-600 text-sm text-center">
-                                Tengo entre 1-10 empleados y quiero conocer el
-                                catálogo.
+                                Soy una casa de repuestos de autos/motos.
                               </p>
                             </button>
                             <input
@@ -98,26 +98,25 @@ export default function CategoryModal() {
                               id="category"
                               name="category"
                               type="text"
-                              value="Pequeña empresa"
+                              value="Casa de repuestos"
                               className="sr-only"
                             />
                           </form>
                           <form
                             action={dispath}
-                            className="bg-gray-100 rounded-lg p-5 cursor-pointer"
+                            className="bg-gray-100 hover:bg-gray-200 rounded-lg p-5 cursor-pointer"
                           >
                             <button type="submit" className="outline-none">
                               <img
                                 src="/category2.png"
                                 alt=""
-                                className="hidden md:block rounded-lg mb-2"
+                                className="hidden md:block rounded-lg mb-2  h-40 w-full object-scale-down bg-white"
                               />
                               <h4 className="mb-2 text-lg font-medium text-gray-900">
-                                Soy una mediana empresa.
+                                Rectificadora
                               </h4>
                               <p className="text-gray-600 text-sm text-center">
-                                Tengo entre 10-30 empleados y quiero analizar un
-                                posible pedido de productos.
+                                Soy una rectificadora de diferentes autopartes.
                               </p>
                             </button>
                             <input
@@ -131,26 +130,26 @@ export default function CategoryModal() {
                               id="category"
                               name="category"
                               type="text"
-                              value="Mediana empresa"
+                              value="Rectificadora"
                               className="sr-only"
                             />
                           </form>
                           <form
                             action={dispath}
-                            className="bg-gray-100 rounded-lg p-5 cursor-pointer"
+                            className="bg-gray-100 hover:bg-gray-200 rounded-lg p-5 cursor-pointer"
                           >
                             <button type="submit" className="outline-none">
                               <img
                                 src="/category3.png"
                                 alt=""
-                                className="hidden md:block rounded-lg mb-2"
+                                className="hidden md:block rounded-lg mb-2 h-40 w-full object-scale-down bg-white"
                               />
                               <h4 className="mb-2 text-lg font-medium text-gray-900">
-                                Soy una gran empresa.
+                                Vendedor
                               </h4>
                               <p className="text-gray-600 text-sm text-center">
-                                Tengo entre +30 empleados y quiero realizar
-                                pedidos con frecuencia.
+                                Soy un vendedor o tengo un negocio de venta de
+                                autopartes.
                               </p>
                             </button>
                             <input
@@ -164,13 +163,13 @@ export default function CategoryModal() {
                               id="category"
                               name="category"
                               type="text"
-                              value="Gran empresa"
+                              value="Vendedor"
                               className="sr-only"
                             />
                           </form>
                           <form
                             action={dispath}
-                            className="bg-gray-100 rounded-lg p-5 cursor-pointer"
+                            className="bg-gray-100 hover:bg-gray-200 rounded-lg p-5 cursor-pointer"
                           >
                             <button type="submit" className="outline-none">
                               <img
@@ -180,10 +179,11 @@ export default function CategoryModal() {
                               />
 
                               <h4 className="mb-2 text-lg font-medium text-gray-900">
-                                Uso personal.
+                                Reparación
                               </h4>
                               <p className="text-gray-600 text-sm text-center">
-                                Solo para uso y pedidos individuales.
+                                Necesito repuestos para la reparación de mis
+                                propios vehículos.
                               </p>
                             </button>
                             <input
@@ -197,7 +197,7 @@ export default function CategoryModal() {
                               id="category"
                               name="category"
                               type="text"
-                              value="Negocio/Uso personal"
+                              value="Reparación"
                               className="sr-only"
                             />
                           </form>
