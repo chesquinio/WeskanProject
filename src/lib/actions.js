@@ -531,6 +531,7 @@ export async function updateUserOptions(prevState, formdata) {
           activeRequest: false,
           typeRequest: "todas",
           role: "ADMIN",
+          validated: true,
           special: true,
           curriculum: null,
         },
@@ -547,6 +548,7 @@ export async function updateUserOptions(prevState, formdata) {
           activeRequest: false,
           typeRequest: access === "remove" ? null : access,
           role: "USER",
+          validated: access === "remove" ? false : true,
           special:
             access === "remove" ? false : special === "allowed" ? true : false,
         },

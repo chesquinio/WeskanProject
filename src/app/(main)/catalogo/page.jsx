@@ -1,7 +1,7 @@
 import FileButtons from "@/components/file-button";
 import ListRequestForm from "@/components/main/list-request-form";
 import { FileButtonsSkeleton } from "@/components/skeletons";
-import { currentUser, currentValidated } from "@/lib/auth";
+import { currentUser } from "@/lib/auth";
 import { ArrowRightIcon } from "@heroicons/react/24/outline";
 import Link from "next/link";
 import { Suspense } from "react";
@@ -12,7 +12,6 @@ export const metadata = {
 
 export default async function CataloguePage() {
   const user = await currentUser();
-  const isValidated = await currentValidated();
 
   return (
     <main className="m-5">
@@ -66,7 +65,7 @@ export default async function CataloguePage() {
         </section>
       )}
 
-      {user && !isValidated && (
+      {user && !user.validated && (
         <section className="mx-auto max-w-[900px] py-24 sm:py-32">
           <h3 className="text-2xl font-bold text-center text-gray-800 mb-12">
             Solicitar acceso a listas de precios.
@@ -75,7 +74,7 @@ export default async function CataloguePage() {
         </section>
       )}
 
-      {isValidated && (
+      {user.validated && (
         <section className="mx-auto max-w-[1200px] py-24 sm:py-32">
           <h2 className="text-4xl font-bold text-center text-gray-800 mb-12">
             Conoce nuestra listas de precios.
