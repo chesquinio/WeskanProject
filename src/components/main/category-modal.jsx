@@ -179,11 +179,10 @@ export default function CategoryModal() {
                               />
 
                               <h4 className="mb-2 text-lg font-medium text-gray-900">
-                                Reparación
+                                Distribudor
                               </h4>
                               <p className="text-gray-600 text-sm text-center">
-                                Necesito repuestos para la reparación de mis
-                                propios vehículos.
+                                Soy un distribudor de repuestos y autopartes.
                               </p>
                             </button>
                             <input
@@ -197,7 +196,7 @@ export default function CategoryModal() {
                               id="category"
                               name="category"
                               type="text"
-                              value="Reparación"
+                              value="Distribudor"
                               className="sr-only"
                             />
                           </form>
