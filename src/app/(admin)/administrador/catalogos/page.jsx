@@ -6,6 +6,8 @@ export const metadata = {
 };
 
 export default async function CataloguePage() {
+  const { typeRequest, special } = await currentUser();
+
   return (
     <main className="m-5 space-y-5">
       <div className="flex flex-col w-full">
@@ -18,7 +20,7 @@ export default async function CataloguePage() {
       <div className="flex flex-col w-full">
         <h2 className="text-2xl">Ver catálogos</h2>
         <section className="mt-4">
-          <FileButtons />
+          <FileButtons typeRequest={typeRequest} special={special} />
         </section>
       </div>
     </main>

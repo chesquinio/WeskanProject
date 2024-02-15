@@ -48,26 +48,30 @@ export default async function CataloguePage() {
         </div>
       </section>
 
-      {user && (
+      {user ? (
         <>
-          <section className="mx-auto max-w-[1200px] py-24 sm:py-32">
-            <h2 className="text-4xl font-bold text-center text-gray-800 mb-12">
-              Conoce nuestra listas de precios.
-            </h2>
-            <Suspense fallback={<FileButtonsSkeleton />}>
-              <FileButtons />
-            </Suspense>
-          </section>
-
-          {/* <section className="mx-auto max-w-[900px] py-24 sm:py-32">
+          {user?.validated ? (
+            <section className="mx-auto max-w-[1200px] py-24 sm:py-32">
+              <h2 className="text-4xl font-bold text-center text-gray-800 mb-12">
+                Conoce nuestra listas de precios.
+              </h2>
+              <Suspense fallback={<FileButtonsSkeleton />}>
+                <FileButtons
+                  typeRequest={user?.typeRequest}
+                  special={user?.special}
+                />
+              </Suspense>
+            </section>
+          ) : (
+            <section className="mx-auto max-w-[900px] py-24 sm:py-32">
               <h3 className="text-2xl font-bold text-center text-gray-800 mb-12">
                 Solicitar acceso a listas de precios.
               </h3>
               <ListRequestForm />
-            </section> */}
+            </section>
+          )}
         </>
-      )}
-      {!user && (
+      ) : (
         <section className="mx-auto max-w-[900px] py-24 sm:py-32">
           <h3 className="text-2xl font-bold text-center text-gray-800 mb-12">
             ¿Quiéres conocer nuestras listas de precios?

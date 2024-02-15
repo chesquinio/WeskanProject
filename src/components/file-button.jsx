@@ -1,23 +1,8 @@
-import { currentUser } from "@/lib/auth";
 import { getLastsFiles } from "@/lib/data";
+import { formatFileName } from "@/lib/utils";
 import Link from "next/link";
 
-function formatName(name) {
-  const formattedName = name
-    .replace(/-/g, " ")
-    .replace(/\b\w/g, (c) => c.toUpperCase());
-
-  const withAcentoGuias = formattedName.replace(/\bGuias\b/g, "Guías");
-  const withAcentoValvulas = withAcentoGuias.replace(
-    /\bValvulas\b/g,
-    "Válvulas"
-  );
-
-  return withAcentoValvulas;
-}
-
-export default async function FileButtons() {
-  const { typeRequest, special } = await currentUser();
+export default async function FileButtons({ typeRequest, special }) {
   const latestFiles = await getLastsFiles();
 
   const filesFiltered = () => {
@@ -71,7 +56,7 @@ export default async function FileButtons() {
                 style={{ textShadow: "0px 4px 19px rgba(0,0,0,0.6)" }}
                 className="text-xl lg:text-3xl lg:group-hover:ml-3 transition-all"
               >
-                {file ? formatName(file.name) : "Nombre no disponible"}
+                {file ? formatFileName(file.name) : "Nombre no disponible"}
               </h3>
             </div>
           </Link>

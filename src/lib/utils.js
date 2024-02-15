@@ -37,3 +37,17 @@ export const generatePagination = (currentPage, totalPages) => {
     totalPages,
   ];
 };
+
+export const formatFileName = (name) => {
+  const formattedName = name
+    .replace(/-/g, " ")
+    .replace(/\b\w/g, (c) => c.toUpperCase());
+
+  const withAcentoGuias = formattedName.replace(/\bGuias\b/g, "Guías");
+  const withAcentoValvulas = withAcentoGuias.replace(
+    /\bValvulas\b/g,
+    "Válvulas"
+  );
+
+  return withAcentoValvulas;
+};
