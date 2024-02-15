@@ -337,6 +337,19 @@ export async function uploadFile(prevState, formdata) {
       return { message: "No se ha encontrado ningun archivo." };
     }
 
+    const existingListType = await db.file.findUnique({
+      where: {
+        name: list_type,
+      },
+    });
+    if (existingListType) {
+      await db.file.delete({
+        where: {
+          name: list_type,
+        },
+      });
+    }
+
     const { link, date } = await upload(file);
     if (!link || !date) {
       return { message: "Ha ocurrido un error al guardar el archivo." };

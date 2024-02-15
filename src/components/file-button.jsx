@@ -1,40 +1,45 @@
-// import { getLastsFilesByUser } from "@/lib/data";
+import { getLastsFiles } from "@/lib/data";
 import { formatFileName } from "@/lib/utils";
 import Link from "next/link";
 
 export default async function FileButtons({ typeRequest, special }) {
-  // const latestFiles = await getLastsFilesByUser({ typeRequest, special });
+  const latestFiles = await getLastsFiles();
 
-  const latestFiles = [
-    {
-      id: 1,
-      name: "guias",
-      category: "autos_y_vehículos_pesados",
-      link: "https://weskan.s3.sa-east-1.amazonaws.com/price-list/catalogo_de_precios_7-2-2024_15:35:22.xlsx",
-    },
-    {
-      id: 2,
-      name: "guias-moto",
-      category: "motos",
-      link: "https://weskan.s3.sa-east-1.amazonaws.com/price-list/catalogo_de_precios_7-2-2024_15:35:33.xlsx",
-    },
-    {
-      id: 3,
-      name: "camisas",
-      category: "motos",
-      link: "https://weskan.s3.sa-east-1.amazonaws.com/price-list/catalogo_de_precios_7-2-2024_15:35:40.xlsx",
-    },
-    {
-      id: 4,
-      name: "valvulas",
-      category: "autos_y_vehículos_pesados",
-      link: "https://weskan.s3.sa-east-1.amazonaws.com/price-list/catalogo_de_precios_7-2-2024_15:35:47.xlsx",
-    },
-  ];
+  const filterFiles = () => {
+    let array = [];
+    for (const file of latestFiles) {
+      if (file.name === "promociones") {
+        if (special) {
+          array.push(file);
+          continue;
+        }
+        continue;
+      }
+
+      if (typeRequest === "todas") {
+        array.push(file);
+        continue;
+      } else if (typeRequest === "motos") {
+        if (file.category === "motos") {
+          array.push(file);
+          continue;
+        }
+      } else {
+        if (file.category === "autos_y_vehículos_pesados") {
+          array.push(file);
+          continue;
+        }
+      }
+    }
+
+    return array;
+  };
+
+  const files = filterFiles();
 
   return (
     <section className="grid grid-cols-1 md:grid-cols-2 gap-10 w-full">
-      {latestFiles.map((file) => (
+      {files.map((file) => (
         <div
           key={file ? file.id : null}
           className="group h-40 w-full lg:w-80 mx-auto"

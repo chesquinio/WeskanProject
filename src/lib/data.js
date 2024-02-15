@@ -199,61 +199,18 @@ export async function getAccessUsersPages(query) {
   }
 }
 
-export async function getLastsFilesByUser({ typeRequest, special }) {
+export async function getLastsFiles() {
   try {
-    const latestFiles = await prisma.file.groupBy({
-      by: ["name"],
-      _max: {
-        createdAt: true,
+    const latestFiles = await prisma.file.findMany({
+      select: {
+        id: true,
+        name: true,
+        category: true,
+        link: true,
       },
     });
 
-    let results = [];
-
-    for (const group of latestFiles) {
-      const latestFile = await prisma.file.findFirst({
-        where: {
-          name: group.name,
-          createdAt: group._max.createdAt,
-        },
-        select: {
-          id: true,
-          name: true,
-          category: true,
-          link: true,
-          createdAt: true,
-        },
-      });
-      results.push(latestFile);
-    }
-
-    let array = [];
-    for (const res of results) {
-      if (res.name === "promociones") {
-        if (special) {
-          array.push(res);
-          continue;
-        }
-        continue;
-      }
-
-      if (typeRequest === "todas") {
-        array.push(res);
-        continue;
-      } else if (typeRequest === "motos") {
-        if (res.category === "motos") {
-          array.push(res);
-          continue;
-        }
-      } else {
-        if (res.category === "autos_y_vehículos_pesados") {
-          array.push(res);
-          continue;
-        }
-      }
-    }
-
-    return array;
+    return latestFiles;
   } catch (error) {
     return null;
   }
