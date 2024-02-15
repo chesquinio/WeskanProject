@@ -1,9 +1,36 @@
-import { getLastsFilesByUser } from "@/lib/data";
+// import { getLastsFilesByUser } from "@/lib/data";
 import { formatFileName } from "@/lib/utils";
 import Link from "next/link";
 
 export default async function FileButtons({ typeRequest, special }) {
-  const latestFiles = await getLastsFilesByUser({ typeRequest, special });
+  // const latestFiles = await getLastsFilesByUser({ typeRequest, special });
+
+  const latestFiles = [
+    {
+      id: 1,
+      name: "guias",
+      category: "autos_y_vehículos_pesados",
+      link: "https://weskan.s3.sa-east-1.amazonaws.com/price-list/catalogo_de_precios_7-2-2024_15:35:22.xlsx",
+    },
+    {
+      id: 2,
+      name: "guias-moto",
+      category: "motos",
+      link: "https://weskan.s3.sa-east-1.amazonaws.com/price-list/catalogo_de_precios_7-2-2024_15:35:33.xlsx",
+    },
+    {
+      id: 3,
+      name: "camisas",
+      category: "motos",
+      link: "https://weskan.s3.sa-east-1.amazonaws.com/price-list/catalogo_de_precios_7-2-2024_15:35:40.xlsx",
+    },
+    {
+      id: 4,
+      name: "valvulas",
+      category: "autos_y_vehículos_pesados",
+      link: "https://weskan.s3.sa-east-1.amazonaws.com/price-list/catalogo_de_precios_7-2-2024_15:35:47.xlsx",
+    },
+  ];
 
   return (
     <section className="grid grid-cols-1 md:grid-cols-2 gap-10 w-full">
