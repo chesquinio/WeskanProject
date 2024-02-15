@@ -5,6 +5,7 @@ import {
   LinkedinIcon,
   MailIcon,
   MapPinIcon,
+  PhoneCallIcon,
 } from "lucide-react";
 import Link from "next/link";
 
@@ -16,9 +17,9 @@ export default function Footer() {
           <div className="flex flex-col lg:flex-row lg:justify-center">
             <div className="flex flex-col lg:grid lg:grid-cols-2 items-start lg:w-5/12 gap-8 ml-3 mt-5 text-white">
               <span className="flex items-center text-lg font-ligh cursor-default">
-                <MapPinIcon className="text-gray-300 w-4" />
+                <PhoneCallIcon className="text-gray-300 w-4" />
                 <p className="text-gray-300 ml-2 inline text-sm">
-                  J.D.Perón 2189, Rafaela, Santa Fe
+                  +54 3492 56-9621
                 </p>
               </span>
               <a

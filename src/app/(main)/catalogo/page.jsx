@@ -50,7 +50,7 @@ export default async function CataloguePage() {
 
       {user ? (
         <>
-          {user.validated ? (
+          {user?.validated ? (
             <section className="mx-auto max-w-[1200px] py-24 sm:py-32">
               <h2 className="text-4xl font-bold text-center text-gray-800 mb-12">
                 Conoce nuestra listas de precios.
