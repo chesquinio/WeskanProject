@@ -153,7 +153,7 @@ export default function Header() {
                 ) : (
                   <div className="hidden lg:flex lg:flex-1 lg:justify-end">
                     <Link
-                      href="https://weskan.online/iniciar-sesion"
+                      href="/iniciar-sesion"
                       className="text-sm font-semibold py-2 px-4 rounded-lg leading-6 text-gray-800 transition-transform hover:text-pink-400 hover:bg-pink-50"
                     >
                       Iniciar Sesión <span aria-hidden="true">&rarr;</span>

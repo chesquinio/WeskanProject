@@ -5,6 +5,7 @@ export const publicRoutes = [
   "/empresa",
   "/productos",
   "/catalogo",
+  "/terminos-y-condiciones",
 ];
 
 // Routes used for authentication

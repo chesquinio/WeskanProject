@@ -75,7 +75,7 @@ export default async function CataloguePage() {
           </h3>
           <div className="flex justify-center items-center">
             <Link
-              href="https://weskan.online/iniciar-sesion"
+              href="/iniciar-sesion"
               className="md:text-lg xl:text-xl font-medium leading-6 text-pink-400 hover:text-pink-500 flex items-center gap-3 hover:gap-5 transition-all"
             >
               Iniciar Sesión
