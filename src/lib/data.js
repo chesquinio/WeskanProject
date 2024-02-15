@@ -100,6 +100,19 @@ export async function getUserById(id) {
   }
 }
 
+export async function getFileByName(name) {
+  try {
+    const file = db.file.findFirst({
+      where: {
+        name,
+      },
+    });
+    return file;
+  } catch (error) {
+    return null;
+  }
+}
+
 export async function getVerificationToken(token) {
   try {
     const verificationToken = await db.verificationToken.findUnique({

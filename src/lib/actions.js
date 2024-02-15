@@ -11,6 +11,7 @@ import {
   userOptionsSchema,
 } from "@/schemas";
 import {
+  getFileByName,
   getPasswordRecoverTokenByToken,
   getUserByEmail,
   getUserById,
@@ -337,15 +338,11 @@ export async function uploadFile(prevState, formdata) {
       return { message: "No se ha encontrado ningun archivo." };
     }
 
-    const existingListType = await db.file.findUnique({
-      where: {
-        name: list_type,
-      },
-    });
+    const existingListType = await getFileByName(list_type);
     if (existingListType) {
       await db.file.delete({
         where: {
-          name: list_type,
+          id: existingListType.id,
         },
       });
     }
