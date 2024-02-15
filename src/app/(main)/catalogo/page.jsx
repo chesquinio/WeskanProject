@@ -1,4 +1,4 @@
-// import FileButtons from "@/components/file-button";
+import FileButtons from "@/components/file-button";
 import ListRequestForm from "@/components/main/list-request-form";
 import { FileButtonsSkeleton } from "@/components/skeletons";
 import { currentUser } from "@/lib/auth";
@@ -55,12 +55,12 @@ export default async function CataloguePage() {
               <h2 className="text-4xl font-bold text-center text-gray-800 mb-12">
                 Conoce nuestra listas de precios.
               </h2>
-              {/* <Suspense fallback={<FileButtonsSkeleton />}>
+              <Suspense fallback={<FileButtonsSkeleton />}>
                 <FileButtons
                   typeRequest={user?.typeRequest}
                   special={user?.special}
                 />
-              </Suspense> */}
+              </Suspense>
             </section>
           ) : (
             <section className="mx-auto max-w-[900px] py-24 sm:py-32">

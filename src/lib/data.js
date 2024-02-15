@@ -199,7 +199,7 @@ export async function getAccessUsersPages(query) {
   }
 }
 
-export async function getLastsFiles() {
+export async function getLastsFilesByUser({ typeRequest, special }) {
   try {
     const latestFiles = await prisma.file.groupBy({
       by: ["name"],
@@ -227,7 +227,33 @@ export async function getLastsFiles() {
       results.push(latestFile);
     }
 
-    return results;
+    let array = [];
+    for (const res of results) {
+      if (res.name === "promociones") {
+        if (special) {
+          array.push(res);
+          continue;
+        }
+        continue;
+      }
+
+      if (typeRequest === "todas") {
+        array.push(res);
+        continue;
+      } else if (typeRequest === "motos") {
+        if (res.category === "motos") {
+          array.push(res);
+          continue;
+        }
+      } else {
+        if (res.category === "autos_y_vehículos_pesados") {
+          array.push(res);
+          continue;
+        }
+      }
+    }
+
+    return array;
   } catch (error) {
     return null;
   }

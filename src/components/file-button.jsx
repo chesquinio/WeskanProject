@@ -1,44 +1,13 @@
-import { getLastsFiles } from "@/lib/data";
+import { getLastsFilesByUser } from "@/lib/data";
 import { formatFileName } from "@/lib/utils";
 import Link from "next/link";
 
 export default async function FileButtons({ typeRequest, special }) {
-  const latestFiles = await getLastsFiles();
-
-  const filesFiltered = () => {
-    let array = [];
-    for (const file of latestFiles) {
-      if (file.name === "promociones") {
-        if (special) {
-          array.push(file);
-          continue;
-        }
-        continue;
-      }
-
-      if (typeRequest === "todas") {
-        array.push(file);
-        continue;
-      } else if (typeRequest === "motos") {
-        if (file.category === "motos") {
-          array.push(file);
-          continue;
-        }
-      } else {
-        if (file.category === "autos_y_vehículos_pesados") {
-          array.push(file);
-          continue;
-        }
-      }
-    }
-    return array;
-  };
-
-  const files = filesFiltered();
+  const latestFiles = await getLastsFilesByUser({ typeRequest, special });
 
   return (
     <section className="grid grid-cols-1 md:grid-cols-2 gap-10 w-full">
-      {files.map((file) => (
+      {latestFiles.map((file) => (
         <div
           key={file ? file.id : null}
           className="group h-40 w-full lg:w-80 mx-auto"
