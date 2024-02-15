@@ -210,7 +210,7 @@ export async function getLastsFiles() {
       },
     });
 
-    return latestFiles;
+    return { latestFiles };
   } catch (error) {
     return null;
   }
