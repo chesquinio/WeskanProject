@@ -195,7 +195,7 @@ export default function CompanyPage() {
             <li>
               <div className="flex items-center gap-x-6">
                 <img
-                  class="h-16 w-16 rounded-full"
+                  className="h-16 w-16 rounded-full"
                   src="/founder.jpg"
                   alt="Juan Bautista Gays"
                 />
