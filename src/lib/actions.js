@@ -350,8 +350,8 @@ export async function uploadFile(prevState, formdata) {
       });
     }
 
-    const { link, date } = await upload(file);
-    if (!link || !date) {
+    const { link } = await upload(file);
+    if (!link) {
       return { message: "Ha ocurrido un error al guardar el archivo." };
     }
 
@@ -360,7 +360,6 @@ export async function uploadFile(prevState, formdata) {
         name: list_type,
         link: link,
         category: category,
-        createdAt: date,
       },
     });
 

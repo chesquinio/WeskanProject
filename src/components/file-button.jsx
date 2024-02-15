@@ -5,41 +5,41 @@ import Link from "next/link";
 export default async function FileButtons({ typeRequest, special }) {
   const latestFiles = await getLastsFiles();
 
-  // const filterFiles = () => {
-  //   let array = [];
-  //   for (const file of latestFiles) {
-  //     if (file.name === "promociones") {
-  //       if (special) {
-  //         array.push(file);
-  //         continue;
-  //       }
-  //       continue;
-  //     }
+  const filterFiles = () => {
+    let array = [];
+    for (const file of latestFiles) {
+      if (file.name === "promociones") {
+        if (special) {
+          array.push(file);
+          continue;
+        }
+        continue;
+      }
 
-  //     if (typeRequest === "todas") {
-  //       array.push(file);
-  //       continue;
-  //     } else if (typeRequest === "motos") {
-  //       if (file.category === "motos") {
-  //         array.push(file);
-  //         continue;
-  //       }
-  //     } else {
-  //       if (file.category === "autos_y_vehículos_pesados") {
-  //         array.push(file);
-  //         continue;
-  //       }
-  //     }
-  //   }
+      if (typeRequest === "todas") {
+        array.push(file);
+        continue;
+      } else if (typeRequest === "motos") {
+        if (file.category === "motos") {
+          array.push(file);
+          continue;
+        }
+      } else {
+        if (file.category === "autos_y_vehículos_pesados") {
+          array.push(file);
+          continue;
+        }
+      }
+    }
 
-  //   return array;
-  // };
+    return array;
+  };
 
-  // const files = filterFiles();
+  const files = filterFiles();
 
   return (
     <section className="grid grid-cols-1 md:grid-cols-2 gap-10 w-full">
-      {latestFiles.map((file) => (
+      {files.map((file) => (
         <div
           key={file ? file.id : null}
           className="group h-40 w-full lg:w-80 mx-auto"
