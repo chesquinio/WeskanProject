@@ -237,7 +237,7 @@ export async function getLastsFilesByUser({ typeRequest, special }) {
       }
     }
 
-    return { filteredFiles };
+    return filteredFiles;
   } catch (error) {
     return null;
   }
