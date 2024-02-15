@@ -56,10 +56,7 @@ export default async function CataloguePage() {
                 Conoce nuestra listas de precios.
               </h2>
               <Suspense fallback={<FileButtonsSkeleton />}>
-                <FileButtons
-                  typeRequest={user?.typeRequest}
-                  special={user?.special}
-                />
+                <FileButtons />
               </Suspense>
             </section>
           ) : (

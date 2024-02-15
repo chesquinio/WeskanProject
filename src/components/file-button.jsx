@@ -1,10 +1,11 @@
+import { currentUser } from "@/lib/auth";
 import { getLastsFilesByUser } from "@/lib/data";
 import { formatFileName } from "@/lib/utils";
 import Link from "next/link";
 
-export default async function FileButtons({ typeRequest, special }) {
+export default async function FileButtons() {
+  const { typeRequest, special } = await currentUser();
   const latestFiles = await getLastsFilesByUser({ typeRequest, special });
-  console.log(latestFiles);
 
   return (
     <>

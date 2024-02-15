@@ -201,7 +201,7 @@ export async function getAccessUsersPages(query) {
 
 export async function getLastsFilesByUser({ typeRequest, special }) {
   try {
-    const latestFiles = await prisma.file.findMany({
+    const latestFiles = await db.file.findMany({
       select: {
         id: true,
         name: true,

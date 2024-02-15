@@ -60,7 +60,7 @@ const list = [
   {
     id: 8,
     name: "Tubos",
-    value: "Tubos",
+    value: "tubos",
     category: "todas",
     image: "/tubos.webp",
   },
