@@ -543,6 +543,7 @@ export async function updateUserOptions(prevState, formdata) {
           validated: true,
           special: true,
           curriculum: null,
+          category: "Administrador",
         },
       });
 
@@ -558,6 +559,7 @@ export async function updateUserOptions(prevState, formdata) {
           typeRequest: access === "remove" ? null : access,
           role: "USER",
           validated: access === "remove" ? false : true,
+          category: null,
           special:
             access === "remove" ? false : special === "allowed" ? true : false,
         },

@@ -234,19 +234,19 @@ export async function getLastsFilesByUser({ typeRequest, special }) {
         continue;
       }
 
-      if (typeRequest === "todas") {
-        filteredFiles.push(file);
-        continue;
-      } else if (typeRequest === "motos") {
-        if (file.category === "motos") {
+      if (file.category === "motos") {
+        if (typeRequest === "motos" || typeRequest === "todas") {
           filteredFiles.push(file);
-          continue;
+        }
+      } else if (file.category === "autos_y_vehículos_pesados") {
+        if (
+          typeRequest === "autos_y_vehículos_pesados" ||
+          typeRequest === "todas"
+        ) {
+          filteredFiles.push(file);
         }
       } else {
-        if (file.category === "autos_y_vehículos_pesados") {
-          filteredFiles.push(file);
-          continue;
-        }
+        filteredFiles.push(file);
       }
     }
 
@@ -273,6 +273,7 @@ export async function getCardData() {
     const totalAccess = await db.user.count({
       where: {
         validated: true,
+        role: "USER",
       },
     });
 

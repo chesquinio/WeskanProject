@@ -20,7 +20,7 @@ export default async function CardWrapper() {
     <>
       <Card title="Usuarios" value={totalUsers} type="customers" />
       <Card title="Usuarios con Accesos" value={totalAccess} type="access" />
-      <Card title="Catálogos Subidos" value={totalFiles} type="files" />
+      <Card title="Listas Actuales" value={totalFiles} type="files" />
       <Card title="Administradores" value={totalAdmins} type="admins" />
     </>
   );
