@@ -1,6 +1,5 @@
 "use client";
 
-import { useCurrentUser } from "@/hooks/use-current-user";
 import { uploadCurriculum } from "@/lib/actions";
 import { ArrowRightIcon } from "@heroicons/react/24/outline";
 import { useEffect, useState } from "react";
@@ -8,7 +7,6 @@ import { useFormState, useFormStatus } from "react-dom";
 import { toast } from "../ui/use-toast";
 
 export default function UploadCurriculum() {
-  const { id, curriculum } = useCurrentUser();
   const [filename, setFilename] = useState(null);
   const initialState = { message: null, success: null };
   const [state, dispath] = useFormState(uploadCurriculum, initialState);
@@ -31,35 +29,44 @@ export default function UploadCurriculum() {
 
   return (
     <main className="bg-gray-50 rounded-lg p-5">
-      <form action={dispath} className="flex flex-col md:flex-row gap-3 mb-5">
-        <div>
-          <input
-            id="id"
-            name="id"
-            type="text"
-            defaultValue={id}
-            className="sr-only"
-          />
+      <form action={dispath} className="flex flex-col gap-3 mb-5">
+        <div className="flex flex-row gap-3">
+          <div className="w-full md:w-1/2">
+            <input
+              type="text"
+              name="name"
+              id="name"
+              className="block w-full h-10 rounded-md border-0 py-1.5 pl-3 pr-20 text-gray-800 outline-none  ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-pink-500 sm:text-sm sm:leading-6"
+              placeholder="Agusto Baez"
+            />
+          </div>
+          <div className="w-1/2 h-full hidden md:block">
+            <SubmitButton />
+          </div>
         </div>
-        <label
-          htmlFor="file"
-          className="w-full h-40 border-2 font-medium text-gray-700 border-dashed border-pink-400 rounded-lg flex justify-center items-center cursor-pointer"
-        >
-          <span>
-            {!filename
-              ? "Sube tu curriculum. (Formato .pdf)"
-              : `Archivo ${filename} seleccionado.`}
-          </span>
-          <input
-            id="file"
-            type="file"
-            name="file"
-            accept=".pdf"
-            onChange={(e) => setFilename(e.target.files[0]?.name)}
-            className="sr-only"
-          />
-        </label>
-        <SubmitButton />
+        <div className="flex flex-col md:flex-row gap-3 mb-5">
+          <label
+            htmlFor="file"
+            className="w-full h-40 border-2 font-medium text-gray-700 border-dashed border-pink-400 rounded-lg flex justify-center items-center cursor-pointer"
+          >
+            <span>
+              {!filename
+                ? "Sube tu curriculum. (Formato .pdf)"
+                : `Archivo ${filename} seleccionado.`}
+            </span>
+            <input
+              id="file"
+              type="file"
+              name="file"
+              accept=".pdf"
+              onChange={(e) => setFilename(e.target.files[0]?.name)}
+              className="sr-only"
+            />
+          </label>
+          <div className="w-full h-full md:hidden">
+            <SubmitButton />
+          </div>
+        </div>
       </form>
       <div className="space-y-3">
         <p className="text-gray-600 text-sm tracking-wide">
@@ -67,19 +74,6 @@ export default function UploadCurriculum() {
           sumarte al equipo, hay perfiles que pueden ser muy iteresantes y no
           dudaremos en contactarte de ser el caso.
         </p>
-        {curriculum && (
-          <p className="text-gray-600 tracking-wide">
-            Ya has subido un{" "}
-            <a
-              href={curriculum}
-              target="_black"
-              className="font-medium text-pink-400"
-            >
-              curriculum
-            </a>{" "}
-            anteriormente.
-          </p>
-        )}
       </div>
     </main>
   );
@@ -92,7 +86,7 @@ function SubmitButton() {
     <button
       type="submit"
       disabled={pending}
-      className={`flex items-center justify-center w-full md:w-12 md:h-auto h-12 rounded-lg bg-gray-200 ${
+      className={`flex items-center justify-center w-full h-12 md:h-10 rounded-lg bg-gray-200 ${
         pending
           ? "text-gray-500 bg-gray-300"
           : "hover:bg-pink-100 hover:text-pink-500"

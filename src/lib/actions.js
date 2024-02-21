@@ -574,31 +574,54 @@ export async function updateUserOptions(prevState, formdata) {
 }
 
 export async function uploadCurriculum(prevState, formdata) {
-  const id = formdata.get("id");
+  const name = formdata.get("name");
   const file = formdata.get("file");
+
+  if (!name) {
+    return { message: "Es necesario ingresar un nombre." };
+  }
 
   if (!file.size > 0) {
     return { message: "No se ha encontrado ningun archivo." };
   }
 
-  const existingUser = await getUserById(id);
-  if (!existingUser) {
-    return { message: "No se ha encontrado el usuario." };
-  }
-
   try {
     const link = await uploadCurriculumFile(file);
 
-    await db.user.update({
-      where: {
-        id: existingUser.id,
-      },
+    await db.curriculum.create({
       data: {
-        curriculum: link,
+        name: name,
+        link: link,
       },
     });
 
     return { success: "Se ha subido el curriculum correctamente." };
+  } catch (error) {
+    throw new Error(`Ha ocurrido un error: ${error}`);
+  }
+}
+
+export async function deleteCurriculum(prevState, formdata) {
+  const id = formdata.get("id");
+
+  const cv = await db.curriculum.findUnique({
+    where: {
+      id: id,
+    },
+  });
+  if (!cv) {
+    return { message: "No se ha encontrado el curriculum." };
+  }
+
+  try {
+    await db.curriculum.delete({
+      where: {
+        id: id,
+      },
+    });
+
+    revalidatePath("/administrador/curriculums");
+    return { success: "Se ha eliminado el curriculum." };
   } catch (error) {
     throw new Error(`Ha ocurrido un error: ${error}`);
   }

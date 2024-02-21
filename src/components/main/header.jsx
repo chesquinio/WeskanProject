@@ -22,6 +22,7 @@ const navigation = [
   { name: "Empresa", href: "/empresa" },
   { name: "Productos", href: "https://weskan.mercadoshops.com.ar" },
   { name: "Catálogo", href: "/catalogo" },
+  { name: "Únete a Weskan", href: "/unirse" },
 ];
 
 function classNames(...classes) {
@@ -102,7 +103,7 @@ export default function Header() {
                             </Link>
                           )}
                         </Menu.Item>
-                        {user.role === "ADMIN" ? (
+                        {user.role === "ADMIN" && (
                           <Menu.Item>
                             {({ active }) => (
                               <Link
@@ -114,21 +115,6 @@ export default function Header() {
                               >
                                 <Cog6ToothIcon className="w-5" />
                                 <div>Administrador</div>
-                              </Link>
-                            )}
-                          </Menu.Item>
-                        ) : (
-                          <Menu.Item>
-                            {({ active }) => (
-                              <Link
-                                href="/curriculum"
-                                className={classNames(
-                                  active ? "bg-gray-100" : "",
-                                  "flex w-full items-center gap-2 px-4 py-2 text-md text-gray-800"
-                                )}
-                              >
-                                <ArrowUpOnSquareStackIcon className="w-5" />
-                                <div>Subir CV</div>
                               </Link>
                             )}
                           </Menu.Item>

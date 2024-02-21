@@ -4,6 +4,7 @@ import {
   UserGroupIcon,
   HomeIcon,
   DocumentDuplicateIcon,
+  ClipboardDocumentListIcon,
   DocumentTextIcon,
   GlobeAltIcon,
 } from "@heroicons/react/24/outline";
@@ -22,9 +23,14 @@ const links = [
     icon: DocumentDuplicateIcon,
   },
   {
+    name: "Curriculums",
+    href: "/administrador/curriculums",
+    icon: DocumentTextIcon,
+  },
+  {
     name: "Catálogos",
     href: "/administrador/catalogos",
-    icon: DocumentTextIcon,
+    icon: ClipboardDocumentListIcon,
   },
   { name: "Página Web", href: "/", icon: GlobeAltIcon },
 ];
@@ -44,6 +50,7 @@ export default function NavLinks() {
               `flex h-[48px] grow items-center justify-center gap-2 rounded-md bg-gray-50 p-3 text-sm font-medium hover:bg-pink-100 hover:text-pink-600 md:flex-none md:justify-start md:p-2 md:px-3`,
               {
                 "bg-pink-100 text-pink-600": pathname === link.href,
+                "hidden md:flex": link.href === "/",
               }
             )}
           >

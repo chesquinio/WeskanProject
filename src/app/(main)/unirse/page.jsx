@@ -1,6 +1,6 @@
 import UploadCurriculum from "@/components/main/upload-curriculum";
 
-export default function CurriculumPage() {
+export default function JoinPage() {
   return (
     <main className="m-5">
       <section className="w-full md:max-w-5xl mx-auto min-h-[calc(100dvh-120px)]">

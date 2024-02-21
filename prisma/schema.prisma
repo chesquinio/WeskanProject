@@ -28,7 +28,6 @@ model User {
   typeRequest   String?
   validated     Boolean   @default(false)
   special       Boolean   @default(false)
-  curriculum    String?
   role          UserRole  @default(USER)
   Account       Account[]
 }
@@ -74,6 +73,13 @@ model File {
   name     String
   category String
   link     String
+}
+
+model Curriculum {
+  id        String   @id @default(cuid())
+  name      String
+  link      String
+  createdAt DateTime @default(now())
 }
 
 // model MeliToken {

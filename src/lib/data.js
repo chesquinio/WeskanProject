@@ -62,6 +62,32 @@ export async function getFilteredAccessUsers(query, currentPage) {
   }
 }
 
+export async function getFilteredCurriculums(query, currentPage) {
+  noStore();
+  const offset = (currentPage - 1) * ITEMS_PER_PAGE;
+
+  try {
+    const curriculums = await db.curriculum.findMany({
+      where: {
+        AND: [
+          {
+            OR: [{ name: { contains: query, mode: "insensitive" } }],
+          },
+        ],
+      },
+      orderBy: {
+        name: "desc",
+      },
+      take: ITEMS_PER_PAGE,
+      skip: offset,
+    });
+
+    return curriculums;
+  } catch (error) {
+    return null;
+  }
+}
+
 export const getAccountByUserId = async (userId) => {
   try {
     const account = await db.account.findFirst({
@@ -177,6 +203,25 @@ export async function getUsersPages(query) {
               { name: { contains: query, mode: "insensitive" } },
               { email: { contains: query, mode: "insensitive" } },
             ],
+          },
+        ],
+      },
+    });
+
+    const totalPages = Math.ceil(count / ITEMS_PER_PAGE);
+    return totalPages;
+  } catch (error) {
+    return null;
+  }
+}
+
+export async function getCurriculumsPages(query) {
+  try {
+    const count = await db.curriculum.count({
+      where: {
+        AND: [
+          {
+            OR: [{ name: { contains: query, mode: "insensitive" } }],
           },
         ],
       },
