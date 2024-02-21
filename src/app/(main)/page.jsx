@@ -5,7 +5,7 @@ import Link from "next/link";
 const valuesInfo = [
   {
     id: 1,
-    title: "Progresando e innovando.",
+    title: "Progreso e innovación.",
     description:
       "Uno de los valores que nos caracteriza, es la confianza de lo que fabricamos, por tal motivo es el cual mejoramos y buscamos la manera de ofrecer un mejor producto, en pos del desarrollo.",
   },
@@ -36,7 +36,7 @@ export default function HomePage() {
               className={`text-xl text-gray-800 md:text-2xl xl:text-3xl md:leading-normal`}
             >
               Bienvenidos a <strong className="text-pink-400">Weskan.</strong>{" "}
-              Vendedores de autopartes de todo el país.
+              Fabricantes y vendedores de <b>autopartes</b> para motores.
             </p>
             <Link
               href="https://weskan.mercadoshops.com.ar/"
@@ -67,17 +67,17 @@ export default function HomePage() {
             </p>
             <p className="text-balance text-gray-600 tracking-wider">
               Nos concentramos en la fabricación y venta de productos
-              especializados como válvulas, guías de válvulas, asientos de
-              válvulas, pistones o tapas de cilindros. Actualmente, estamos
-              centrados en consolidar nuestra posición en el mercado nacional,
-              para destacarnos como proveedores líderes en soluciones
-              metalúrgicas de alta calidad.
+              especializados como guías, asientos de válvulas, camisas,
+              válvulas, tubos, retenes, etc. Actualmente, estamos centrados en
+              consolidar nuestra posición en el mercado nacional, brindando un
+              servicio de asistencia técnica de primer nivel de la mano de una
+              logística dinámica para adaptarnos a las necesidades de los
+              distribudores, repuesteros, vendedores y rectificadores.
             </p>
             <p className="text-balance text-gray-600 tracking-wider">
-              Nosotros tenemos el compromiso de ser líderes locales y
-              expandirnos globalmente, manteniendo siempre nuestro compromiso
-              con la calidad, la innovación y la satisfacción del cliente en la
-              fabricación y comercialización de nuestros productos distintivos.
+              Tomamos el compromiso de ser líderes locales y expandirnos
+              globalmente, manteniendo nuestro compromiso con la calidad, la
+              innovación y la satisfacción de nuestros clientes.
             </p>
           </div>
           <div className="flex flex-col lg:w-1/3 lg:ml-10 mt-12 gap-5">
@@ -127,9 +127,9 @@ export default function HomePage() {
             ))}
           </div>
         </section>
-        {/* <section>
+        <section>
           <Associates />
-        </section> */}
+        </section>
       </main>
     </>
   );

@@ -20,13 +20,13 @@ export default function CompanyPage() {
             className={`text-cl text-gray-800 md:text-2xl xl:text-3xl md:leading-normal`}
           >
             La actividad comenzo en <b className="text-pink-400">1948</b>,
-            convirtiéndonos asi de los primeros en fabricar{" "}
+            convirtiéndonos así de los primeros en fabricar{" "}
             <b className="text-pink-400">guías de válvulas</b> para motor.
           </p>
           <p
             className={`text-lg text-gray-800 md:text-xl xl:text-2xl md:leading-normal`}
           >
-            Weskan de Establecimientos Metalúrgicos Gays S.A. fue fundada por
+            Weskan de Establecimientos Metalúrgicos Gays S.A. fue fundada por{" "}
             <strong>Juan Bautista Gays.</strong>
           </p>
         </div>
@@ -75,17 +75,11 @@ export default function CompanyPage() {
             <div className="lg:pr-4">
               <div className="lg:max-w-lg">
                 <p className="text-base font-semibold leading-7 text-pink-400">
-                  Fabricación a medida
+                  No somos únicos, sí los primeros
                 </p>
                 <h1 className="mt-2 text-3xl font-bold tracking-tight text-gray-800 sm:text-4xl">
                   Establecimiento metalúrgico.
                 </h1>
-                <p className="mt-6 text-xl leading-8 text-gray-700">
-                  Desde hace unos años que mejoramos nuestras instalaciones a
-                  una fabrica mas modernas y con más capacidad de produccion,
-                  con la finalidad de crecer, y esta mejora constante siempre
-                  estuvo.
-                </p>
               </div>
             </div>
           </div>
@@ -108,7 +102,7 @@ export default function CompanyPage() {
                 <p>
                   A inicios del siglo actual, <b>Weskan</b> comienza un{" "}
                   <b>proceso de mejora contínua</b>, iniciado un camino de{" "}
-                  <b>innovación tecnologica</b> que consistió en:
+                  <b>innovación tecnológica</b> que consistió en:
                 </p>
                 <ul role="list" className="mt-8 space-y-8 text-gray-600">
                   <li className="flex gap-x-3">
@@ -157,20 +151,11 @@ export default function CompanyPage() {
                   En octubre del 2013 la empresa se muda a su nuevo predio
                   ubicado en el Parque de Actividades Económicas de Rafaela
                   (PAER). La nueva propiedad, cuenta con 7000 M2, siendo 700 M2
-                  los cubiertos por la empresa en la actualidad. La edificación,
-                  se basó en los nuevos parámetros de construcción sustentable,
-                  tanto en el diseño como en la edificación, con materiales de
-                  bajo impacto ambiental, tratando de aprovechar al máximo la
-                  luz natural en todos los sectores de la misma.
-                </p>
-                <h2 className="mt-16 text-2xl font-bold tracking-tight text-gray-900">
-                  Dar vuelta la página.
-                </h2>
-                <p className="mt-6">
-                  Weskan da todo por ofrecer un buen producto de buena calidad,
-                  por eso apostamos a la mejora continua en todas las áreas de
-                  la empresa, pero siempre con especial énfasis en los recursos
-                  humanos.
+                  los cubiertos por la empresa en la actualidad. El inmueble se
+                  proyectó de acuerdo a los nuevos parámetros de construcción
+                  sustentable, tanto en el diseño como en la edificación, con
+                  materiales de bajo impacto ambiental, tratando de aprovechar
+                  al máximo la luz natural en todos los sectores de la misma.
                 </p>
               </div>
             </div>
@@ -184,8 +169,8 @@ export default function CompanyPage() {
               Descubre nuestras generaciones.
             </h2>
             <p className="mt-6 text-lg leading-8 text-gray-600">
-              La empresa a crecido a lo largo de tres importantes generaciones
-              en estas últimas decadas.
+              La empresa creció a lo largo de tres importantes generaciones en
+              estas últimas décadas.
             </p>
           </div>
           <ul
@@ -282,7 +267,9 @@ export default function CompanyPage() {
                 >
                   <circle cx={1} cy={1} r={1} />
                 </svg>
-                <div className="text-gray-600">Fundador de Weskan S.A.</div>
+                <div className="text-gray-600">
+                  Fundador de Estab. Metalúrgicos Gays S.A.
+                </div>
               </div>
             </figcaption>
           </figure>
