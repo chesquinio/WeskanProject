@@ -197,7 +197,7 @@ const template = (message) => {
 </html>`;
 };
 
-const templateWithLink = (message, confirmLink) => {
+const templateWithLink = (message, link) => {
   return `
   <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
   <html dir="ltr" xmlns="http://www.w3.org/1999/xhtml" xmlns:o="urn:schemas-microsoft-com:office:office">
@@ -308,7 +308,7 @@ const templateWithLink = (message, confirmLink) => {
                                                                                   </tr>
                                                                                   <tr>
                                                                                       <td align="left" class="esd-block-text es-p10" bgcolor="#ffffff">
-                                                                                          <p style="line-height: 200%;">Ingresa <a href="${confirmLink}">aquí</a> para ${message}</p>
+                                                                                          <p style="line-height: 200%;">Ingresa <a href="${link}">aquí</a> para ${message}</p>
                                                                                       </td>
                                                                                   </tr>
                                                                                   <tr>
@@ -413,6 +413,25 @@ export const sendPasswordRecoverEmail = async (email, token) => {
       to: email,
       subject: "Recuperación de contraseña",
       html: templateWithLink("recuperar tu contraseña!", confirmLink),
+    });
+    return response?.messageId ? { ok: true } : { ok: false };
+  } catch (error) {
+    return { ok: false };
+  }
+};
+
+export const sendRequestNoticeEmail = async (name) => {
+  const link = `${process.env.NEXTAUTH_URL}administrador/accessos`;
+
+  try {
+    const response = await transporter.sendMail({
+      from: `Weskan S.A. <${domain_address}>`,
+      to: "ventas@weskan.com.ar",
+      subject: "Nueva solicitud de usuario!",
+      html: templateWithLink(
+        `permitir el acceso de ${name} a las listas de precios.`,
+        link
+      ),
     });
     return response?.messageId ? { ok: true } : { ok: false };
   } catch (error) {

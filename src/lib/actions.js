@@ -29,6 +29,7 @@ import {
   sendDeniedRequestEmail,
   sendEmail,
   sendPasswordRecoverEmail,
+  sendRequestNoticeEmail,
   sendVerificationEmail,
 } from "./emails";
 import {
@@ -466,24 +467,25 @@ export async function listRequest(prevState, formdata) {
   const id = formdata.get("id");
   const requestType = formdata.get("request_type");
 
-  if (!id) {
-    return { message: "No se ha encontrado el usuario!" };
-  }
-
   if (!requestType) {
     return { message: "Debes seleccionar una lista a solicitar!" };
   }
 
-  const existingUser = await db.user.findUnique({
+  const user = await db.user.findUnique({
     where: {
       id: id,
     },
   });
-  if (existingUser.activeRequest) {
+  if (!user) {
+    return { message: "No se ha encontrado el usuario!" };
+  }
+  if (user.activeRequest) {
     return { message: "Ya tienes una solicitud activa!" };
   }
 
   try {
+    await sendRequestNoticeEmail(user.name);
+
     await db.user.update({
       where: {
         id: id,
