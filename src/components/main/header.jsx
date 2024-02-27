@@ -22,7 +22,7 @@ const navigation = [
   { name: "Empresa", href: "/empresa" },
   { name: "Productos", href: "https://weskan.mercadoshops.com.ar" },
   { name: "Catálogo", href: "/catalogo" },
-  { name: "Únete a Weskan", href: "/unirse" },
+  { name: "Se parte de Weskan", href: "/unirse" },
 ];
 
 function classNames(...classes) {
