@@ -35,6 +35,7 @@ module.exports = {
         primary: "#d20d6d",
         secondary_dark: "#15417c",
         secondary_light: "#1d5caf",
+        whatsapp_green: "#4dc247",
       },
     },
   },
