@@ -20,7 +20,12 @@ import { usePathname } from "next/navigation";
 const navigation = [
   { name: "Inicio", href: "/" },
   { name: "Empresa", href: "/empresa" },
-  { name: "Productos", href: "https://weskan.mercadoshops.com.ar" },
+  {
+    name: "Productos",
+    href: "https://weskan.mercadoshops.com.ar",
+    blank: true,
+  },
+  { name: "Listas", href: "/listas" },
   { name: "Catálogo", href: "/catalogo" },
   { name: "Se parte de Weskan", href: "/unirse" },
 ];
@@ -49,11 +54,12 @@ export default function Header() {
                 <WeskanLogo />
               </Link>
 
-              <div className="hidden lg:flex lg:gap-x-12">
+              <div className="hidden lg:flex lg:gap-x-8 xl:gap-x-12">
                 {navigation.map((item) => (
                   <Link
                     key={item.name}
                     href={item.href}
+                    target={item.blank ? "_blank" : null}
                     className={`${
                       pathname === item.href ? "text-pink-400 bg-pink-50" : ""
                     } text-sm py-2 px-4 rounded-lg font-semibold leading-6 text-gray-800 hover:text-pink-400 hover:bg-pink-50`}
@@ -190,6 +196,7 @@ export default function Header() {
                           <Link
                             key={item.name}
                             href={item.href}
+                            target={item.blank ? "_blank" : null}
                             onClick={() => setMobileMenuOpen(false)}
                             className="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-gray-800 hover:text-pink-400 hover:bg-pink-50"
                           >
