@@ -3,7 +3,7 @@ export const publicRoutes = [
   "/",
   "/nueva-verificacion",
   "/empresa",
-  "/productos",
+  "/listas",
   "/catalogo",
   "/unirse",
   "/terminos-y-condiciones",
