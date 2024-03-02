@@ -544,7 +544,6 @@ export async function updateUserOptions(prevState, formdata) {
           role: "ADMIN",
           validated: true,
           special: true,
-          curriculum: null,
           category: "Administrador",
         },
       });
