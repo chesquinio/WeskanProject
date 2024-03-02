@@ -92,7 +92,7 @@ export default function ListRequestForm() {
           </p>
         </div>
       ) : (
-        <div className="flex justify-center items-center w-1/2 h-32 rounded-lg bg-white">
+        <div className="flex justify-center items-center w-full md:w-1/2 h-32 rounded-lg bg-white">
           <img
             src={selectedItem.image}
             alt={selectedItem.name}
