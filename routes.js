@@ -21,4 +21,4 @@ export const authRoutes = [
 // The prefix for API authentication routes
 export const apiAuthPrefix = "/api/auth";
 
-export const DEFAULT_LOGIN_REDIRECT = "/catalogo";
+export const DEFAULT_LOGIN_REDIRECT = "/listas";
