@@ -19,7 +19,7 @@ export default function SelectMenu({ label, list, handleSelectItem }) {
     >
       {({ open }) => (
         <>
-          <Listbox.Label className="block font-medium leading-6 text-gray-800">
+          <Listbox.Label className="block md:text-lg font-medium leading-6 text-gray-800">
             {label}
           </Listbox.Label>
           <div className="relative mt-2">
