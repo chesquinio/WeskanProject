@@ -11,7 +11,7 @@ export const metadata = {
 
 export default async function CurriculumsPage({ searchParams }) {
   const query = searchParams?.query || "";
-  const currentPage = searchParams?.currentPage || 1;
+  const currentPage = searchParams?.page || 1;
 
   const totalPages = await getCurriculumsPages(query);
 

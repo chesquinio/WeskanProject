@@ -11,7 +11,7 @@ export const metadata = {
 
 export default async function AccessesPage({ searchParams }) {
   const query = searchParams?.query || "";
-  const currentPage = searchParams?.currentPage || 1;
+  const currentPage = searchParams?.page || 1;
 
   const totalPages = await getAccessUsersPages(query);
 
