@@ -2,6 +2,15 @@ import { getFilteredCurriculums } from "@/lib/data";
 import { ArrowDownTrayIcon } from "@heroicons/react/24/outline";
 import { DeleteButton } from "./delete-button-cv";
 
+const sortDate = (lastDate) => {
+  const date = new Date(lastDate)
+    .toISOString()
+    .split("T")[0]
+    .replace(/(\d{4})-(\d{2})-(\d{2})/, "$3/$2/$1");
+
+  return date;
+};
+
 export default async function CurriculumsTable({ query, currentPage }) {
   const curriculums = await getFilteredCurriculums(query, currentPage);
 
@@ -23,7 +32,7 @@ export default async function CurriculumsTable({ query, currentPage }) {
                           <p>{cv.name}</p>
                         </div>
                         <div className="mb-2 flex items-center">
-                          <p>{new Date(cv.createdAt).toLocaleDateString()}</p>
+                          <p>{sortDate(cv.createdAt)}</p>
                         </div>
                       </div>
                       <div className={`flex justify-end gap-2`}>
@@ -66,7 +75,7 @@ export default async function CurriculumsTable({ query, currentPage }) {
                         </div>
                       </td>
                       <td className="whitespace-nowrap px-3 py-3">
-                        {new Date(cv.createdAt).toLocaleDateString()}
+                        {sortDate(cv.createdAt)}
                       </td>
                       <td className="whitespace-nowrap py-3 pl-6 pr-3">
                         <div className={`flex justify-end gap-3`}>
