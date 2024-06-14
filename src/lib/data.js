@@ -257,6 +257,23 @@ export async function getAccessUsersPages(query) {
   }
 }
 
+export async function getLastsLists() {
+  try {
+    const latestLists = await db.file.findMany({
+      select: {
+        id: true,
+        name: true,
+        category: true,
+        link: true,
+      },
+    });
+
+    return latestLists
+  } catch (error) {
+    return null
+  }
+}
+
 export async function getLastsFilesByUser({ typeRequest, special }) {
   try {
     const latestFiles = await db.file.findMany({

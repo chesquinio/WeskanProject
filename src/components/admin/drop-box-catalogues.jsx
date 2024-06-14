@@ -73,7 +73,7 @@ const list = [
   },
 ];
 
-export default function DropBox() {
+export default function DropBoxCatalogues() {
   const [filename, setFilename] = useState(null);
   const [selectedItem, setSelectedItem] = useState(list[1]);
   const initialState = { message: null, success: null };
@@ -104,10 +104,10 @@ export default function DropBox() {
     <section>
       <form
         action={dispath}
-        className="flex flex-col bg-gray-50 rounded p-5 max-w-xl mx-auto"
+        className="flex flex-col bg-gray-50 rounded p-5 w-auto"
       >
         <SelectMenu
-          label="Elige una lista a subir:"
+          label="Catalogos de productos:"
           list={list}
           handleSelectItem={handleSelectItem}
         />

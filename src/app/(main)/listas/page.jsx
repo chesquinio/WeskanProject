@@ -19,17 +19,14 @@ export default async function ListPage() {
         <>
           {user?.validated ? (
             <section className="w-full md:max-w-[1200px] mx-auto min-h-[calc(100dvh-120px)]">
-              <h2 className="text-xl text-center font-bold text-gray-900 md:text-2xl xl:text-3xl md:leading-normal mt-10 mb-20">
-                  Las listas de precios volveran en un instante...
-                </h2>
-              {/* <div className="max-w-5xl mx-auto">
+              <div className="max-w-5xl mx-auto">
                 <h2 className="text-2xl font-bold text-gray-900  md:text-4xl xl:text-5xl md:leading-normal mt-10 mb-20">
                   Conoce nuestra listas de precios.
                 </h2>
               </div>
               <Suspense fallback={<FileButtonsSkeleton />}>
                 <FileButtons />
-              </Suspense> */}
+              </Suspense>
             </section>
           ) : (
             <section className="w-full md:max-w-[900px] mx-auto min-h-[calc(100dvh-120px)]">

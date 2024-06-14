@@ -6,8 +6,17 @@ function classNames(...classes) {
   return classes.filter(Boolean).join(" ");
 }
 
-export default function SelectMenu({ label, list, handleSelectItem }) {
+const deleteElement = async (id) => {
+  await deleteElement(id)
+}
+
+export default function SelectMenu({ label, list, handleSelectItem, image, text }) {
   const [selected, setSelected] = useState(list[1] || []);
+
+  const getImage = (link) => {
+    const image = link.split("|")[1]
+    return image
+  }
 
   return (
     <Listbox
@@ -19,17 +28,19 @@ export default function SelectMenu({ label, list, handleSelectItem }) {
     >
       {({ open }) => (
         <>
-          <Listbox.Label className="block md:text-lg font-medium leading-6 text-gray-800">
+          <Listbox.Label className={`block leading-6 ${text === 'small' ? 'text-sm text-gray-600 mb-1 ml-1' : 'text-md font-medium text-gray-800'}`}>
             {label}
           </Listbox.Label>
           <div className="relative mt-2">
             <Listbox.Button className="relative w-full cursor-default rounded-md bg-white py-1.5 pl-3 pr-10 text-left text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:outline-none focus:ring-2 focus:ring-pink-500 sm:text-sm sm:leading-6">
-              <span className="flex items-center">
-                <img
-                  src={selected.image}
-                  alt=""
-                  className="h-5 w-5 flex-shrink-0 rounded-full"
-                />
+              <span className="flex items-center"> 
+                {image && (
+                  <img
+                    src={getImage(selected.link)}
+                    alt=""
+                    className="h-5 w-5 flex-shrink-0 rounded-full"
+                  />
+                )}
                 <span className="ml-3 block truncate">{selected.name}</span>
               </span>
               <span className="pointer-events-none absolute inset-y-0 right-0 ml-3 flex items-center pr-2">
@@ -62,11 +73,13 @@ export default function SelectMenu({ label, list, handleSelectItem }) {
                     {({ selected, active }) => (
                       <>
                         <div className="flex items-center">
-                          <img
-                            src={element.image}
-                            alt=""
-                            className="h-5 w-5 flex-shrink-0 rounded-full"
-                          />
+                          {image && (
+                            <img
+                              src={getImage(element.link)}
+                              alt=""
+                              className="h-5 w-5 flex-shrink-0 rounded-full"
+                            />
+                          )}
                           <span
                             className={classNames(
                               selected ? "font-semibold" : "font-normal",

@@ -627,3 +627,60 @@ export async function deleteCurriculum(prevState, formdata) {
     throw new Error(`Ha ocurrido un error: ${error}`);
   }
 }
+
+export async function createNewList(prevState, formdata) {
+  const name = formdata.get("name");
+  const category = formdata.get("category");
+  const list = formdata.get("list");
+  const image = formdata.get("image");
+  console.log(list, image)
+
+  if (!list.size > 0 || !image.size > 0) {
+    return { message: "No se ha encontrado algún archivo." };
+  }
+
+  const existingListType = await getFileByName(name);
+    if (existingListType) {
+      await db.file.delete({
+        where: {
+          id: existingListType.id,
+        },
+      });
+    }
+
+  const { link } = await upload(list);
+  if (!link) {
+    return { message: "Ha ocurrido un error al guardar el archivo." };
+  }
+
+  const linkImage = await uploadImage(image)
+  if (!linkImage) {
+    return { message: "Ha ocurrido un error al guardar el archivo." };
+  }
+
+  const bothlinks = link + "|" + linkImage
+
+  try {
+    await db.file.create({
+      data: {
+        name,
+        category,
+        link: bothlinks
+      },
+    });
+  
+    revalidatePath("/administrador/catalogos")
+    return { success: "Se ha añadido una nueva lista." };
+  }
+  catch (error) {
+    throw new Error(`Ha ocurrido un error: ${error}`);
+  }
+}
+
+export async function deleteList(id) {
+  await db.file.delete({
+    where: {
+      id
+    },
+  });
+}
