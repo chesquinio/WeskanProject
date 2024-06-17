@@ -11,12 +11,7 @@ const deleteElement = async (id) => {
 }
 
 export default function SelectMenu({ label, list, handleSelectItem, image, text }) {
-  const [selected, setSelected] = useState(list[1] || []);
-
-  const getImage = (link) => {
-    const image = link.split("|")[1]
-    return image
-  }
+  const [selected, setSelected] = useState(list[0] || []);
 
   return (
     <Listbox
@@ -36,7 +31,7 @@ export default function SelectMenu({ label, list, handleSelectItem, image, text 
               <span className="flex items-center"> 
                 {image && (
                   <img
-                    src={getImage(selected.link)}
+                    src={selected.image}
                     alt=""
                     className="h-5 w-5 flex-shrink-0 rounded-full"
                   />
@@ -75,7 +70,7 @@ export default function SelectMenu({ label, list, handleSelectItem, image, text 
                         <div className="flex items-center">
                           {image && (
                             <img
-                              src={getImage(element.link)}
+                              src={element.image}
                               alt=""
                               className="h-5 w-5 flex-shrink-0 rounded-full"
                             />

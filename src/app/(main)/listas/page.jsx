@@ -34,6 +34,12 @@ export default async function ListPage() {
                 Solicitar acceso a listas de precios.
               </h2>
               <ListRequestForm />
+              <div className="mt-4">
+                <p className="text-gray-600 text-sm">
+                  Estimado cliente, si esta viendo esta pantalla y ya había solicitado ver las listas, es necesario que 
+                  vuelva a solicitar acceso; lo estaremos aceptando en breve. Desde ya, disculpe las molestias.
+                </p>
+              </div>
             </section>
           )}
         </>

@@ -95,6 +95,12 @@ export default function LoginForm() {
           <div className="mt-2">
             <Social />
           </div>
+          <div>
+            <p className="text-sm text-gray-600">
+              Si tienes problemas iniciando sesión, prueba registrandote con 
+              tu misma cuenta y volviendo a iniciar.
+            </p>
+          </div>
           <div
             id="form-status"
             aria-live="polite"

@@ -8,16 +8,6 @@ export default async function FileButtons({ admin }) {
   const { typeRequest, special } = await currentUser();
   const latestFiles = await getLastsFilesByUser({ typeRequest, special });
 
-  const getImage = (link) => {
-    const image = link.split("|")[1]
-    return image
-  }
-
-  const getFile = (link) => {
-    const file = link.split("|")[0]
-    return file
-  }
-
   return (
     <>
       {latestFiles ? (
@@ -28,11 +18,11 @@ export default async function FileButtons({ admin }) {
               className="group h-40 w-full lg:w-80 mx-auto flex flex-row gap-3"
             >
               <Link
-                href={file ? getFile(file.link) : "/"}
+                href={file ? file.file : "/"}
                 className="block relative w-full h-full rounded-lg overflow-hidden group"
               >
                 <img
-                  src={file ? getImage(file.link) : "/weskan-logo.webp"}
+                  src={file ? file.image : "/weskan-logo.webp"}
                   className="w-full h-full rounded object-cover object-center transition-transform transform scale-100 lg:group-hover:scale-105"
                 />
                 <div className="absolute inset-0 pb-8 pl-5 pr-16 flex flex-col items-start justify-end z-5 opacity-100 lg:group-hover:bg-opacity-60 transition-opacity bg-gray-500 bg-opacity-50 text-white">
@@ -44,7 +34,9 @@ export default async function FileButtons({ admin }) {
                   </h3>
                 </div>
               </Link>
-              <DeleteButton id={file.id}/>
+              {admin && (
+                <DeleteButton id={file.id}/>
+              )}
             </div>
           ))}
         </section>

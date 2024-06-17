@@ -133,6 +133,21 @@ export async function getFileByName(name) {
         name: name,
       },
     });
+
+    return file;
+  } catch (error) {
+    return null;
+  }
+}
+
+export async function getCatalogueByName(name) {
+  try {
+    const file = db.catalogue.findFirst({
+      where: {
+        name: name,
+      },
+    });
+
     return file;
   } catch (error) {
     return null;
@@ -264,11 +279,29 @@ export async function getLastsLists() {
         id: true,
         name: true,
         category: true,
-        link: true,
+        file: true,
+        image: true,
       },
     });
 
     return latestLists
+  } catch (error) {
+    return null
+  }
+}
+
+export async function getLastsCatalogues() {
+  try {
+    const latestCatalogues = await db.catalogue.findMany({
+      select: {
+        id: true,
+        name: true,
+        description: true,
+        file: true,
+      },
+    });
+
+    return latestCatalogues
   } catch (error) {
     return null
   }
@@ -281,7 +314,8 @@ export async function getLastsFilesByUser({ typeRequest, special }) {
         id: true,
         name: true,
         category: true,
-        link: true,
+        file: true,
+        image: true,
       },
     });
 

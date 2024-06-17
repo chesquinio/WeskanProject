@@ -64,7 +64,15 @@ model File {
   id       String @id @default(cuid())
   name     String
   category String
-  link     String
+  file     String
+  image    String
+}
+
+model Catalogue {
+  id          String @id @default(cuid())
+  name        String
+  description String
+  file        String
 }
 
 model Curriculum {

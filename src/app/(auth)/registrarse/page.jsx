@@ -14,7 +14,7 @@ export default function RegisterPage() {
               Regístrate y crea una cuenta
             </h2>
             <p className="text-gray-600 text-sm">
-              Una vez registrado, recuerde verificar el email
+              Una vez registrado, solo inicia sesión
             </p>
           </div>
           <RegisterForm />

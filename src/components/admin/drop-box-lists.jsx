@@ -74,9 +74,9 @@ import NewListModal from "./new-list-modal";
 //   },
 // ];
 
-export default function DropBoxLists({latestLists}) {
+export default function DropBoxLists({ latestLists }) {
   const [filename, setFilename] = useState(null);
-  const [selectedItem, setSelectedItem] = useState(latestLists[1]);
+  const [selectedItem, setSelectedItem] = useState(latestLists[0]);
   const initialState = { message: null, success: null };
   const [state, dispath] = useFormState(uploadFile, initialState);
   const { toast } = useToast();

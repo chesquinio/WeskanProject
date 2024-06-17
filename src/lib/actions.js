@@ -11,6 +11,7 @@ import {
   userOptionsSchema,
 } from "@/schemas";
 import {
+  getCatalogueByName,
   getFileByName,
   getPasswordRecoverTokenByToken,
   getUserByEmail,
@@ -70,17 +71,18 @@ export async function register(prevState, formdata) {
       data: {
         name,
         email,
+        emailVerified: new Date(),
         password: hashedPassword,
       },
     });
 
-    const verificationToken = await generateVerificationToken(email);
-    await sendVerificationEmail(
-      verificationToken.email,
-      verificationToken.token
-    );
+    // const verificationToken = await generateVerificationToken(email);
+    // await sendVerificationEmail(
+    //   verificationToken.email,
+    //   verificationToken.token
+    // );
 
-    return { success: "Se ha enviado un correo de verificación" };
+    return { success: "Se ha registrado correctamente!" };
   } catch (error) {
     throw new Error(`Ha ocurrido un error al registrarse: ${error}`);
   }
@@ -341,29 +343,64 @@ export async function uploadFile(prevState, formdata) {
 
     const existingListType = await getFileByName(list_type);
 
-    if (existingListType) {
-      await db.file.delete({
-        where: {
-          id: existingListType.id,
-        },
-      });
+    if (!existingListType) {
+      return { message: "Ha ocurrido un error al buscar la lista." };
     }
 
     const { link } = await upload(file);
     if (!link) {
-      return { message: "Ha ocurrido un error al guardar el archivo." };
+      return { message: "Ha ocurrido un error al guardar la lista." };
     }
 
-    await db.file.create({
+    await db.file.update({
+      where: {
+        id: existingListType.id
+      },
       data: {
         name: list_type,
         category,
-        link,
+        file: link,
       },
     });
 
     revalidatePath("/administrador/catalogos");
     return { success: "Se ha guardado el archivo." };
+  } catch (error) {
+    throw new Error(`Ha ocurrido un error: ${error}`);
+  }
+}
+
+export async function updateCatalogue(prevState, formdata) {
+  try {
+    const name = formdata.get("name");
+    const file = formdata.get("file2");
+
+    if (!file.size > 0) {
+      return { message: "No se ha encontrado ningun archivo." };
+    }
+
+    const existingCatalogue = await getCatalogueByName(name);
+
+    if (!existingCatalogue) {
+      return { message: "Ha ocurrido un error al buscar el catálogo." };
+    }
+
+    const { link } = await upload(file);
+    if (!link) {
+      return { message: "Ha ocurrido un error al guardar el catálogo." };
+    }
+
+    await db.catalogue.update({
+      where: {
+        id: existingCatalogue.id
+      },
+      data: {
+        file: link,
+      },
+    });
+
+    revalidatePath("/administrador/catalogos");
+    return { success: "Se ha guardado el catálogo." };
   } catch (error) {
     throw new Error(`Ha ocurrido un error: ${error}`);
   }
@@ -658,19 +695,54 @@ export async function createNewList(prevState, formdata) {
     return { message: "Ha ocurrido un error al guardar el archivo." };
   }
 
-  const bothlinks = link + "|" + linkImage
-
   try {
     await db.file.create({
       data: {
         name,
         category,
-        link: bothlinks
+        file: link,
+        image: linkImage,
       },
     });
   
     revalidatePath("/administrador/catalogos")
     return { success: "Se ha añadido una nueva lista." };
+  }
+  catch (error) {
+    throw new Error(`Ha ocurrido un error: ${error}`);
+  }
+}
+
+export async function createNewCatalogue(prevState, formdata) {
+  const name = formdata.get("nameCatalogue");
+  const description = formdata.get("description");
+  const file = formdata.get("catalogue");
+
+  if (!file.size > 0) {
+    return { message: "No se ha encontrado algún archivo." };
+  }
+
+  const existingCatalogue = await getCatalogueByName(name);
+    if (existingCatalogue) {
+      return { message: "Ya existe un caálogo con este nombre." }
+    }
+
+  const { link } = await upload(file);
+  if (!link) {
+    return { message: "Ha ocurrido un error al guardar el archivo." };
+  }
+
+  try {
+    await db.catalogue.create({
+      data: {
+        name,
+        description,
+        file: link,
+      },
+    });
+  
+    revalidatePath("/administrador/catalogos")
+    return { success: "Se ha añadido un nuevo catálogo." };
   }
   catch (error) {
     throw new Error(`Ha ocurrido un error: ${error}`);
@@ -690,14 +762,38 @@ export async function deleteList(prevState, formdata) {
   }
 
   try {
-    await db.fie.delete({
+    await db.file.delete({
       where: {
         id: id,
       },
     });
 
-    revalidatePath("/administrador/catalogos");
     return { success: "Se ha eliminado la lista." };
+  } catch (error) {
+    throw new Error(`Ha ocurrido un error: ${error}`);
+  }
+}
+
+export async function deleteCatalogue(prevState, formdata) {
+  const id = formdata.get("id");
+
+  const list = await db.catalogue.findUnique({
+    where: {
+      id: id,
+    },
+  });
+  if (!list) {
+    return { message: "No se ha encontrado el catálogo.." };
+  }
+
+  try {
+    await db.catalogue.delete({
+      where: {
+        id: id,
+      },
+    });
+
+    return { success: "Se ha eliminado el catálogo." };
   } catch (error) {
     throw new Error(`Ha ocurrido un error: ${error}`);
   }

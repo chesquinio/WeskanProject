@@ -1,6 +1,6 @@
 "use client";
 
-import { deleteList } from "@/lib/actions";
+import { deleteCatalogue, deleteList } from "@/lib/actions";
 import { useEffect } from "react";
 import { useFormState } from "react-dom";
 import { TrashIcon } from "@heroicons/react/24/outline";
@@ -9,7 +9,7 @@ import { useRouter } from "next/navigation";
 
 export function DeleteButton({ id }) {
   const initialState = { message: null, success: null };
-  const [state, dispath] = useFormState(deleteList, initialState);
+  const [state, dispath] = useFormState(deleteCatalogue, initialState);
   const { refresh } = useRouter()
   const { toast } = useToast();
 
@@ -36,12 +36,12 @@ export function DeleteButton({ id }) {
         type="text"
         name="id"
         id="id"
-        className="sr-only hidden"
+        className="sr-only"
         defaultValue={id}
       />
       <button
         type="submit"
-        className="h-full px-3 bg-red-100 text-red-500 hover:bg-red-200 transition-all flex items-center justify-center rounded-lg"
+        className="h-12 w-12 px-3 rounded-lg hover:bg-white hover:bg-opacity-15 border-gray-500 border font-semibold text-sm"
       >
         <TrashIcon className="w-6 h-6 md:w-5 md:h-5" />
       </button>

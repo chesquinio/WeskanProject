@@ -3,34 +3,14 @@ import { Dialog, Transition } from "@headlessui/react";
 import { ExclamationCircleIcon, FolderIcon } from "@heroicons/react/24/outline";
 import { useFormState } from "react-dom";
 import { toast } from "../ui/use-toast";
-import SelectMenu from "../select-menu";
-import { createNewList } from "@/lib/actions";
+import { createNewCatalogue } from "@/lib/actions";
 
-const categories = [
-    {
-        id: 1,
-        name: 'Motos',
-        value: 'motos',
-    },
-    {
-        id: 2,
-        name: 'Autos y vehículos pesados',
-        value: 'autos_y_vehículos_pesados',
-    },
-    {
-        id: 3,
-        name: 'Todas',
-        value: 'todas',
-    },
-]
 
-export default function NewListModal() {
+export default function NewCatalogueModal() {
   const [open, setOpen] = useState(false);
   const [listName, setListName] = useState(null);
-  const [imageName, setImageName] = useState(null);
-  const [selectedItem, setSelectedItem] = useState(categories[1]);
   const initialState = { errors: {}, message: null, success: null };
-  const [state, dispath] = useFormState(createNewList, initialState);
+  const [state, dispath] = useFormState(createNewCatalogue, initialState);
 
   useEffect(() => {
     if (state.success) {
@@ -44,17 +24,13 @@ export default function NewListModal() {
 
   const cancelButtonRef = useRef(null);
 
-  const handleSelectItem = (item) => {
-    setSelectedItem(item);
-  };
-
   return (
     <>
       <button 
         onClick={() => setOpen(true)}
         className="w-full rounded-lg p-3 text-center text-white bg-pink-300 hover:bg-pink-400"
       >
-        Nueva Lista
+        Nuevo Catálogo
       </button>
       <Transition.Root show={open} as={Fragment}>
         <Dialog
@@ -101,7 +77,7 @@ export default function NewListModal() {
                             as="h3"
                             className="text-base font-semibold leading-6 text-center text-gray-900 mb-4"
                           >
-                            Crea una nueva lista:
+                            Crea un nuevo catálogo:
                           </Dialog.Title>
                           <div className="mb-4">
                             <label
@@ -112,8 +88,8 @@ export default function NewListModal() {
                             </label>
                             <input
                               type="text"
-                              id="name"
-                              name="name"
+                              id="nameCatalogue"
+                              name="nameCatalogue"
                               placeholder="Válvulas"
                               className="py-2 text-sm px-5 rounded-md w-full border ring-1 ring-inset ring-gray-200 focus:outline-none focus:ring-2 focus:ring-pink-500"
                               required
@@ -121,24 +97,18 @@ export default function NewListModal() {
                           </div>
                           <div className="mb-4">
                             <label
-                              htmlFor="category"
-                              className="hidden"
+                              htmlFor="subject"
+                              className="block text-sm text-gray-600 mb-3 ml-1"
                             >
-                              Categoria:
+                              Descripción:
                             </label>
-                            <SelectMenu 
-                                label={"Categoría:"} 
-                                list={categories} 
-                                handleSelectItem={handleSelectItem}
-                                text={'small'} 
-                            />
                             <input
-                                type="text"
-                                id="category"
-                                name="category"
-                                value={selectedItem.value}
-                                readOnly
-                                className="sr-only"
+                              type="text"
+                              id="description"
+                              name="description"
+                              placeholder="Aquí se detallaran las medidas..."
+                              className="py-2 text-sm px-5 rounded-md w-full border ring-1 ring-inset ring-gray-200 focus:outline-none focus:ring-2 focus:ring-pink-500"
+                              required
                             />
                           </div>
                           <div className="mb-4">
@@ -149,7 +119,7 @@ export default function NewListModal() {
                               Archivo:
                             </span>
                             <label
-                                htmlFor="list"
+                                htmlFor="catalogue"
                                 className="w-full h-10 border text-sm text-gray-700 border-dashed border-pink-400 rounded-lg flex justify-center items-center cursor-pointer"
                             >
                                 <span>
@@ -158,37 +128,11 @@ export default function NewListModal() {
                                     : `Archivo ${listName} seleccionado.`}
                                 </span>
                                 <input
-                                    id="list"
+                                    id="catalogue"
                                     type="file"
-                                    name="list"
-                                    accept=".xlsx, .xls"
+                                    name="catalogue"
+                                    accept=".xlsx, .xls, .pdf"
                                     onChange={(e) => setListName(e.target.files[0]?.name)}
-                                    className="sr-only"
-                                />
-                            </label>
-                          </div>
-                          <div className="mb-4">
-                            <span
-                              htmlFor="subject"
-                              className="block text-sm text-gray-600 mb-3 ml-1"
-                            >
-                              Imagen:
-                            </span>
-                            <label
-                                htmlFor="image"
-                                className="w-full h-10 border text-sm text-gray-700 border-dashed border-pink-400 rounded-lg flex justify-center items-center cursor-pointer"
-                            >
-                                <span>
-                                {!imageName
-                                    ? "Seleciona una imagen."
-                                    : `Imagen ${imageName} seleccionado.`}
-                                </span>
-                                <input
-                                    id="image"
-                                    type="file"
-                                    name="image"
-                                    accept=".png, .jpeg, .jpg, .webp"
-                                    onChange={(e) => setImageName(e.target.files[0]?.name)}
                                     className="sr-only"
                                 />
                             </label>

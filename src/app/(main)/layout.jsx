@@ -1,7 +1,7 @@
 import CategoryModal from "@/components/main/category-modal";
 import Footer from "@/components/main/footer";
 import Header from "@/components/main/header";
-import News from "@/components/main/news";
+// import News from "@/components/main/news";
 import WhatsAppButton from "@/components/main/whatsapp-button";
 
 export default function MainLayout({ children }) {
@@ -9,7 +9,7 @@ export default function MainLayout({ children }) {
     <main>
       <Header />
       {children}
-      <News />
+      {/* <News /> */}
       <CategoryModal />
       <WhatsAppButton />
       <Footer />
