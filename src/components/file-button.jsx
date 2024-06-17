@@ -1,8 +1,10 @@
 import { currentUser } from "@/lib/auth";
 import { getLastsFilesByUser } from "@/lib/data";
+import { TrashIcon } from "@heroicons/react/24/outline";
 import Link from "next/link";
+import { DeleteButton } from "./admin/delete-button-list";
 
-export default async function FileButtons() {
+export default async function FileButtons({ admin }) {
   const { typeRequest, special } = await currentUser();
   const latestFiles = await getLastsFilesByUser({ typeRequest, special });
 
@@ -23,7 +25,7 @@ export default async function FileButtons() {
           {latestFiles?.map((file) => (
             <div
               key={file ? file.id : null}
-              className="group h-40 w-full lg:w-80 mx-auto"
+              className="group h-40 w-full lg:w-80 mx-auto flex flex-row gap-3"
             >
               <Link
                 href={file ? getFile(file.link) : "/"}
@@ -42,6 +44,7 @@ export default async function FileButtons() {
                   </h3>
                 </div>
               </Link>
+              <DeleteButton id={file.id}/>
             </div>
           ))}
         </section>

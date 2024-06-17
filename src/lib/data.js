@@ -130,7 +130,7 @@ export async function getFileByName(name) {
   try {
     const file = db.file.findFirst({
       where: {
-        name,
+        name: name,
       },
     });
     return file;

@@ -340,6 +340,7 @@ export async function uploadFile(prevState, formdata) {
     }
 
     const existingListType = await getFileByName(list_type);
+
     if (existingListType) {
       await db.file.delete({
         where: {
@@ -356,8 +357,8 @@ export async function uploadFile(prevState, formdata) {
     await db.file.create({
       data: {
         name: list_type,
-        link: link,
-        category: category,
+        category,
+        link,
       },
     });
 
@@ -633,7 +634,6 @@ export async function createNewList(prevState, formdata) {
   const category = formdata.get("category");
   const list = formdata.get("list");
   const image = formdata.get("image");
-  console.log(list, image)
 
   if (!list.size > 0 || !image.size > 0) {
     return { message: "No se ha encontrado algún archivo." };
@@ -677,10 +677,28 @@ export async function createNewList(prevState, formdata) {
   }
 }
 
-export async function deleteList(id) {
-  await db.file.delete({
+export async function deleteList(prevState, formdata) {
+  const id = formdata.get("id");
+
+  const list = await db.file.findUnique({
     where: {
-      id
+      id: id,
     },
   });
+  if (!list) {
+    return { message: "No se ha encontrado la lista." };
+  }
+
+  try {
+    await db.fie.delete({
+      where: {
+        id: id,
+      },
+    });
+
+    revalidatePath("/administrador/catalogos");
+    return { success: "Se ha eliminado la lista." };
+  } catch (error) {
+    throw new Error(`Ha ocurrido un error: ${error}`);
+  }
 }

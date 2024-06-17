@@ -25,7 +25,7 @@ export default async function CataloguePage() {
       <div className="flex flex-col w-full">
         <h2 className="text-2xl">Ver catálogos</h2>
         <section className="mt-4">
-          <FileButtons />
+          <FileButtons admin={true} />
         </section>
       </div>
     </main>
