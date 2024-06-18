@@ -322,7 +322,7 @@ export async function getLastsFilesByUser({ typeRequest, special }) {
     let filteredFiles = [];
 
     for (const file of latestFiles) {
-      if (file.name === "promociones") {
+      if (file.name === "Promociones") {
         if (special) {
           filteredFiles.push(file);
           continue;

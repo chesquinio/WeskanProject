@@ -17,8 +17,8 @@ model User {
   category      String?
   description   String?
   activeRequest Boolean   @default(false)
-  typeRequest   String?
-  validated     Boolean   @default(false)
+  typeRequest   String    @default("todas")
+  validated     Boolean   @default(true)
   special       Boolean   @default(false)
   role          UserRole  @default(USER)
   Account       Account[]
