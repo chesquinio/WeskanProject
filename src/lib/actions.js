@@ -724,7 +724,7 @@ export async function createNewCatalogue(prevState, formdata) {
 
   const existingCatalogue = await getCatalogueByName(name);
     if (existingCatalogue) {
-      return { message: "Ya existe un caálogo con este nombre." }
+      return { message: "Ya existe un catálogo con este nombre." }
     }
 
   const { link } = await upload(file);
