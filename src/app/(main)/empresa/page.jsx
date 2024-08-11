@@ -23,12 +23,6 @@ export default function CompanyPage() {
             convirtiéndonos así de los primeros en fabricar{" "}
             <b className="text-pink-400">guías de válvulas</b> para motor.
           </p>
-          <p
-            className={`text-lg text-gray-800 md:text-xl xl:text-2xl md:leading-normal`}
-          >
-            Weskan de Establecimientos Metalúrgicos Gays S.A. fue fundada por{" "}
-            <strong>Juan Bautista Gays.</strong>
-          </p>
         </div>
         <div className="flex items-center justify-center p-6 md:w-3/5 md:px-28 md:py-12">
           <img
@@ -83,7 +77,7 @@ export default function CompanyPage() {
               </div>
             </div>
           </div>
-          <div className="-ml-12 -mt-12 p-12 lg:sticky lg:top-4 lg:col-start-2 lg:row-span-2 lg:row-start-1 lg:overflow-hidden">
+          <div className="-ml-12 -mt-12 p-12 lg:relative lg:top-4 lg:col-start-2 lg:row-span-2 lg:row-start-1 lg:overflow-hidden">
             <img
               className="w-[48rem] max-w-none rounded-xl bg-gray-900 shadow-xl ring-1 ring-gray-400/10 sm:w-[57rem]"
               src="/empresa3.webp"
@@ -147,16 +141,6 @@ export default function CompanyPage() {
                     </span>
                   </li>
                 </ul>
-                <p className="mt-8">
-                  En octubre del 2013 la empresa se muda a su nuevo predio
-                  ubicado en el Parque de Actividades Económicas de Rafaela
-                  (PAER). La nueva propiedad, cuenta con 7000 M2, siendo 700 M2
-                  los cubiertos por la empresa en la actualidad. El inmueble se
-                  proyectó de acuerdo a los nuevos parámetros de construcción
-                  sustentable, tanto en el diseño como en la edificación, con
-                  materiales de bajo impacto ambiental, tratando de aprovechar
-                  al máximo la luz natural en todos los sectores de la misma.
-                </p>
               </div>
             </div>
           </div>
@@ -224,6 +208,23 @@ export default function CompanyPage() {
                   </h3>
                   <p className="text-sm font-semibold leading-6 text-pink-400">
                     3° Generación
+                  </p>
+                </div>
+              </div>
+            </li>
+            <li>
+              <div className="flex items-center gap-x-6">
+                <img
+                  className="h-16 w-16 rounded-full"
+                  src="/4-generation.jpg"
+                  alt="Juan Bautista Gays"
+                />
+                <div>
+                  <h3 className="text-base font-semibold leading-7 tracking-tight text-gray-900">
+                    Gastón Gays
+                  </h3>
+                  <p className="text-sm font-semibold leading-6 text-pink-400">
+                    4° Generación
                   </p>
                 </div>
               </div>
