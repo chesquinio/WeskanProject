@@ -354,7 +354,7 @@ export async function uploadFile(prevState, formdata) {
 
     await db.file.update({
       where: {
-        id: existingListType.id
+        id: existingListType.id,
       },
       data: {
         name: list_type,
@@ -373,11 +373,9 @@ export async function uploadFile(prevState, formdata) {
 export async function updateCatalogue(prevState, formdata) {
   try {
     const name = formdata.get("name");
+    const oldFile = formdata.get("oldFile");
     const file = formdata.get("file2");
-
-    if (!file.size > 0) {
-      return { message: "No se ha encontrado ningun archivo." };
-    }
+    const image = formdata.get("image1");
 
     const existingCatalogue = await getCatalogueByName(name);
 
@@ -386,21 +384,37 @@ export async function updateCatalogue(prevState, formdata) {
     }
 
     const { link } = await upload(file);
-    if (!link) {
-      return { message: "Ha ocurrido un error al guardar el catálogo." };
+    const linkImage = await uploadImage(image);
+
+    let completeLink;
+
+    if (!image.size > 0 && file.size > 0) {
+      completeLink = link + "|" + oldFile.split("|")[1];
+    } else if (!file.size > 0 && image.size > 0) {
+      completeLink = oldFile.split("|")[0] + "|" + linkImage;
+    } else if (!file.size > 0 && !image.size > 0) {
+      return { message: "Debes ingresar al menos un archivo." };
+    } else {
+      if (!link) {
+        return { message: "Ha ocurrido un error al guardar el archivo." };
+      }
+      if (!linkImage) {
+        return { message: "Ha ocurrido un error al guardar el archivo." };
+      }
+      completeLink = link + "|" + linkImage;
     }
 
     await db.catalogue.update({
       where: {
-        id: existingCatalogue.id
+        id: existingCatalogue.id,
       },
       data: {
-        file: link,
+        file: completeLink,
       },
     });
 
     revalidatePath("/administrador/catalogos");
-    return { success: "Se ha guardado el catálogo." };
+    return { success: "Se ha actualizado el catálogo." };
   } catch (error) {
     throw new Error(`Ha ocurrido un error: ${error}`);
   }
@@ -677,20 +691,20 @@ export async function createNewList(prevState, formdata) {
   }
 
   const existingListType = await getFileByName(name);
-    if (existingListType) {
-      await db.file.delete({
-        where: {
-          id: existingListType.id,
-        },
-      });
-    }
+  if (existingListType) {
+    await db.file.delete({
+      where: {
+        id: existingListType.id,
+      },
+    });
+  }
 
   const { link } = await upload(list);
   if (!link) {
     return { message: "Ha ocurrido un error al guardar el archivo." };
   }
 
-  const linkImage = await uploadImage(image)
+  const linkImage = await uploadImage(image);
   if (!linkImage) {
     return { message: "Ha ocurrido un error al guardar el archivo." };
   }
@@ -704,11 +718,10 @@ export async function createNewList(prevState, formdata) {
         image: linkImage,
       },
     });
-  
-    revalidatePath("/administrador/catalogos")
+
+    revalidatePath("/administrador/catalogos");
     return { success: "Se ha añadido una nueva lista." };
-  }
-  catch (error) {
+  } catch (error) {
     throw new Error(`Ha ocurrido un error: ${error}`);
   }
 }
@@ -717,34 +730,41 @@ export async function createNewCatalogue(prevState, formdata) {
   const name = formdata.get("nameCatalogue");
   const description = formdata.get("description");
   const file = formdata.get("catalogue");
+  const image = formdata.get("image2");
 
-  if (!file.size > 0) {
+  if (!file.size > 0 || !image.size > 0) {
     return { message: "No se ha encontrado algún archivo." };
   }
 
   const existingCatalogue = await getCatalogueByName(name);
-    if (existingCatalogue) {
-      return { message: "Ya existe un catálogo con este nombre." }
-    }
+  if (existingCatalogue) {
+    return { message: "Ya existe un catálogo con este nombre." };
+  }
 
   const { link } = await upload(file);
   if (!link) {
     return { message: "Ha ocurrido un error al guardar el archivo." };
   }
 
+  const linkImage = await uploadImage(image);
+  if (!linkImage) {
+    return { message: "Ha ocurrido un error al guardar el archivo." };
+  }
+
+  const completeLink = link + "|" + linkImage;
+
   try {
     await db.catalogue.create({
       data: {
         name,
         description,
-        file: link,
+        file: completeLink,
       },
     });
-  
-    revalidatePath("/administrador/catalogos")
+
+    revalidatePath("/administrador/catalogos");
     return { success: "Se ha añadido un nuevo catálogo." };
-  }
-  catch (error) {
+  } catch (error) {
     throw new Error(`Ha ocurrido un error: ${error}`);
   }
 }

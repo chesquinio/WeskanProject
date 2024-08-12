@@ -5,16 +5,16 @@ import { useFormState } from "react-dom";
 import { toast } from "../ui/use-toast";
 import { createNewCatalogue } from "@/lib/actions";
 
-
 export default function NewCatalogueModal() {
   const [open, setOpen] = useState(false);
   const [listName, setListName] = useState(null);
+  const [imageName, setImageName] = useState(null);
   const initialState = { errors: {}, message: null, success: null };
   const [state, dispath] = useFormState(createNewCatalogue, initialState);
 
   useEffect(() => {
     if (state.success) {
-      setOpen(false)
+      setOpen(false);
       toast({
         description: state.success,
         status: "success",
@@ -26,7 +26,7 @@ export default function NewCatalogueModal() {
 
   return (
     <>
-      <button 
+      <button
         onClick={() => setOpen(true)}
         className="w-full rounded-lg p-3 text-center text-white bg-pink-300 hover:bg-pink-400"
       >
@@ -113,28 +113,58 @@ export default function NewCatalogueModal() {
                           </div>
                           <div className="mb-4">
                             <span
-                              htmlFor="subject"
+                              htmlFor="catalogue"
                               className="block text-sm text-gray-600 mb-3 ml-1"
                             >
                               Archivo:
                             </span>
                             <label
-                                htmlFor="catalogue"
-                                className="w-full h-10 border text-sm text-gray-700 border-dashed border-pink-400 rounded-lg flex justify-center items-center cursor-pointer"
+                              htmlFor="catalogue"
+                              className="w-full h-10 border text-sm text-gray-700 border-dashed border-pink-400 rounded-lg flex justify-center items-center cursor-pointer"
                             >
-                                <span>
+                              <span>
                                 {!listName
-                                    ? "Seleciona un archivo."
-                                    : `Archivo ${listName} seleccionado.`}
-                                </span>
-                                <input
-                                    id="catalogue"
-                                    type="file"
-                                    name="catalogue"
-                                    accept=".xlsx, .xls, .pdf"
-                                    onChange={(e) => setListName(e.target.files[0]?.name)}
-                                    className="sr-only"
-                                />
+                                  ? "Seleciona un archivo."
+                                  : `Archivo ${listName} seleccionado.`}
+                              </span>
+                              <input
+                                id="catalogue"
+                                type="file"
+                                name="catalogue"
+                                accept=".xlsx, .xls, .pdf"
+                                onChange={(e) =>
+                                  setListName(e.target.files[0]?.name)
+                                }
+                                className="sr-only"
+                              />
+                            </label>
+                          </div>
+                          <div className="mb-4">
+                            <span
+                              htmlFor="image2"
+                              className="block text-sm text-gray-600 mb-3 ml-1"
+                            >
+                              Imagen:
+                            </span>
+                            <label
+                              htmlFor="image2"
+                              className="w-full h-10 border text-sm text-gray-700 border-dashed border-pink-400 rounded-lg flex justify-center items-center cursor-pointer"
+                            >
+                              <span>
+                                {!imageName
+                                  ? "Seleciona una imagen."
+                                  : `Imagen ${imageName} seleccionado.`}
+                              </span>
+                              <input
+                                id="image2"
+                                type="file"
+                                name="image2"
+                                accept=".png, .jpeg, .jpg, .webp"
+                                onChange={(e) =>
+                                  setImageName(e.target.files[0]?.name)
+                                }
+                                className="sr-only"
+                              />
                             </label>
                           </div>
                         </div>
@@ -144,22 +174,22 @@ export default function NewCatalogueModal() {
                         aria-live="polite"
                         aria-atomic="true"
                         className="flex items-center h-8"
-                    >
-                        {(state?.message) && (
-                        <div
+                      >
+                        {state?.message && (
+                          <div
                             key={state.message}
                             id="error-message"
                             aria-live="polite"
                             aria-atomic="true"
                             className="flex justify-start items-center w-full space-x-1 bg-red-300 rounded py-2 px-4"
-                        >
+                          >
                             <ExclamationCircleIcon className="h-5 w-5 text-red-800" />
                             <p className="text-sm font-semibold text-red-800">
-                            {state.message}
+                              {state.message}
                             </p>
-                        </div>
+                          </div>
                         )}
-                    </div>
+                      </div>
                     </div>
                     <div className="bg-gray-50 px-4 py-3 sm:flex sm:flex-row-reverse sm:px-6">
                       <button

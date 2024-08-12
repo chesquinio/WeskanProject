@@ -35,26 +35,35 @@ export default async function CatalogueButtons({ admin }) {
         //     </div>
         //   </div>
         // </div>
-        <div key={catalog.id} className="group relative">
-          <div className="aspect-h-1 aspect-w-1 w-full overflow-hidden rounded-md bg-gray-200 lg:aspect-none group-hover:opacity-75 lg:h-80">
-            <img
-              alt={catalog.name}
-              src="/catalog-main-image.webp"
-              className="h-full w-full object-cover object-center lg:h-full lg:w-full"
-            />
-          </div>
-          <div className="mt-4 flex justify-between">
-            <div>
-              <h3 className="text-md font-medium text-gray-700">
-                <a target="_blanck" href={catalog.file}>
-                  <span aria-hidden="true" className="absolute inset-0" />
-                  {catalog.name}
-                </a>
-              </h3>
-              <p className="mt-1 text-sm text-gray-500">
-                {catalog.description}
-              </p>
+        <div key={catalog.id}>
+          <div className="group relative">
+            <div className="aspect-h-1 aspect-w-1 w-full overflow-hidden rounded-md bg-gray-200 lg:aspect-none group-hover:opacity-75 lg:h-80">
+              <img
+                alt={catalog.name}
+                src={
+                  catalog.file.split("|")[1] != undefined
+                    ? catalog.file.split("|")[1]
+                    : "/catalog-main-image.webp"
+                }
+                className="h-full w-full object-cover object-center lg:h-full lg:w-full"
+              />
             </div>
+            <div className="mt-4 flex justify-between">
+              <div>
+                <h3 className="text-md font-medium text-gray-700">
+                  <a target="_blanck" href={catalog.file.split("|")[0]}>
+                    <span aria-hidden="true" className="absolute inset-0" />
+                    {catalog.name}
+                  </a>
+                </h3>
+                <p className="mt-1 text-sm text-gray-500">
+                  {catalog.description}
+                </p>
+              </div>
+            </div>
+          </div>
+          <div className="mt-2">
+            {admin && <DeleteButton id={catalog.id} />}
           </div>
         </div>
       ))}

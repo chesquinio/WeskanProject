@@ -10,7 +10,7 @@ import { useRouter } from "next/navigation";
 export function DeleteButton({ id }) {
   const initialState = { message: null, success: null };
   const [state, dispath] = useFormState(deleteCatalogue, initialState);
-  const { refresh } = useRouter()
+  const { refresh } = useRouter();
   const { toast } = useToast();
 
   useEffect(() => {
@@ -26,7 +26,7 @@ export function DeleteButton({ id }) {
         description: state.success,
         status: "success",
       });
-      refresh()
+      refresh();
     }
   }, [state.message, state.success, toast]);
 
@@ -41,7 +41,7 @@ export function DeleteButton({ id }) {
       />
       <button
         type="submit"
-        className="h-12 w-12 px-3 rounded-lg hover:bg-white hover:bg-opacity-15 border-gray-500 border font-semibold text-sm"
+        className="h-12 w-12 px-3 rounded-lg hover:bg-gray-100 border-gray-500 border  font-semibold text-sm"
       >
         <TrashIcon className="w-6 h-6 md:w-5 md:h-5" />
       </button>
