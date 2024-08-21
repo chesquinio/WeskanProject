@@ -51,6 +51,16 @@ export default function Footer() {
                   ventas@weskan.com.ar
                 </p>
               </a>
+              <a
+                className="flex items-center col-span-2 text-xl font-light"
+                target="_blanck"
+                href="https://maps.app.goo.gl/K5BFUwKbiLn6KgxMA"
+              >
+                <MapPinIcon className="text-gray-300 w-4" />
+                <p className="text-gray-300 hover:text-pink-400 ml-2 font-normal inline text-sm">
+                  J.D.Perón 2189, S2300 Rafaela, Santa Fe
+                </p>
+              </a>
             </div>
             <div className="lg:hidden h-px bg-gray-400 my-8"></div>
             <div className="hidden lg:block w-px bg-gray-400 mx-8"></div>
